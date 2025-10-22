@@ -224,9 +224,21 @@ async function addVin() {
       body: formData,
     });
 
+    // Parsear JSON independientemente del código de estado HTTP
     const data = await response.json();
 
-    if (data.success) {
+    // Verificar primero si es un duplicado (código 409)
+    if (data.is_duplicate) {
+      // VIN duplicado - preguntar si quiere agregarlo como repetido
+      const confirmMessage = `🔄 ${data.message}\n\n¿Desea agregarlo como repetido?\n\nContador actual: ${data.repeat_count} repeticiones`;
+
+      if (confirm(confirmMessage)) {
+        // Usuario aceptó - agregar como repetido
+        await addRepeatedVin(vin, type);
+      } else {
+        showAlert("⚠️ No se agregó el VIN duplicado", "warning");
+      }
+    } else if (data.success) {
       vinInput.value = "";
       preview.textContent = "";
       showAlert("✅ VIN agregado correctamente", "success");
@@ -236,6 +248,34 @@ async function addVin() {
     }
   } catch (error) {
     showAlert("❌ Error al agregar VIN: " + error.message, "error");
+  }
+}
+
+// Agregar VIN repetido
+async function addRepeatedVin(vin, type) {
+  try {
+    const formData = new FormData();
+    formData.append("action", "add_repeated");
+    formData.append("vin", vin);
+    formData.append("type", type);
+
+    const response = await fetch("api.php", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      vinInput.value = "";
+      preview.textContent = "";
+      showAlert("✅ " + data.message, "success");
+      loadRecords();
+    } else {
+      showAlert("❌ " + data.message, "error");
+    }
+  } catch (error) {
+    showAlert("❌ Error al agregar VIN repetido: " + error.message, "error");
   }
 }
 
@@ -328,7 +368,24 @@ function renderTable(records, tbody, type) {
 
   tbody.innerHTML = records
     .map(
-      (record) => `
+      (record) => {
+        // Mostrar información de repetición si existe
+        let repeatInfo = "";
+        if (record.repeat_count && record.repeat_count > 0) {
+          const lastDate = record.last_repeated_at
+            ? formatDate(record.last_repeated_at)
+            : formatDate(record.created_at);
+          repeatInfo = `
+            <div style="font-size: 0.85rem; color: #f59e0b; margin-top: 4px;">
+              🔄 Repetido ${record.repeat_count} ${
+            record.repeat_count === 1 ? "vez" : "veces"
+          }
+              <br>Última: ${lastDate}
+            </div>
+          `;
+        }
+
+        return `
         <tr>
             <td style="font-weight: bold; color: #667eea;">${
               record.counter
@@ -345,12 +402,13 @@ function renderTable(records, tbody, type) {
                 <span class="vin-badge vin-${type}">
                     ${record.vin}
                 </span>
+                ${repeatInfo}
             </td>
             <td style="font-size: 0.9rem; color: #666;">
                 ${formatDate(record.created_at)}
             </td>
             <td style="text-align: center;">
-                <button 
+                <button
                     class="register-btn ${
                       record.registered == 1 ? "registered" : "not-registered"
                     }"
@@ -371,7 +429,8 @@ function renderTable(records, tbody, type) {
                 </button>
             </td>
         </tr>
-    `
+      `;
+      }
     )
     .join("");
 }

@@ -21,21 +21,66 @@ try {
             }
 
             // Verificar si el VIN ya existe
-            $checkStmt = $conn->prepare("SELECT id, type FROM vin_records WHERE vin = ?");
+            $checkStmt = $conn->prepare("SELECT id, type, repeat_count, created_at FROM vin_records WHERE vin = ?");
             $checkStmt->execute([$vin]);
             $existing = $checkStmt->fetch();
 
             if ($existing) {
-                throw new Exception('Este VIN ya existe en ' . ucfirst($existing['type']) . ' (ID: ' . $existing['id'] . ')');
+                // Retornar información sobre el duplicado para que el usuario decida
+                http_response_code(409); // Conflict
+                echo json_encode([
+                    'success' => false,
+                    'is_duplicate' => true,
+                    'message' => 'Este VIN ya existe en ' . ucfirst($existing['type']) . ' (ID: ' . $existing['id'] . ')',
+                    'existing_id' => $existing['id'],
+                    'existing_type' => $existing['type'],
+                    'repeat_count' => $existing['repeat_count'],
+                    'created_at' => $existing['created_at']
+                ]);
+                exit;
             }
 
-            $stmt = $conn->prepare("INSERT INTO vin_records (vin, char_count, type, registered) VALUES (?, ?, ?, 0)");
+            $stmt = $conn->prepare("INSERT INTO vin_records (vin, char_count, type, registered, repeat_count) VALUES (?, ?, ?, 0, 0)");
             $stmt->execute([$vin, $charCount, $type]);
 
             echo json_encode([
                 'success' => true,
                 'message' => 'VIN agregado correctamente',
                 'id' => $conn->lastInsertId()
+            ]);
+            break;
+
+        case 'add_repeated':
+            $vin = $_POST['vin'] ?? '';
+            $type = $_POST['type'] ?? 'delivery';
+
+            // Procesar VIN: reemplazar O por 0
+            $vin = strtoupper(str_replace('O', '0', $vin));
+            $charCount = strlen($vin);
+
+            if (empty($vin)) {
+                throw new Exception('VIN no puede estar vacío');
+            }
+
+            // Buscar el VIN existente
+            $checkStmt = $conn->prepare("SELECT id, repeat_count FROM vin_records WHERE vin = ?");
+            $checkStmt->execute([$vin]);
+            $existing = $checkStmt->fetch();
+
+            if (!$existing) {
+                throw new Exception('VIN no encontrado. Usa la función agregar normal.');
+            }
+
+            // Incrementar contador de repeticiones y actualizar fecha
+            $newRepeatCount = $existing['repeat_count'] + 1;
+            $updateStmt = $conn->prepare("UPDATE vin_records SET repeat_count = ?, last_repeated_at = NOW(), registered = 0 WHERE id = ?");
+            $updateStmt->execute([$newRepeatCount, $existing['id']]);
+
+            echo json_encode([
+                'success' => true,
+                'message' => 'VIN marcado como repetido (Repetición #' . $newRepeatCount . ')',
+                'id' => $existing['id'],
+                'repeat_count' => $newRepeatCount
             ]);
             break;
 
@@ -169,7 +214,7 @@ try {
             $dateFilter = $_GET['date'] ?? '';
 
             // SOLO exportar VINs NO registrados
-            $query = "SELECT vin, type FROM vin_records WHERE registered = 0";
+            $query = "SELECT vin, type, repeat_count, last_repeated_at, created_at FROM vin_records WHERE registered = 0";
             $params = [];
 
             if ($type !== 'all') {
@@ -203,10 +248,18 @@ try {
             $serviceVins = [];
 
             foreach ($records as $record) {
+                $vinLine = $record['vin'];
+
+                // Si es repetido, agregar la fecha de última repetición o creación
+                if ($record['repeat_count'] > 0) {
+                    $dateToShow = $record['last_repeated_at'] ?? $record['created_at'];
+                    $vinLine .= " - Última repetición: " . date('Y-m-d H:i', strtotime($dateToShow));
+                }
+
                 if ($record['type'] === 'delivery') {
-                    $deliveryVins[] = $record['vin'];
+                    $deliveryVins[] = $vinLine;
                 } else {
-                    $serviceVins[] = $record['vin'];
+                    $serviceVins[] = $vinLine;
                 }
             }
 
