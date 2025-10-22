@@ -174,11 +174,12 @@ async function unregisterAll(type) {
 }
 
 // Alternar estado de registrado
-async function toggleRegistered(id) {
+async function toggleRegistered(id, type) {
   try {
     const formData = new FormData();
     formData.append("action", "toggle_registered");
     formData.append("id", id);
+    formData.append("type", type);
 
     const response = await fetch("api.php", {
       method: "POST",
@@ -280,13 +281,14 @@ async function addRepeatedVin(vin, type) {
 }
 
 // Eliminar VIN
-async function deleteVin(id) {
+async function deleteVin(id, type) {
   if (!confirm("¿Está seguro de eliminar este registro?")) return;
 
   try {
     const formData = new FormData();
     formData.append("action", "delete");
     formData.append("id", id);
+    formData.append("type", type);
 
     const response = await fetch("api.php", {
       method: "POST",
@@ -412,7 +414,7 @@ function renderTable(records, tbody, type) {
                     class="register-btn ${
                       record.registered == 1 ? "registered" : "not-registered"
                     }"
-                    onclick="toggleRegistered(${record.id})"
+                    onclick="toggleRegistered(${record.id}, '${record.type}')"
                 >
                     ${
                       record.registered == 1
@@ -424,7 +426,7 @@ function renderTable(records, tbody, type) {
             <td style="text-align: center;">
                 <button class="action-btn delete-btn" onclick="deleteVin(${
                   record.id
-                })">
+                }, '${record.type}')">
                     🗑️
                 </button>
             </td>

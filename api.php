@@ -4,6 +4,11 @@ require_once 'config.php';
 
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
+// Función helper para obtener el nombre de la tabla según el tipo
+function getTableName($type) {
+    return $type === 'delivery' ? 'delivery_records' : 'service_records';
+}
+
 try {
     $conn = getConnection();
 
@@ -20,8 +25,11 @@ try {
                 throw new Exception('VIN no puede estar vacío');
             }
 
-            // Verificar si el VIN ya existe
-            $checkStmt = $conn->prepare("SELECT id, type, repeat_count, created_at FROM vin_records WHERE vin = ?");
+            // Obtener nombre de la tabla según el tipo
+            $tableName = getTableName($type);
+
+            // Verificar si el VIN ya existe en esta tabla
+            $checkStmt = $conn->prepare("SELECT id, repeat_count, created_at FROM {$tableName} WHERE vin = ?");
             $checkStmt->execute([$vin]);
             $existing = $checkStmt->fetch();
 
@@ -31,17 +39,17 @@ try {
                 echo json_encode([
                     'success' => false,
                     'is_duplicate' => true,
-                    'message' => 'Este VIN ya existe en ' . ucfirst($existing['type']) . ' (ID: ' . $existing['id'] . ')',
+                    'message' => 'Este VIN ya existe en ' . ucfirst($type) . ' (ID: ' . $existing['id'] . ')',
                     'existing_id' => $existing['id'],
-                    'existing_type' => $existing['type'],
+                    'existing_type' => $type,
                     'repeat_count' => $existing['repeat_count'],
                     'created_at' => $existing['created_at']
                 ]);
                 exit;
             }
 
-            $stmt = $conn->prepare("INSERT INTO vin_records (vin, char_count, type, registered, repeat_count) VALUES (?, ?, ?, 0, 0)");
-            $stmt->execute([$vin, $charCount, $type]);
+            $stmt = $conn->prepare("INSERT INTO {$tableName} (vin, char_count, registered, repeat_count) VALUES (?, ?, 0, 0)");
+            $stmt->execute([$vin, $charCount]);
 
             echo json_encode([
                 'success' => true,
@@ -56,24 +64,26 @@ try {
 
             // Procesar VIN: reemplazar O por 0
             $vin = strtoupper(str_replace('O', '0', $vin));
-            $charCount = strlen($vin);
 
             if (empty($vin)) {
                 throw new Exception('VIN no puede estar vacío');
             }
 
-            // Buscar el VIN existente
-            $checkStmt = $conn->prepare("SELECT id, repeat_count FROM vin_records WHERE vin = ?");
+            // Obtener nombre de la tabla según el tipo
+            $tableName = getTableName($type);
+
+            // Buscar el VIN existente en esta tabla
+            $checkStmt = $conn->prepare("SELECT id, repeat_count FROM {$tableName} WHERE vin = ?");
             $checkStmt->execute([$vin]);
             $existing = $checkStmt->fetch();
 
             if (!$existing) {
-                throw new Exception('VIN no encontrado. Usa la función agregar normal.');
+                throw new Exception('VIN no encontrado en ' . ucfirst($type) . '. Usa la función agregar normal.');
             }
 
             // Incrementar contador de repeticiones y actualizar fecha
             $newRepeatCount = $existing['repeat_count'] + 1;
-            $updateStmt = $conn->prepare("UPDATE vin_records SET repeat_count = ?, last_repeated_at = NOW(), registered = 0 WHERE id = ?");
+            $updateStmt = $conn->prepare("UPDATE {$tableName} SET repeat_count = ?, last_repeated_at = NOW(), registered = 0 WHERE id = ?");
             $updateStmt->execute([$newRepeatCount, $existing['id']]);
 
             echo json_encode([
@@ -89,49 +99,60 @@ try {
             $dateFilter = $_GET['date'] ?? '';
             $registeredFilter = $_GET['registered'] ?? 'all';
 
-            $query = "SELECT * FROM vin_records WHERE 1=1";
+            $delivery = [];
+            $service = [];
+
+            // Construir query base con filtros
+            $whereConditions = [];
             $params = [];
 
-            if ($type !== 'all') {
-                $query .= " AND type = ?";
-                $params[] = $type;
-            }
-
             if (!empty($dateFilter)) {
-                $query .= " AND DATE(created_at) = ?";
+                $whereConditions[] = "DATE(created_at) = ?";
                 $params[] = $dateFilter;
             }
 
-            // Filtro por estado de registro
             if ($registeredFilter === 'registered') {
-                $query .= " AND registered = 1";
+                $whereConditions[] = "registered = 1";
             } elseif ($registeredFilter === 'not_registered') {
-                $query .= " AND registered = 0";
+                $whereConditions[] = "registered = 0";
             }
 
-            $query .= " ORDER BY type ASC, id ASC";
+            $whereClause = count($whereConditions) > 0 ? 'WHERE ' . implode(' AND ', $whereConditions) : '';
 
-            if (!empty($params)) {
-                $stmt = $conn->prepare($query);
-                $stmt->execute($params);
-            } else {
-                $stmt = $conn->query($query);
-            }
-
-            $records = $stmt->fetchAll();
-
-            // Separar por tipo y agregar contadores
-            $delivery = [];
-            $service = [];
-            $deliveryCounter = 1;
-            $serviceCounter = 1;
-
-            foreach ($records as $record) {
-                if ($record['type'] === 'delivery') {
-                    $record['counter'] = $deliveryCounter++;
-                    $delivery[] = $record;
+            // Obtener registros de delivery
+            if ($type === 'all' || $type === 'delivery') {
+                $query = "SELECT * FROM delivery_records {$whereClause} ORDER BY id ASC";
+                if (!empty($params)) {
+                    $stmt = $conn->prepare($query);
+                    $stmt->execute($params);
                 } else {
+                    $stmt = $conn->query($query);
+                }
+                $deliveryRecords = $stmt->fetchAll();
+
+                $deliveryCounter = 1;
+                foreach ($deliveryRecords as $record) {
+                    $record['counter'] = $deliveryCounter++;
+                    $record['type'] = 'delivery';
+                    $delivery[] = $record;
+                }
+            }
+
+            // Obtener registros de service
+            if ($type === 'all' || $type === 'service') {
+                $query = "SELECT * FROM service_records {$whereClause} ORDER BY id ASC";
+                if (!empty($params)) {
+                    $stmt = $conn->prepare($query);
+                    $stmt->execute($params);
+                } else {
+                    $stmt = $conn->query($query);
+                }
+                $serviceRecords = $stmt->fetchAll();
+
+                $serviceCounter = 1;
+                foreach ($serviceRecords as $record) {
                     $record['counter'] = $serviceCounter++;
+                    $record['type'] = 'service';
                     $service[] = $record;
                 }
             }
@@ -145,13 +166,20 @@ try {
 
         case 'toggle_registered':
             $id = $_POST['id'] ?? 0;
+            $type = $_POST['type'] ?? '';
 
             if ($id <= 0) {
                 throw new Exception('ID inválido');
             }
 
+            if (empty($type)) {
+                throw new Exception('Tipo de servicio no especificado');
+            }
+
+            $tableName = getTableName($type);
+
             // Obtener estado actual
-            $stmt = $conn->prepare("SELECT registered FROM vin_records WHERE id = ?");
+            $stmt = $conn->prepare("SELECT registered FROM {$tableName} WHERE id = ?");
             $stmt->execute([$id]);
             $current = $stmt->fetch();
 
@@ -161,7 +189,7 @@ try {
 
             // Cambiar estado
             $newStatus = $current['registered'] == 1 ? 0 : 1;
-            $updateStmt = $conn->prepare("UPDATE vin_records SET registered = ? WHERE id = ?");
+            $updateStmt = $conn->prepare("UPDATE {$tableName} SET registered = ? WHERE id = ?");
             $updateStmt->execute([$newStatus, $id]);
 
             echo json_encode([
@@ -175,14 +203,22 @@ try {
             $type = $_POST['type'] ?? 'all';
 
             if ($type === 'all') {
-                $stmt = $conn->prepare("UPDATE vin_records SET registered = 1 WHERE registered = 0");
-                $stmt->execute();
-            } else {
-                $stmt = $conn->prepare("UPDATE vin_records SET registered = 1 WHERE registered = 0 AND type = ?");
-                $stmt->execute([$type]);
-            }
+                // Registrar en ambas tablas
+                $stmt1 = $conn->prepare("UPDATE delivery_records SET registered = 1 WHERE registered = 0");
+                $stmt1->execute();
+                $affected1 = $stmt1->rowCount();
 
-            $affected = $stmt->rowCount();
+                $stmt2 = $conn->prepare("UPDATE service_records SET registered = 1 WHERE registered = 0");
+                $stmt2->execute();
+                $affected2 = $stmt2->rowCount();
+
+                $affected = $affected1 + $affected2;
+            } else {
+                $tableName = getTableName($type);
+                $stmt = $conn->prepare("UPDATE {$tableName} SET registered = 1 WHERE registered = 0");
+                $stmt->execute();
+                $affected = $stmt->rowCount();
+            }
 
             echo json_encode([
                 'success' => true,
@@ -194,14 +230,22 @@ try {
             $type = $_POST['type'] ?? 'all';
 
             if ($type === 'all') {
-                $stmt = $conn->prepare("UPDATE vin_records SET registered = 0 WHERE registered = 1");
-                $stmt->execute();
-            } else {
-                $stmt = $conn->prepare("UPDATE vin_records SET registered = 0 WHERE registered = 1 AND type = ?");
-                $stmt->execute([$type]);
-            }
+                // Desregistrar en ambas tablas
+                $stmt1 = $conn->prepare("UPDATE delivery_records SET registered = 0 WHERE registered = 1");
+                $stmt1->execute();
+                $affected1 = $stmt1->rowCount();
 
-            $affected = $stmt->rowCount();
+                $stmt2 = $conn->prepare("UPDATE service_records SET registered = 0 WHERE registered = 1");
+                $stmt2->execute();
+                $affected2 = $stmt2->rowCount();
+
+                $affected = $affected1 + $affected2;
+            } else {
+                $tableName = getTableName($type);
+                $stmt = $conn->prepare("UPDATE {$tableName} SET registered = 0 WHERE registered = 1");
+                $stmt->execute();
+                $affected = $stmt->rowCount();
+            }
 
             echo json_encode([
                 'success' => true,
@@ -213,54 +257,65 @@ try {
             $type = $_GET['type'] ?? 'all';
             $dateFilter = $_GET['date'] ?? '';
 
-            // SOLO exportar VINs NO registrados
-            $query = "SELECT vin, type, repeat_count, last_repeated_at, created_at FROM vin_records WHERE registered = 0";
-            $params = [];
-
-            if ($type !== 'all') {
-                $query .= " AND type = ?";
-                $params[] = $type;
-            }
-
-            if (!empty($dateFilter)) {
-                $query .= " AND DATE(created_at) = ?";
-                $params[] = $dateFilter;
-            }
-
-            $query .= " ORDER BY type ASC, id ASC";
-
-            if (!empty($params)) {
-                $stmt = $conn->prepare($query);
-                $stmt->execute($params);
-            } else {
-                $stmt = $conn->query($query);
-            }
-
-            $records = $stmt->fetchAll();
-
-            // Si no hay VINs sin registrar
-            if (count($records) === 0) {
-                throw new Exception('No hay VINs sin registrar para exportar');
-            }
-
-            // Separar por tipo
             $deliveryVins = [];
             $serviceVins = [];
 
-            foreach ($records as $record) {
-                $vinLine = $record['vin'];
+            // Construir condiciones de filtro
+            $whereConditions = ["registered = 0"];
+            $params = [];
 
-                // Si es repetido, agregar la fecha de última repetición o creación
-                if ($record['repeat_count'] > 0) {
-                    $dateToShow = $record['last_repeated_at'] ?? $record['created_at'];
-                    $vinLine .= " - Última repetición: " . date('Y-m-d H:i', strtotime($dateToShow));
-                }
+            if (!empty($dateFilter)) {
+                $whereConditions[] = "DATE(created_at) = ?";
+                $params[] = $dateFilter;
+            }
 
-                if ($record['type'] === 'delivery') {
-                    $deliveryVins[] = $vinLine;
+            $whereClause = 'WHERE ' . implode(' AND ', $whereConditions);
+
+            // Obtener VINs de delivery
+            if ($type === 'all' || $type === 'delivery') {
+                $query = "SELECT vin, repeat_count, last_repeated_at, created_at FROM delivery_records {$whereClause} ORDER BY id ASC";
+                if (!empty($params)) {
+                    $stmt = $conn->prepare($query);
+                    $stmt->execute($params);
                 } else {
+                    $stmt = $conn->query($query);
+                }
+                $deliveryRecords = $stmt->fetchAll();
+
+                foreach ($deliveryRecords as $record) {
+                    $vinLine = $record['vin'];
+                    if ($record['repeat_count'] > 0) {
+                        $dateToShow = $record['last_repeated_at'] ?? $record['created_at'];
+                        $vinLine .= " - Última repetición: " . date('Y-m-d H:i', strtotime($dateToShow));
+                    }
+                    $deliveryVins[] = $vinLine;
+                }
+            }
+
+            // Obtener VINs de service
+            if ($type === 'all' || $type === 'service') {
+                $query = "SELECT vin, repeat_count, last_repeated_at, created_at FROM service_records {$whereClause} ORDER BY id ASC";
+                if (!empty($params)) {
+                    $stmt = $conn->prepare($query);
+                    $stmt->execute($params);
+                } else {
+                    $stmt = $conn->query($query);
+                }
+                $serviceRecords = $stmt->fetchAll();
+
+                foreach ($serviceRecords as $record) {
+                    $vinLine = $record['vin'];
+                    if ($record['repeat_count'] > 0) {
+                        $dateToShow = $record['last_repeated_at'] ?? $record['created_at'];
+                        $vinLine .= " - Última repetición: " . date('Y-m-d H:i', strtotime($dateToShow));
+                    }
                     $serviceVins[] = $vinLine;
                 }
+            }
+
+            // Si no hay VINs sin registrar
+            if (count($deliveryVins) === 0 && count($serviceVins) === 0) {
+                throw new Exception('No hay VINs sin registrar para exportar');
             }
 
             // Preparar TXT con encabezados
@@ -290,12 +345,18 @@ try {
 
         case 'delete':
             $id = $_POST['id'] ?? 0;
+            $type = $_POST['type'] ?? '';
 
             if ($id <= 0) {
                 throw new Exception('ID inválido');
             }
 
-            $stmt = $conn->prepare("DELETE FROM vin_records WHERE id = ?");
+            if (empty($type)) {
+                throw new Exception('Tipo de servicio no especificado');
+            }
+
+            $tableName = getTableName($type);
+            $stmt = $conn->prepare("DELETE FROM {$tableName} WHERE id = ?");
             $stmt->execute([$id]);
 
             echo json_encode([
