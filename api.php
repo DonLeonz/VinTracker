@@ -29,16 +29,30 @@ try {
             $tableName = getTableName($type);
 
             // Verificar si el VIN ya existe en esta tabla
-            $checkStmt = $conn->prepare("SELECT id, repeat_count, created_at FROM {$tableName} WHERE vin = ?");
+            $checkStmt = $conn->prepare("SELECT id, repeat_count, created_at, registered FROM {$tableName} WHERE vin = ?");
             $checkStmt->execute([$vin]);
             $existing = $checkStmt->fetch();
 
             if ($existing) {
-                // Retornar información sobre el duplicado para que el usuario decida
+                // Si el VIN ya existe pero NO está registrado, no permitir agregar
+                if ($existing['registered'] == 0) {
+                    http_response_code(409); // Conflict
+                    echo json_encode([
+                        'success' => false,
+                        'is_duplicate' => true,
+                        'is_not_registered' => true,
+                        'message' => 'Este VIN ya está en la base de datos pero NO está registrado todavía',
+                        'existing_id' => $existing['id']
+                    ]);
+                    exit;
+                }
+
+                // Si el VIN ya existe y está registrado, preguntar si quiere agregarlo como repetido
                 http_response_code(409); // Conflict
                 echo json_encode([
                     'success' => false,
                     'is_duplicate' => true,
+                    'is_not_registered' => false,
                     'message' => 'Este VIN ya existe en ' . ucfirst($type) . ' (ID: ' . $existing['id'] . ')',
                     'existing_id' => $existing['id'],
                     'existing_type' => $type,
@@ -341,6 +355,52 @@ try {
             }
 
             exit;
+            break;
+
+        case 'update':
+            $id = $_POST['id'] ?? 0;
+            $type = $_POST['type'] ?? '';
+            $vin = $_POST['vin'] ?? '';
+
+            if ($id <= 0) {
+                throw new Exception('ID inválido');
+            }
+
+            if (empty($type)) {
+                throw new Exception('Tipo de servicio no especificado');
+            }
+
+            if (empty($vin)) {
+                throw new Exception('VIN no puede estar vacío');
+            }
+
+            // Procesar VIN: reemplazar O por 0
+            $vin = strtoupper(str_replace('O', '0', $vin));
+            $charCount = strlen($vin);
+
+            // Validar que el VIN tenga exactamente 17 caracteres
+            if ($charCount !== 17) {
+                throw new Exception('El VIN debe tener exactamente 17 caracteres');
+            }
+
+            $tableName = getTableName($type);
+
+            // Verificar que el VIN no exista en otro registro del mismo tipo
+            $checkStmt = $conn->prepare("SELECT id FROM {$tableName} WHERE vin = ? AND id != ?");
+            $checkStmt->execute([$vin, $id]);
+            $existing = $checkStmt->fetch();
+
+            if ($existing) {
+                throw new Exception('Este VIN ya existe en otro registro de ' . ucfirst($type));
+            }
+
+            $stmt = $conn->prepare("UPDATE {$tableName} SET vin = ?, char_count = ? WHERE id = ?");
+            $stmt->execute([$vin, $charCount, $id]);
+
+            echo json_encode([
+                'success' => true,
+                'message' => 'VIN actualizado correctamente'
+            ]);
             break;
 
         case 'delete':

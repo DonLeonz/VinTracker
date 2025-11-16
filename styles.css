@@ -216,6 +216,15 @@ tr:hover {
   transition: all 0.2s;
 }
 
+.edit-btn {
+  color: #ffc107;
+}
+
+.edit-btn:hover {
+  color: #e0a800;
+  transform: scale(1.2);
+}
+
 .delete-btn {
   color: #dc3545;
 }
@@ -290,6 +299,86 @@ tr:hover {
 
 .btn-unregister-all:hover {
   background: #5a6268;
+}
+
+/* Dropdown styles */
+.dropdown-toggle {
+  padding: 8px 12px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+}
+
+.dropdown-toggle:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+}
+
+.dropdown-toggle span {
+  transition: transform 0.3s;
+}
+
+.dropdown-toggle.collapsed span {
+  transform: rotate(-90deg);
+}
+
+.dropdown-content {
+  max-height: 600px;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+.dropdown-content.collapsed {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.count-badge {
+  background: #667eea;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+/* Scroll to top button */
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
 }
 
 @media (max-width: 768px) {

@@ -12,6 +12,46 @@ const alertBox = document.getElementById("alertBox");
 // Variable para almacenar datos actuales
 let currentData = { delivery: [], service: [] };
 
+// Estado de dropdowns (por defecto colapsados al inicio)
+let dropdownStates = { delivery: false, service: false };
+
+// Función para toggle dropdown
+function toggleDropdown(type) {
+  const content = document.getElementById(`${type}Content`);
+  const toggle = document.getElementById(`${type}Toggle`);
+  const icon = document.getElementById(`${type}ToggleIcon`);
+
+  dropdownStates[type] = !dropdownStates[type];
+
+  if (dropdownStates[type]) {
+    content.classList.remove("collapsed");
+    toggle.classList.remove("collapsed");
+    icon.textContent = "▼";
+  } else {
+    content.classList.add("collapsed");
+    toggle.classList.add("collapsed");
+    icon.textContent = "▶";
+  }
+}
+
+// Inicializar dropdowns colapsados
+function initializeDropdowns() {
+  const deliveryContent = document.getElementById("deliveryContent");
+  const serviceContent = document.getElementById("serviceContent");
+  const deliveryToggle = document.getElementById("deliveryToggle");
+  const serviceToggle = document.getElementById("serviceToggle");
+  const deliveryIcon = document.getElementById("deliveryToggleIcon");
+  const serviceIcon = document.getElementById("serviceToggleIcon");
+
+  // Colapsar al inicio
+  deliveryContent.classList.add("collapsed");
+  serviceContent.classList.add("collapsed");
+  deliveryToggle.classList.add("collapsed");
+  serviceToggle.classList.add("collapsed");
+  deliveryIcon.textContent = "▶";
+  serviceIcon.textContent = "▶";
+}
+
 // Mostrar alerta
 function showAlert(message, type = "error") {
   alertBox.textContent = message;
@@ -214,6 +254,13 @@ async function addVin() {
     return;
   }
 
+  // Validar que el VIN tenga exactamente 17 caracteres
+  const processedVin = processVin(vin);
+  if (processedVin.length !== 17) {
+    showAlert(`⚠️ El VIN debe tener exactamente 17 caracteres (tiene ${processedVin.length})`, "error");
+    return;
+  }
+
   try {
     const formData = new FormData();
     formData.append("action", "add");
@@ -230,7 +277,13 @@ async function addVin() {
 
     // Verificar primero si es un duplicado (código 409)
     if (data.is_duplicate) {
-      // VIN duplicado - preguntar si quiere agregarlo como repetido
+      // Si el VIN ya existe pero NO está registrado
+      if (data.is_not_registered) {
+        showAlert("⚠️ " + data.message, "warning");
+        return;
+      }
+
+      // VIN duplicado y registrado - preguntar si quiere agregarlo como repetido
       const confirmMessage = `🔄 ${data.message}\n\n¿Desea agregarlo como repetido?\n\nContador actual: ${data.repeat_count} repeticiones`;
 
       if (confirm(confirmMessage)) {
@@ -277,6 +330,57 @@ async function addRepeatedVin(vin, type) {
     }
   } catch (error) {
     showAlert("❌ Error al agregar VIN repetido: " + error.message, "error");
+  }
+}
+
+// Editar VIN
+async function editVin(id, type, currentVin) {
+  const newVin = prompt(
+    "Editar VIN:\n(O se convierte en 0)",
+    currentVin
+  );
+
+  if (newVin === null) return; // Usuario canceló
+
+  const trimmedVin = newVin.trim();
+
+  if (!trimmedVin) {
+    showAlert("⚠️ El VIN no puede estar vacío", "error");
+    return;
+  }
+
+  // Validar que el VIN tenga exactamente 17 caracteres
+  const processedVin = processVin(trimmedVin);
+  if (processedVin.length !== 17) {
+    showAlert(
+      `⚠️ El VIN debe tener exactamente 17 caracteres (tiene ${processedVin.length})`,
+      "error"
+    );
+    return;
+  }
+
+  try {
+    const formData = new FormData();
+    formData.append("action", "update");
+    formData.append("id", id);
+    formData.append("type", type);
+    formData.append("vin", trimmedVin);
+
+    const response = await fetch("api.php", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      showAlert("✅ VIN actualizado correctamente", "success");
+      loadRecords();
+    } else {
+      showAlert("❌ Error: " + data.message, "error");
+    }
+  } catch (error) {
+    showAlert("❌ Error al actualizar VIN: " + error.message, "error");
   }
 }
 
@@ -359,6 +463,10 @@ function formatDate(dateStr) {
 
 // Renderizar tabla
 function renderTable(records, tbody, type) {
+  // Actualizar contador
+  const countElement = document.getElementById(`${type}Count`);
+  countElement.textContent = records.length;
+
   if (records.length === 0) {
     tbody.innerHTML = `
             <tr>
@@ -424,9 +532,14 @@ function renderTable(records, tbody, type) {
                 </button>
             </td>
             <td style="text-align: center;">
+                <button class="action-btn edit-btn" onclick="editVin(${
+                  record.id
+                }, '${record.type}', '${record.vin}')" title="Editar">
+                    ✏️
+                </button>
                 <button class="action-btn delete-btn" onclick="deleteVin(${
                   record.id
-                }, '${record.type}')">
+                }, '${record.type}')" title="Eliminar">
                     🗑️
                 </button>
             </td>
@@ -437,5 +550,25 @@ function renderTable(records, tbody, type) {
     .join("");
 }
 
-// Cargar registros al iniciar
+// Función para subir al inicio
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+}
+
+// Mostrar/ocultar botón de subir al hacer scroll
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    scrollToTopBtn.classList.add("visible");
+  } else {
+    scrollToTopBtn.classList.remove("visible");
+  }
+});
+
+// Inicializar dropdowns y cargar registros al iniciar
+initializeDropdowns();
 loadRecords();

@@ -82,7 +82,12 @@
         <!-- Tabla Delivery -->
         <div class="card">
             <div class="button-group" style="margin-bottom: 20px;">
-                <h2 class="section-title" style="margin: 0;">📦 Delivery</h2>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="dropdown-toggle" onclick="toggleDropdown('delivery')" id="deliveryToggle">
+                        <span id="deliveryToggleIcon">▼</span>
+                    </button>
+                    <h2 class="section-title" style="margin: 0;">📦 Delivery <span id="deliveryCount" class="count-badge">0</span></h2>
+                </div>
                 <div style="display: flex; gap: 10px;">
                     <button class="btn-register-all" onclick="registerAll('delivery')">
                         <span>✅</span>
@@ -94,31 +99,38 @@
                     </button>
                 </div>
             </div>
-            <div id="deliveryLoading" class="loading" style="display: none;">Cargando...</div>
-            <table id="deliveryTable">
-                <thead>
-                    <tr>
-                        <th style="width: 60px;">#</th>
-                        <th style="width: 80px;">ID</th>
-                        <th style="width: 100px;">Caracteres</th>
-                        <th>VIN</th>
-                        <th style="width: 150px;">Fecha</th>
-                        <th style="width: 120px; text-align: center;">Estado</th>
-                        <th style="width: 80px; text-align: center;">Acción</th>
-                    </tr>
-                </thead>
-                <tbody id="deliveryBody">
-                    <tr>
-                        <td colspan="7" class="empty-state">No hay registros de delivery</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="deliveryContent" class="dropdown-content">
+                <div id="deliveryLoading" class="loading" style="display: none;">Cargando...</div>
+                <table id="deliveryTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 60px;">#</th>
+                            <th style="width: 80px;">ID</th>
+                            <th style="width: 100px;">Caracteres</th>
+                            <th>VIN</th>
+                            <th style="width: 150px;">Fecha</th>
+                            <th style="width: 120px; text-align: center;">Estado</th>
+                            <th style="width: 120px; text-align: center;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="deliveryBody">
+                        <tr>
+                            <td colspan="7" class="empty-state">No hay registros de delivery</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <!-- Tabla Service -->
         <div class="card">
             <div class="button-group" style="margin-bottom: 20px;">
-                <h2 class="section-title" style="margin: 0;">🔧 Service</h2>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="dropdown-toggle" onclick="toggleDropdown('service')" id="serviceToggle">
+                        <span id="serviceToggleIcon">▼</span>
+                    </button>
+                    <h2 class="section-title" style="margin: 0;">🔧 Service <span id="serviceCount" class="count-badge">0</span></h2>
+                </div>
                 <div style="display: flex; gap: 10px;">
                     <button class="btn-register-all" onclick="registerAll('service')">
                         <span>✅</span>
@@ -130,27 +142,34 @@
                     </button>
                 </div>
             </div>
-            <div id="serviceLoading" class="loading" style="display: none;">Cargando...</div>
-            <table id="serviceTable">
-                <thead>
-                    <tr>
-                        <th style="width: 60px;">#</th>
-                        <th style="width: 80px;">ID</th>
-                        <th style="width: 100px;">Caracteres</th>
-                        <th>VIN</th>
-                        <th style="width: 150px;">Fecha</th>
-                        <th style="width: 120px; text-align: center;">Estado</th>
-                        <th style="width: 80px; text-align: center;">Acción</th>
-                    </tr>
-                </thead>
-                <tbody id="serviceBody">
-                    <tr>
-                        <td colspan="7" class="empty-state">No hay registros de service</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="serviceContent" class="dropdown-content">
+                <div id="serviceLoading" class="loading" style="display: none;">Cargando...</div>
+                <table id="serviceTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 60px;">#</th>
+                            <th style="width: 80px;">ID</th>
+                            <th style="width: 100px;">Caracteres</th>
+                            <th>VIN</th>
+                            <th style="width: 150px;">Fecha</th>
+                            <th style="width: 120px; text-align: center;">Estado</th>
+                            <th style="width: 120px; text-align: center;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="serviceBody">
+                        <tr>
+                            <td colspan="7" class="empty-state">No hay registros de service</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
+    <!-- Botón flotante para subir -->
+    <button id="scrollToTopBtn" class="scroll-to-top" onclick="scrollToTop()">
+        ⬆️
+    </button>
 
     <script src="script.js"></script>
 </body>
