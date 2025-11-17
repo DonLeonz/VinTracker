@@ -1,24 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 
 const Filters = ({ filters, onFilterChange, onClearFilters, onExport }) => {
   const [localFilters, setLocalFilters] = useState(filters);
 
-  const handleDateChange = (e) => {
+  // Sincronizar con props cuando cambien externamente
+  useEffect(() => {
+    setLocalFilters(filters);
+  }, [filters]);
+
+  const handleDateChange = useCallback((e) => {
     const newFilters = { ...localFilters, date: e.target.value };
     setLocalFilters(newFilters);
     onFilterChange(newFilters);
-  };
+  }, [localFilters, onFilterChange]);
 
-  const handleRegisteredChange = (e) => {
+  const handleRegisteredChange = useCallback((e) => {
     const newFilters = { ...localFilters, registered: e.target.value };
     setLocalFilters(newFilters);
     onFilterChange(newFilters);
-  };
+  }, [localFilters, onFilterChange]);
 
-  const handleClear = () => {
+  const handleClear = useCallback(() => {
     setLocalFilters({ date: '', registered: 'all' });
     onClearFilters();
-  };
+  }, [onClearFilters]);
 
   return (
     <div className="uk-card uk-card-default uk-card-body uk-margin-medium fade-in">
@@ -52,7 +57,7 @@ const Filters = ({ filters, onFilterChange, onClearFilters, onExport }) => {
 
         {/* Export Buttons */}
         <div className="uk-width-auto@m">
-          <label className="uk-form-label" style={{ opacity: 0 }}>Actions</label>
+          <label className="uk-form-label filters-label-spacer">Actions</label>
           <div className="uk-flex uk-flex-middle" data-uk-margin>
             <button
               className="uk-button uk-button-secondary uk-button-small"
@@ -69,17 +74,15 @@ const Filters = ({ filters, onFilterChange, onClearFilters, onExport }) => {
               <span className="uk-margin-small-left">Exportar Sin Registrar</span>
             </button>
             <button
-              className="uk-button uk-button-primary uk-button-small"
+              className="uk-button uk-button-primary uk-button-small filters-export-delivery"
               onClick={() => onExport('delivery')}
-              style={{ background: '#28A745' }}
             >
               <span data-uk-icon="download"></span>
               <span className="uk-margin-small-left">Export. Delivery</span>
             </button>
             <button
-              className="uk-button uk-button-primary uk-button-small"
+              className="uk-button uk-button-primary uk-button-small filters-export-service"
               onClick={() => onExport('service')}
-              style={{ background: '#007BFF' }}
             >
               <span data-uk-icon="download"></span>
               <span className="uk-margin-small-left">Export. Service</span>
@@ -91,4 +94,4 @@ const Filters = ({ filters, onFilterChange, onClearFilters, onExport }) => {
   );
 };
 
-export default Filters;
+export default memo(Filters);

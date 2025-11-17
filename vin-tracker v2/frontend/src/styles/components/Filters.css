@@ -1,0 +1,49 @@
+/* ========================================
+   FILTERS COMPONENT STYLES
+   ======================================== */
+
+.filters-container {
+  /* Inherits uk-card styles */
+}
+
+.filters-grid {
+  /* Inherits uk-grid-small styles */
+}
+
+.filters-left {
+  /* Contains filter inputs */
+}
+
+.filters-right {
+  /* Contains export buttons */
+}
+
+.filters-label-spacer {
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.filters-export-delivery {
+  background: linear-gradient(135deg, #28A745, #20c997) !important;
+}
+
+.filters-export-delivery:hover {
+  background: linear-gradient(135deg, #20c997, #28A745) !important;
+}
+
+.filters-export-service {
+  background: linear-gradient(135deg, #007BFF, #0056b3) !important;
+}
+
+.filters-export-service:hover {
+  background: linear-gradient(135deg, #0056b3, #007BFF) !important;
+}
+
+@media (max-width: 640px) {
+  .filters-right {
+    width: 100%;
+  }
+}

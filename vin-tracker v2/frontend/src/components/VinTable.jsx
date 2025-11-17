@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import { formatDate, showNotification } from '../utils/helpers';
+import { useState, useCallback } from 'react';
 import { vinService } from '../services/api';
-import ConfirmModal from './ConfirmModal';
-import EditVinModal from './EditVinModal';
+import { showNotification } from '../utils/helpers';
+import ConfirmModal from './modals/ConfirmModal';
+import EditVinModal from './modals/EditVinModal';
+import TableHeader from './table/TableHeader';
+import TableBody from './table/TableBody';
 
 const VinTable = ({ title, type, records, isLoading, onRecordsChange }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -22,11 +24,12 @@ const VinTable = ({ title, type, records, isLoading, onRecordsChange }) => {
     currentVin: ''
   });
 
-  const toggleCollapse = () => {
+  const toggleCollapse = useCallback(() => {
     setIsCollapsed(!isCollapsed);
-  };
+  }, [isCollapsed]);
 
-  const handleToggleRegistered = async (id, isRegistered) => {
+  const handleToggleRegistered = useCallback(async (id, isRegistered) => {
+    console.log('VinTable handleToggleRegistered:', id, isRegistered);
     const newStatus = isRegistered ? 'No Registrado' : 'Registrado';
     const actionText = isRegistered ? 'desregistrar' : 'registrar';
 
@@ -47,17 +50,18 @@ const VinTable = ({ title, type, records, isLoading, onRecordsChange }) => {
         }
       }
     });
-  };
+  }, [type, onRecordsChange]);
 
-  const handleEdit = (id, currentVin) => {
+  const handleEdit = useCallback((id, currentVin) => {
+    console.log('VinTable handleEdit:', id, currentVin);
     setEditModal({
       isOpen: true,
       id: id,
       currentVin: currentVin
     });
-  };
+  }, []);
 
-  const handleEditSave = async (newVin) => {
+  const handleEditSave = useCallback(async (newVin) => {
     try {
       const result = await vinService.updateVin(editModal.id, type, newVin);
       if (result.success) {
@@ -67,9 +71,10 @@ const VinTable = ({ title, type, records, isLoading, onRecordsChange }) => {
     } catch (error) {
       showNotification('❌ ' + (error.message || 'Error al actualizar VIN'), 'danger');
     }
-  };
+  }, [editModal.id, type, onRecordsChange]);
 
-  const handleDelete = (id, vin) => {
+  const handleDelete = useCallback((id, vin) => {
+    console.log('VinTable handleDelete:', id, vin);
     setConfirmModal({
       isOpen: true,
       type: 'danger',
@@ -88,9 +93,9 @@ const VinTable = ({ title, type, records, isLoading, onRecordsChange }) => {
         }
       }
     });
-  };
+  }, [type, onRecordsChange]);
 
-  const handleRegisterAll = () => {
+  const handleRegisterAll = useCallback(() => {
     setConfirmModal({
       isOpen: true,
       type: 'success',
@@ -109,9 +114,9 @@ const VinTable = ({ title, type, records, isLoading, onRecordsChange }) => {
         }
       }
     });
-  };
+  }, [type, onRecordsChange]);
 
-  const handleUnregisterAll = () => {
+  const handleUnregisterAll = useCallback(() => {
     setConfirmModal({
       isOpen: true,
       type: 'danger',
@@ -130,121 +135,31 @@ const VinTable = ({ title, type, records, isLoading, onRecordsChange }) => {
         }
       }
     });
-  };
+  }, [type, onRecordsChange]);
 
   return (
     <>
       <div className="uk-card uk-card-default uk-card-body uk-margin-medium slide-in">
         {/* Header */}
-        <div className="uk-flex uk-flex-between uk-flex-middle uk-margin-bottom">
-          <div className="uk-flex uk-flex-middle">
-            <div className="dropdown-header" onClick={toggleCollapse}>
-              <span className={`dropdown-icon ${isCollapsed ? 'collapsed' : ''}`}>
-                {isCollapsed ? '▶' : '▼'}
-              </span>
-              <h2 className="uk-card-title uk-margin-remove">
-                {title} <span className="count-badge">{records.length}</span>
-              </h2>
-            </div>
-          </div>
-
-          <div className="uk-flex" data-uk-margin>
-            <button
-              className="uk-button uk-button-secondary uk-button-small"
-              onClick={handleRegisterAll}
-            >
-              <span data-uk-icon="check"></span>
-              <span className="uk-margin-small-left">Registrar Todos</span>
-            </button>
-            <button
-              className="uk-button uk-button-danger uk-button-small"
-              onClick={handleUnregisterAll}
-            >
-              <span data-uk-icon="close"></span>
-              <span className="uk-margin-small-left">Desregistrar Todos</span>
-            </button>
-          </div>
-        </div>
+        <TableHeader
+          title={title}
+          count={records.length}
+          isCollapsed={isCollapsed}
+          onToggle={toggleCollapse}
+          onRegisterAll={handleRegisterAll}
+          onUnregisterAll={handleUnregisterAll}
+        />
 
         {/* Table */}
         <div className={`dropdown-content ${isCollapsed ? 'collapsed' : ''}`}>
-          {isLoading ? (
-            <div className="uk-text-center uk-padding">
-              <span data-uk-spinner="ratio: 2"></span>
-              <p className="uk-margin-small-top">Cargando...</p>
-            </div>
-          ) : records.length === 0 ? (
-            <div className="empty-state">
-              No hay registros de {type}
-            </div>
-          ) : (
-            <div className="uk-overflow-auto">
-              <table className="uk-table uk-table-hover uk-table-divider uk-table-small">
-                <thead>
-                  <tr>
-                    <th style={{ width: '60px' }}>#</th>
-                    <th style={{ width: '80px' }}>ID</th>
-                    <th style={{ width: '100px' }}>Caracteres</th>
-                    <th>VIN</th>
-                    <th style={{ width: '180px' }}>Fecha</th>
-                    <th style={{ width: '150px' }} className="uk-text-center">Estado</th>
-                    <th style={{ width: '120px' }} className="uk-text-center">Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {records.map((record) => (
-                    <tr key={record.id}>
-                      <td className="text-gold" style={{ fontWeight: 'bold' }}>
-                        {record.counter}
-                      </td>
-                      <td>{record.id}</td>
-                      <td>
-                        <span className={`char-badge ${record.char_count === 17 ? 'valid' : 'invalid'}`}>
-                          {record.char_count}
-                        </span>
-                      </td>
-                      <td>
-                        <span className={`vin-badge ${type}`}>{record.vin}</span>
-                        {record.repeat_count > 0 && (
-                          <div className="repeat-info">
-                            🔄 Repetido {record.repeat_count}{' '}
-                            {record.repeat_count === 1 ? 'vez' : 'veces'}
-                            <br />
-                            Última: {formatDate(record.last_repeated_at || record.created_at)}
-                          </div>
-                        )}
-                      </td>
-                      <td style={{ fontSize: '0.9rem' }}>{formatDate(record.created_at)}</td>
-                      <td className="uk-text-center">
-                        <span
-                          className={`status-badge ${record.registered ? 'registered' : 'not-registered'}`}
-                          onClick={() => handleToggleRegistered(record.id, record.registered)}
-                        >
-                          {record.registered ? '✅ Registrado' : '❌ No Registrado'}
-                        </span>
-                      </td>
-                      <td className="uk-text-center">
-                        <button
-                          className="action-btn edit"
-                          onClick={() => handleEdit(record.id, record.vin)}
-                          title="Editar"
-                        >
-                          ✏️
-                        </button>
-                        <button
-                          className="action-btn delete"
-                          onClick={() => handleDelete(record.id, record.vin)}
-                          title="Eliminar"
-                        >
-                          🗑️
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+          <TableBody
+            records={records}
+            type={type}
+            isLoading={isLoading}
+            onToggleRegistered={handleToggleRegistered}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
         </div>
       </div>
 

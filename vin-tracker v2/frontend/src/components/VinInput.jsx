@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useCallback, memo } from 'react';
 import { processVin, validateVinLength, showNotification } from '../utils/helpers';
 import { vinService } from '../services/api';
-import ConfirmModal from './ConfirmModal';
+import ConfirmModal from './modals/ConfirmModal';
 
 const VinInput = ({ onVinAdded }) => {
   const [vin, setVin] = useState('');
@@ -18,7 +18,7 @@ const VinInput = ({ onVinAdded }) => {
     onConfirm: () => {}
   });
 
-  const handleVinChange = (e) => {
+  const handleVinChange = useCallback((e) => {
     const value = e.target.value;
     setVin(value);
 
@@ -28,14 +28,29 @@ const VinInput = ({ onVinAdded }) => {
     } else {
       setPreview('');
     }
-  };
+  }, []);
 
-  const handleClearVin = () => {
+  const handleClearVin = useCallback(() => {
     setVin('');
     setPreview('');
-  };
+  }, []);
 
-  const handleAddVin = async (e) => {
+  const handleAddRepeated = useCallback(async (vinValue) => {
+    try {
+      const result = await vinService.addRepeatedVin(vinValue, type);
+
+      if (result.success) {
+        setVin('');
+        setPreview('');
+        showNotification('✅ ' + result.message, 'success');
+        onVinAdded && onVinAdded();
+      }
+    } catch (error) {
+      showNotification('❌ ' + (error.message || 'Error al agregar VIN repetido'), 'danger');
+    }
+  }, [type, onVinAdded]);
+
+  const handleAddVin = useCallback(async (e) => {
     e.preventDefault();
 
     const trimmedVin = vin.trim();
@@ -87,22 +102,7 @@ const VinInput = ({ onVinAdded }) => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleAddRepeated = async (vinValue) => {
-    try {
-      const result = await vinService.addRepeatedVin(vinValue, type);
-
-      if (result.success) {
-        setVin('');
-        setPreview('');
-        showNotification('✅ ' + result.message, 'success');
-        onVinAdded && onVinAdded();
-      }
-    } catch (error) {
-      showNotification('❌ ' + (error.message || 'Error al agregar VIN repetido'), 'danger');
-    }
-  };
+  }, [vin, type, onVinAdded, handleAddRepeated]);
 
   return (
     <>
@@ -155,7 +155,7 @@ const VinInput = ({ onVinAdded }) => {
             </div>
 
             {/* Botón Agregar */}
-            <div className="uk-width-1-4@m uk-flex uk-flex-middle" style={{ paddingTop: '25px' }}>
+            <div className="uk-width-1-4@m uk-flex uk-flex-middle vin-form-submit-wrapper">
               <button
                 type="submit"
                 className="uk-button uk-button-primary"
@@ -192,4 +192,4 @@ const VinInput = ({ onVinAdded }) => {
   );
 };
 
-export default VinInput;
+export default memo(VinInput);

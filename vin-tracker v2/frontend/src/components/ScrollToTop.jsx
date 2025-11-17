@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { scrollToTop } from '../utils/helpers';
 
 const ScrollToTop = () => {
@@ -31,4 +31,4 @@ const ScrollToTop = () => {
   );
 };
 
-export default ScrollToTop;
+export default memo(ScrollToTop);

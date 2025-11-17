@@ -1,0 +1,87 @@
+/* ========================================
+   TABLE COMPONENTS STYLES
+   ======================================== */
+
+/* Table Header */
+.table-header-wrapper {
+  margin-bottom: 20px;
+}
+
+.table-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.table-header-left {
+  flex: 1;
+}
+
+.table-header-actions {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Table Columns Width */
+.table-col-counter {
+  width: 60px;
+}
+
+.table-col-id {
+  width: 80px;
+}
+
+.table-col-chars {
+  width: 100px;
+}
+
+.table-col-date {
+  width: 180px;
+  font-size: 0.9rem;
+}
+
+.table-col-status {
+  width: 150px;
+}
+
+.table-col-actions {
+  width: 120px;
+}
+
+/* Table Counter */
+.table-counter {
+  font-weight: bold;
+}
+
+/* Action Buttons Container */
+.action-buttons-container {
+  display: inline-flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+@media (max-width: 960px) {
+  .table-header-actions {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .table-header-top {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .table-header-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .table-header-actions .uk-button {
+    width: 100%;
+  }
+}

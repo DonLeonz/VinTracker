@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import VinInput from './components/VinInput';
 import VinTable from './components/VinTable';
 import Filters from './components/Filters';
@@ -13,7 +13,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   // Load records
-  const loadRecords = async () => {
+  const loadRecords = useCallback(async () => {
     setIsLoading(true);
     try {
       const data = await vinService.getRecords(filters);
@@ -27,7 +27,7 @@ function App() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [filters]);
 
   // Load records on mount and filter change
   useEffect(() => {
@@ -35,17 +35,17 @@ function App() {
   }, [filters]);
 
   // Handle filter change
-  const handleFilterChange = (newFilters) => {
+  const handleFilterChange = useCallback((newFilters) => {
     setFilters(newFilters);
-  };
+  }, []);
 
   // Clear filters
-  const handleClearFilters = () => {
+  const handleClearFilters = useCallback(() => {
     setFilters({ date: '', registered: 'all' });
-  };
+  }, []);
 
   // Handle export
-  const handleExport = async (type) => {
+  const handleExport = useCallback(async (type) => {
     try {
       // Check if there are records to export
       const data = await vinService.getRecords({ registered: 'not_registered' });
@@ -81,7 +81,7 @@ function App() {
       showNotification('❌ Error al exportar datos', 'danger');
       console.error('Error exporting:', error);
     }
-  };
+  }, [filters.date]);
 
   return (
     <div className="main-container">

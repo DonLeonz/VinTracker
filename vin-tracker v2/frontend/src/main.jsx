@@ -7,9 +7,8 @@ import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import 'uikit/dist/css/uikit.min.css';
 
-// Import custom styles
-import './styles/theme.css';
-import './styles/custom.css';
+// Import custom styles (centralized)
+import './styles/index.css';
 
 // Initialize UIkit icons
 UIkit.use(Icons);

@@ -1,0 +1,17 @@
+/* ========================================
+   VIN INPUT COMPONENT STYLES
+   ======================================== */
+
+.vin-form-container {
+  /* Inherits uk-card styles */
+}
+
+.vin-form-submit-wrapper {
+  padding-top: 25px;
+}
+
+@media (max-width: 640px) {
+  .vin-form-submit-wrapper {
+    padding-top: 0;
+  }
+}

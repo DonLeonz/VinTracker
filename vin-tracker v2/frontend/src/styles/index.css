@@ -1,0 +1,19 @@
+/* ========================================
+   VIN TRACKER - ARCHIVO CSS PRINCIPAL
+   Importa todos los estilos organizados
+   ======================================== */
+
+/* Tema y variables */
+@import './theme.css';
+
+/* Base y Layout */
+@import './custom.css';
+
+/* Componentes */
+@import './components/Filters.css';
+@import './components/VinInput.css';
+@import './components/Table.css';
+
+/* Modales */
+@import './modals/ConfirmModal.css';
+@import './modals/EditVinModal.css';
