@@ -87,22 +87,7 @@
    ======================================== */
 .uk-card {
   position: relative;
-  overflow: hidden;
   margin-bottom: 30px !important;
-}
-
-.uk-card::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(135deg, var(--vin-golden), var(--vin-golden-dark), var(--vin-golden));
-  background-size: 400% 400%;
-  border-radius: inherit;
-  z-index: -1;
-  animation: gradient-shift 6s ease infinite;
 }
 
 .uk-card-body {

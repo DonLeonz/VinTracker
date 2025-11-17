@@ -57,12 +57,16 @@
 }
 
 body {
-  background: linear-gradient(to bottom, var(--vin-dark-primary), var(--vin-dark-secondary)) !important;
+  background:
+    linear-gradient(to bottom, rgba(30, 30, 30, 0.85), rgba(44, 44, 44, 0.9)),
+    url('/src/img/reze-wallpaper.jpg') center center / cover fixed no-repeat !important;
   color: var(--vin-light);
   min-height: 100vh;
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 /* ========================================
@@ -168,6 +172,13 @@ a.uk-button-primary:hover {
   box-shadow: 0 6px 25px rgba(212, 167, 98, 0.4) !important;
 }
 
+/* Iconos dentro de botones primary siempre negros */
+.uk-button-primary [data-uk-icon],
+.uk-button-primary svg {
+  color: #000000 !important;
+  fill: #000000 !important;
+}
+
 .uk-button-secondary,
 button.uk-button-secondary {
   background-color: var(--vin-dark-tertiary) !important;
@@ -217,10 +228,41 @@ button.uk-button-secondary:hover {
   transition: var(--transition-smooth) !important;
 }
 
+.uk-card:hover {
+  border-color: var(--vin-golden) !important;
+  box-shadow: var(--box-shadow-hover) !important;
+  transform: translateY(-8px) !important;
+}
+
 .uk-card-hover:hover {
   border-color: var(--vin-golden) !important;
   box-shadow: var(--box-shadow-hover) !important;
-  transform: translateY(-5px) !important;
+  transform: translateY(-8px) !important;
+}
+
+/* Animaciones para elementos dentro de las cards */
+.uk-card .uk-input,
+.uk-card .uk-select,
+.uk-card .uk-button,
+.uk-card .uk-form-label,
+.uk-card .vin-input-wrapper,
+.uk-card .vin-preview {
+  transition: all 0.3s ease !important;
+}
+
+.uk-card:hover .uk-input,
+.uk-card:hover .uk-select {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 167, 98, 0.2) !important;
+}
+
+.uk-card:hover .uk-button {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.uk-card:hover .uk-form-label {
+  color: var(--vin-golden-light) !important;
+  transform: translateX(3px);
 }
 
 .uk-card-body {

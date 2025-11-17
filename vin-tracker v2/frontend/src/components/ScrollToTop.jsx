@@ -26,7 +26,7 @@ const ScrollToTop = () => {
       onClick={scrollToTop}
       aria-label="Scroll to top"
     >
-      ⬆️
+      <span data-uk-icon="icon: chevron-up; ratio: 2"></span>
     </button>
   );
 };

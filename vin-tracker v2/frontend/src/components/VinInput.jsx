@@ -1,12 +1,22 @@
 import { useState } from 'react';
 import { processVin, validateVinLength, showNotification } from '../utils/helpers';
 import { vinService } from '../services/api';
+import ConfirmModal from './ConfirmModal';
 
 const VinInput = ({ onVinAdded }) => {
   const [vin, setVin] = useState('');
   const [type, setType] = useState('delivery');
   const [preview, setPreview] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  // Modal state
+  const [confirmModal, setConfirmModal] = useState({
+    isOpen: false,
+    type: 'warning',
+    title: '',
+    message: '',
+    onConfirm: () => {}
+  });
 
   const handleVinChange = (e) => {
     const value = e.target.value;
@@ -54,13 +64,17 @@ const VinInput = ({ onVinAdded }) => {
         if (result.is_not_registered) {
           showNotification('⚠️ ' + result.message, 'warning');
         } else {
-          const confirmMessage = `🔄 ${result.message}\n\n¿Desea agregarlo como repetido?\n\nContador actual: ${result.repeat_count} repeticiones`;
-
-          if (window.confirm(confirmMessage)) {
-            await handleAddRepeated(trimmedVin);
-          } else {
-            showNotification('⚠️ No se agregó el VIN duplicado', 'warning');
-          }
+          // Mostrar modal de confirmación para VIN duplicado
+          setConfirmModal({
+            isOpen: true,
+            type: 'warning',
+            title: 'VIN Duplicado',
+            message: `${result.message}\n\n¿Desea agregarlo como repetido?\n\nContador actual: ${result.repeat_count} repeticiones`,
+            confirmText: 'Agregar como Repetido',
+            onConfirm: async () => {
+              await handleAddRepeated(trimmedVin);
+            }
+          });
         }
       } else if (result.success) {
         setVin('');
@@ -91,77 +105,90 @@ const VinInput = ({ onVinAdded }) => {
   };
 
   return (
-    <div className="uk-card uk-card-default uk-card-body uk-margin-medium fade-in">
-      <form onSubmit={handleAddVin}>
-        <div className="uk-grid-small" data-uk-grid>
-          {/* Input VIN con botón X */}
-          <div className="uk-width-1-2@m">
-            <label className="uk-form-label">Número VIN</label>
-            <div className="vin-input-wrapper">
-              <input
-                type="text"
-                className="uk-input vin-input-with-clear"
-                placeholder="Ingrese el VIN (O se convierte en 0)"
-                value={vin}
-                onChange={handleVinChange}
-                maxLength="25"
-                disabled={isLoading}
-              />
-              {vin && !isLoading && (
-                <button
-                  type="button"
-                  className="vin-clear-btn"
-                  onClick={handleClearVin}
-                  aria-label="Limpiar"
-                >
-                  ✕
-                </button>
+    <>
+      <div className="uk-card uk-card-default uk-card-body uk-margin-medium fade-in">
+        <form onSubmit={handleAddVin}>
+          <div className="uk-grid-small" data-uk-grid>
+            {/* Input VIN con botón X */}
+            <div className="uk-width-1-2@m">
+              <label className="uk-form-label">Número VIN</label>
+              <div className="vin-input-wrapper">
+                <input
+                  type="text"
+                  className="uk-input vin-input-with-clear"
+                  placeholder="Ingrese el VIN (O se convierte en 0)"
+                  value={vin}
+                  onChange={handleVinChange}
+                  maxLength="25"
+                  disabled={isLoading}
+                />
+                {vin && !isLoading && (
+                  <button
+                    type="button"
+                    className="vin-clear-btn"
+                    onClick={handleClearVin}
+                    aria-label="Limpiar"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+              {preview && (
+                <div className="vin-preview">
+                  Vista previa: {preview}
+                </div>
               )}
             </div>
-            {preview && (
-              <div className="vin-preview">
-                Vista previa: {preview}
-              </div>
-            )}
-          </div>
 
-          {/* Select Tipo */}
-          <div className="uk-width-1-4@m">
-            <label className="uk-form-label">Tipo</label>
-            <select
-              className="uk-select"
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-              disabled={isLoading}
-            >
-              <option value="delivery">📦 Delivery</option>
-              <option value="service">🔧 Service</option>
-            </select>
-          </div>
+            {/* Select Tipo */}
+            <div className="uk-width-1-4@m">
+              <label className="uk-form-label">Tipo</label>
+              <select
+                className="uk-select"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+                disabled={isLoading}
+              >
+                <option value="delivery">📦 Delivery</option>
+                <option value="service">🔧 Service</option>
+              </select>
+            </div>
 
-          {/* Botón Agregar */}
-          <div className="uk-width-1-4@m uk-flex uk-flex-middle" style={{ paddingTop: '25px' }}>
-            <button
-              type="submit"
-              className="uk-button uk-button-primary"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <>
-                  <span data-uk-spinner="ratio: 0.6"></span>
-                  <span className="uk-margin-small-left">Agregando...</span>
-                </>
-              ) : (
-                <>
-                  <span data-uk-icon="plus"></span>
-                  <span className="uk-margin-small-left">Agregar</span>
-                </>
-              )}
-            </button>
+            {/* Botón Agregar */}
+            <div className="uk-width-1-4@m uk-flex uk-flex-middle" style={{ paddingTop: '25px' }}>
+              <button
+                type="submit"
+                className="uk-button uk-button-primary"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <>
+                    <span data-uk-spinner="ratio: 0.6"></span>
+                    <span className="uk-margin-small-left">Agregando...</span>
+                  </>
+                ) : (
+                  <>
+                    <span data-uk-icon="plus"></span>
+                    <span className="uk-margin-small-left">Agregar</span>
+                  </>
+                )}
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+
+      {/* Modal de confirmación */}
+      <ConfirmModal
+        isOpen={confirmModal.isOpen}
+        onClose={() => setConfirmModal({ ...confirmModal, isOpen: false })}
+        onConfirm={confirmModal.onConfirm}
+        title={confirmModal.title}
+        message={confirmModal.message}
+        type={confirmModal.type}
+        confirmText={confirmModal.confirmText || 'Confirmar'}
+      />
+    </>
   );
 };
 
