@@ -1,0 +1,993 @@
+/* ========================================
+   VIN TRACKER - ESTILOS PERSONALIZADOS
+   Diseño Profesional Responsive con Espaciado Mejorado
+   ======================================== */
+
+/* ========================================
+   LAYOUT PRINCIPAL
+   ======================================== */
+.main-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 60px 30px;
+}
+
+@media (max-width: 960px) {
+  .main-container {
+    padding: 40px 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .main-container {
+    padding: 30px 15px;
+  }
+}
+
+/* ========================================
+   TÍTULO PRINCIPAL
+   ======================================== */
+.app-title {
+  font-size: 4rem;
+  font-weight: 800;
+  text-align: center;
+  background: linear-gradient(135deg, var(--vin-golden-light) 0%, var(--vin-golden) 50%, var(--vin-golden-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 60px;
+  letter-spacing: 3px;
+  position: relative;
+  padding-bottom: 25px;
+  animation: slide-up 0.8s ease;
+}
+
+.app-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 5px;
+  background: linear-gradient(90deg, var(--vin-golden), var(--vin-golden-dark), var(--vin-golden));
+  border-radius: 3px;
+  box-shadow: 0 0 15px rgba(212, 167, 98, 0.5);
+  animation: pulse-golden 2s ease-in-out infinite;
+}
+
+@media (max-width: 960px) {
+  .app-title {
+    font-size: 3rem;
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+  }
+
+  .app-title::after {
+    width: 120px;
+    height: 4px;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-title {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+  }
+
+  .app-title::after {
+    width: 100px;
+    height: 3px;
+  }
+}
+
+/* ========================================
+   CARDS CON ESTILO PROFESIONAL
+   ======================================== */
+.uk-card {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 30px !important;
+}
+
+.uk-card::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, var(--vin-golden), var(--vin-golden-dark), var(--vin-golden));
+  background-size: 400% 400%;
+  border-radius: inherit;
+  z-index: -1;
+  animation: gradient-shift 6s ease infinite;
+}
+
+.uk-card-body {
+  background: var(--vin-dark-secondary) !important;
+  border-radius: var(--border-radius-card);
+  padding: 30px !important;
+}
+
+@media (max-width: 960px) {
+  .uk-card {
+    margin-bottom: 25px !important;
+  }
+
+  .uk-card-body {
+    padding: 25px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .uk-card {
+    margin-bottom: 20px !important;
+  }
+
+  .uk-card-body {
+    padding: 20px !important;
+  }
+}
+
+/* ========================================
+   BOTONES PROFESIONALES
+   ======================================== */
+.uk-button {
+  padding: 12px 24px !important;
+  border-radius: var(--border-radius-button) !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.5px !important;
+  transition: var(--transition-default) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+.uk-button-primary {
+  background: linear-gradient(135deg, var(--vin-golden), var(--vin-golden-dark)) !important;
+  color: #000000 !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(212, 167, 98, 0.3) !important;
+}
+
+.uk-button-primary:hover {
+  background: linear-gradient(135deg, var(--vin-golden-light), var(--vin-golden)) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(212, 167, 98, 0.5) !important;
+}
+
+.uk-button-secondary {
+  background: var(--vin-dark-tertiary) !important;
+  color: var(--vin-golden) !important;
+  border: 2px solid var(--vin-golden) !important;
+}
+
+.uk-button-secondary:hover {
+  background: var(--vin-golden) !important;
+  color: #000000 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(212, 167, 98, 0.4) !important;
+}
+
+.uk-button-danger {
+  background: linear-gradient(135deg, #dc3545, #c82333) !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+.uk-button-danger:hover {
+  background: linear-gradient(135deg, #e74c3c, #dc3545) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4) !important;
+}
+
+.uk-button-small {
+  padding: 10px 18px !important;
+  font-size: 0.9rem !important;
+}
+
+@media (max-width: 960px) {
+  .uk-button {
+    padding: 11px 20px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .uk-button-small {
+    padding: 9px 16px !important;
+    font-size: 0.85rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .uk-button {
+    padding: 10px 16px !important;
+    font-size: 0.85rem !important;
+  }
+
+  .uk-button-small {
+    padding: 8px 14px !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+/* ========================================
+   FORMULARIOS
+   ======================================== */
+.uk-form-label {
+  margin-bottom: 10px !important;
+  display: block !important;
+  font-weight: 600 !important;
+  color: var(--vin-golden) !important;
+  font-size: 0.95rem !important;
+}
+
+.uk-input,
+.uk-select {
+  background: var(--vin-dark-tertiary) !important;
+  color: var(--vin-light) !important;
+  border: 2px solid rgba(212, 167, 98, 0.3) !important;
+  border-radius: var(--border-radius-button) !important;
+  padding: 12px 18px !important;
+  font-size: 0.95rem !important;
+  transition: var(--transition-default) !important;
+  min-width: 220px !important;
+}
+
+.uk-input:focus,
+.uk-select:focus {
+  outline: none !important;
+  border-color: var(--vin-golden) !important;
+  box-shadow: 0 0 0 3px rgba(212, 167, 98, 0.2) !important;
+  background: var(--vin-dark-secondary) !important;
+}
+
+@media (max-width: 960px) {
+  .uk-input,
+  .uk-select {
+    min-width: 180px !important;
+    padding: 11px 16px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .uk-input,
+  .uk-select {
+    min-width: 100% !important;
+    padding: 10px 14px !important;
+    font-size: 0.9rem !important;
+  }
+}
+
+/* ========================================
+   TABLAS
+   ======================================== */
+.uk-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 20px;
+}
+
+.uk-table thead th {
+  background: var(--vin-dark-tertiary) !important;
+  color: var(--vin-golden) !important;
+  padding: 18px 16px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  font-size: 0.85rem !important;
+  letter-spacing: 1px !important;
+  border-bottom: 3px solid var(--vin-golden) !important;
+}
+
+.uk-table tbody td {
+  padding: 16px !important;
+  background: var(--vin-dark-secondary) !important;
+  color: var(--vin-light) !important;
+  border-bottom: 1px solid rgba(212, 167, 98, 0.1) !important;
+  font-size: 0.9rem !important;
+}
+
+.uk-table tbody tr {
+  transition: var(--transition-default);
+}
+
+.uk-table tbody tr:hover {
+  background: var(--vin-dark-tertiary) !important;
+  transform: scale(1.01);
+  box-shadow: 0 4px 15px rgba(212, 167, 98, 0.2) !important;
+}
+
+@media (max-width: 960px) {
+  .uk-table thead th {
+    padding: 15px 12px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .uk-table tbody td {
+    padding: 14px 12px !important;
+    font-size: 0.85rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .uk-table thead th {
+    padding: 12px 10px !important;
+    font-size: 0.75rem !important;
+  }
+
+  .uk-table tbody td {
+    padding: 12px 10px !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+/* ========================================
+   VIN BADGES
+   ======================================== */
+.vin-badge {
+  display: inline-block;
+  padding: 10px 18px;
+  background: var(--vin-dark-tertiary);
+  border: 2px solid var(--vin-golden);
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  color: var(--vin-golden);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  font-size: 0.95rem;
+  box-shadow: 0 0 15px rgba(212, 167, 98, 0.2);
+  transition: var(--transition-default);
+  position: relative;
+  overflow: hidden;
+}
+
+.vin-badge::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212, 167, 98, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.vin-badge:hover::before {
+  left: 100%;
+}
+
+.vin-badge.delivery {
+  border-color: #28a745;
+  color: #28a745;
+}
+
+.vin-badge.service {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+@media (max-width: 640px) {
+  .vin-badge {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ========================================
+   CHAR BADGE
+   ======================================== */
+.char-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.char-badge.valid {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.4);
+}
+
+.char-badge.invalid {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(220, 53, 69, 0.4);
+  animation: pulse-danger 1.5s infinite;
+}
+
+@keyframes pulse-danger {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(220, 53, 69, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(220, 53, 69, 0.6);
+  }
+}
+
+/* ========================================
+   STATUS BADGE
+   ======================================== */
+.status-badge {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition-default);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.status-badge.registered {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: #ffffff;
+}
+
+.status-badge.registered:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.5);
+}
+
+.status-badge.not-registered {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: #ffffff;
+}
+
+.status-badge.not-registered:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(220, 53, 69, 0.5);
+}
+
+@media (max-width: 640px) {
+  .status-badge {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ========================================
+   ACTION BUTTONS
+   ======================================== */
+.action-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  margin: 0 8px;
+  transition: var(--transition-default);
+  padding: 8px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.action-btn:hover {
+  transform: scale(1.2) rotate(15deg);
+  background: rgba(212, 167, 98, 0.2);
+}
+
+.action-btn.edit:hover {
+  filter: drop-shadow(0 0 8px rgba(255, 193, 7, 0.6));
+}
+
+.action-btn.delete:hover {
+  filter: drop-shadow(0 0 8px rgba(220, 53, 69, 0.6));
+}
+
+@media (max-width: 640px) {
+  .action-btn {
+    font-size: 1.2rem;
+    width: 36px;
+    height: 36px;
+    margin: 0 6px;
+  }
+}
+
+/* ========================================
+   REPEAT INFO
+   ======================================== */
+.repeat-info {
+  background: rgba(255, 193, 7, 0.15);
+  border-left: 4px solid #ffc107;
+  padding: 12px 16px;
+  margin-top: 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--vin-light-muted);
+  line-height: 1.7;
+  transition: var(--transition-default);
+}
+
+.repeat-info:hover {
+  background: rgba(255, 193, 7, 0.22);
+  transform: translateX(5px);
+}
+
+/* ========================================
+   DROPDOWN SYSTEM PROFESIONAL
+   ======================================== */
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  user-select: none;
+  padding: 25px 30px;
+  background: var(--vin-dark-tertiary);
+  border-radius: var(--border-radius-button);
+  transition: var(--transition-smooth);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.dropdown-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212, 167, 98, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.dropdown-header:hover::before {
+  left: 100%;
+}
+
+.dropdown-header:hover {
+  background: var(--vin-dark-secondary);
+  box-shadow: var(--box-shadow-golden);
+  transform: translateX(8px);
+  border-color: rgba(212, 167, 98, 0.3);
+}
+
+.dropdown-icon {
+  font-size: 1.8rem;
+  color: var(--vin-golden);
+  transition: transform 0.3s ease, color 0.3s ease;
+  font-weight: 900;
+}
+
+.dropdown-icon.collapsed {
+  transform: rotate(-90deg);
+}
+
+.dropdown-header:hover .dropdown-icon {
+  color: var(--vin-golden-light);
+}
+
+.dropdown-content {
+  max-height: 1000px;
+  overflow-y: auto;
+  transition: var(--transition-smooth);
+  margin-top: 25px;
+}
+
+.dropdown-content.collapsed {
+  max-height: 0;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+@media (max-width: 960px) {
+  .dropdown-header {
+    padding: 20px 25px;
+    gap: 18px;
+  }
+
+  .dropdown-icon {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .dropdown-header {
+    padding: 16px 20px;
+    gap: 15px;
+  }
+
+  .dropdown-icon {
+    font-size: 1.4rem;
+  }
+}
+
+/* ========================================
+   COUNT BADGE
+   ======================================== */
+.count-badge {
+  background: linear-gradient(135deg, var(--vin-golden), var(--vin-golden-dark));
+  color: #000000;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: var(--box-shadow-golden);
+  margin-left: 15px;
+  transition: var(--transition-default);
+}
+
+.dropdown-header:hover .count-badge {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(212, 167, 98, 0.5);
+}
+
+@media (max-width: 640px) {
+  .count-badge {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    margin-left: 10px;
+  }
+}
+
+/* ========================================
+   VIN PREVIEW
+   ======================================== */
+.vin-preview {
+  padding: 18px 25px;
+  background: var(--vin-dark-tertiary);
+  border: 3px solid var(--vin-golden);
+  border-radius: var(--border-radius-button);
+  font-family: 'Courier New', monospace;
+  color: var(--vin-golden);
+  margin-top: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 1.1rem;
+  box-shadow: 0 0 25px rgba(212, 167, 98, 0.2);
+  animation: pulse-golden 2.5s infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.vin-preview::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -100%;
+  width: 100%;
+  height: calc(100% + 4px);
+  background: linear-gradient(90deg, transparent, rgba(212, 167, 98, 0.3), transparent);
+  animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0%, 100% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .vin-preview {
+    padding: 15px 20px;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+  }
+}
+
+/* ========================================
+   SCROLL TO TOP BUTTON
+   ======================================== */
+.scroll-to-top {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, var(--vin-golden), var(--vin-golden-dark));
+  color: #000000;
+  border: 3px solid var(--vin-golden-light);
+  border-radius: 50%;
+  font-size: 2.2rem;
+  cursor: pointer;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 25px rgba(212, 167, 98, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  animation: float 3s ease-in-out infinite;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 12px 35px rgba(212, 167, 98, 0.6);
+  background: linear-gradient(135deg, var(--vin-golden-light), var(--vin-golden));
+}
+
+.scroll-to-top:active {
+  transform: translateY(-3px) scale(1.05);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (max-width: 960px) {
+  .scroll-to-top {
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .scroll-to-top {
+    width: 55px;
+    height: 55px;
+    bottom: 25px;
+    right: 25px;
+    font-size: 1.8rem;
+    border-width: 2px;
+  }
+}
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+.empty-state {
+  text-align: center;
+  padding: 80px 30px;
+  color: var(--vin-light-muted);
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: 300;
+  animation: fadeIn 0.5s ease;
+}
+
+@media (max-width: 640px) {
+  .empty-state {
+    padding: 60px 20px;
+    font-size: 1.1rem;
+  }
+}
+
+/* ========================================
+   ANIMACIONES FADE IN
+   ======================================== */
+.fade-in {
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.6s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ========================================
+   ESPACIADO ENTRE BOTONES Y GRIDS
+   ======================================== */
+.uk-button-group,
+[data-uk-margin],
+.uk-flex.uk-flex-middle {
+  gap: 20px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+.uk-grid-small {
+  gap: 20px !important;
+}
+
+.uk-flex-between {
+  justify-content: space-between !important;
+  align-items: flex-end !important;
+  gap: 20px !important;
+}
+
+/* Override de UIkit para asegurar el espaciado */
+.uk-grid-small > * {
+  padding-left: 0 !important;
+}
+
+[data-uk-grid] {
+  margin-left: 0 !important;
+}
+
+@media (max-width: 960px) {
+  .uk-button-group,
+  [data-uk-margin],
+  .uk-flex.uk-flex-middle {
+    gap: 16px !important;
+  }
+
+  .uk-grid-small {
+    gap: 16px !important;
+  }
+
+  .uk-flex-between {
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .uk-button-group,
+  [data-uk-margin],
+  .uk-flex.uk-flex-middle {
+    gap: 12px !important;
+  }
+
+  .uk-grid-small {
+    gap: 12px !important;
+  }
+
+  .uk-flex-between {
+    gap: 12px !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  /* Botones full width en mobile */
+  .uk-button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* ========================================
+   LOADING SPINNER
+   ======================================== */
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--vin-golden);
+  font-size: 1.1rem;
+}
+
+/* ========================================
+   INPUT CON BOTÓN X PARA LIMPIAR
+   ======================================== */
+.vin-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.vin-input-with-clear {
+  padding-right: 50px !important;
+}
+
+.vin-clear-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--vin-golden);
+  color: #000000;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: 700;
+  transition: var(--transition-default);
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(212, 167, 98, 0.3);
+}
+
+.vin-clear-btn:hover {
+  background: var(--vin-golden-light);
+  transform: translateY(-50%) scale(1.1) rotate(90deg);
+  box-shadow: 0 4px 12px rgba(212, 167, 98, 0.5);
+}
+
+.vin-clear-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+@media (max-width: 640px) {
+  .vin-clear-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    right: 8px;
+  }
+}
+
+/* ========================================
+   MEJORA DE ALTURA DE INPUTS Y SELECTS
+   ======================================== */
+.uk-input,
+.uk-select {
+  height: 50px !important;
+  line-height: 50px !important;
+  padding: 0 18px !important;
+}
+
+.uk-input::placeholder {
+  opacity: 0.6;
+}
+
+@media (max-width: 960px) {
+  .uk-input,
+  .uk-select {
+    height: 48px !important;
+    line-height: 48px !important;
+    padding: 0 16px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .uk-input,
+  .uk-select {
+    height: 46px !important;
+    line-height: 46px !important;
+    padding: 0 14px !important;
+  }
+
+  .vin-input-with-clear {
+    padding-right: 46px !important;
+  }
+}
+
+/* ========================================
+   AJUSTE DE TAMAÑO DE BOTONES EN FORMULARIOS
+   ======================================== */
+.uk-card-body form .uk-button {
+  min-width: auto !important;
+  width: auto !important;
+  white-space: nowrap;
+  padding: 0 20px !important;
+  height: 50px !important;
+}
+
+.uk-card-body form .uk-button-small {
+  height: 44px !important;
+  padding: 0 18px !important;
+}
+
+@media (max-width: 640px) {
+  .uk-card-body form .uk-button {
+    width: 100% !important;
+    height: 46px !important;
+  }
+}

@@ -1,0 +1,3481 @@
+{
+    "delivery": [
+        {
+            "id": 1,
+            "vin": "KNDPYDDH6R7151878",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 2,
+            "vin": "WDC0G4JB5JV044366",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 3,
+            "vin": "5XYP34GC7SG670543",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 4,
+            "vin": "5XYRL4LC5MG054843",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 5,
+            "vin": "KNDPVDDG4T7290785",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 6,
+            "vin": "5XXG64J20PG166483",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 7,
+            "vin": "5N1AZ2CJ1RC123727",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 8,
+            "vin": "3C4NJDDB7KT620341",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-01 20:20:47",
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 9,
+            "vin": "1FADP3K22HL269890",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 10,
+            "vin": "3KPA24AD0ME429675",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 11,
+            "vin": "JTEMU5JR4R6229013",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 12,
+            "vin": "KNDNC5K39T6569030",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 13,
+            "vin": "5XYP34GC1RG488220",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 14,
+            "vin": "3KPA24AD9PE561399",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 15,
+            "vin": "KNDNB5K3XT6570643",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 16,
+            "vin": "3KPF24AD8PE692832",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 17,
+            "vin": "5XYP5DGC6SG677591",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 18,
+            "vin": "KNAG64J76T5400360",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 19,
+            "vin": "5XYK33DF3TG359440",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 20,
+            "vin": "KNDEUCAAXT7851530",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 21,
+            "vin": "5N1AZ2DS4MC132373",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 60,
+            "vin": "KNDNE5K35T6578687",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 23:53:35"
+        },
+        {
+            "id": 61,
+            "vin": "KNAG64J7XT5398693",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 23:54:02"
+        },
+        {
+            "id": 62,
+            "vin": "KNDPM3AC8N7025126",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 23:54:28"
+        },
+        {
+            "id": 63,
+            "vin": "5XYK43DF8TG364968",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 23:55:02"
+        },
+        {
+            "id": 102,
+            "vin": "KNDJ23AU4S7956545",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 17:53:26"
+        },
+        {
+            "id": 103,
+            "vin": "KNDPVCAG4P7083222",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 17:54:11"
+        },
+        {
+            "id": 104,
+            "vin": "3KPFW4DE6SE126394",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 17:54:43"
+        },
+        {
+            "id": 105,
+            "vin": "JM3ER2W53A0341251",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 17:56:23"
+        },
+        {
+            "id": 106,
+            "vin": "5XYP6DHC9NG216949",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 17:57:25"
+        },
+        {
+            "id": 108,
+            "vin": "5XYRKDJF1SG335860",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-22 09:58:06"
+        },
+        {
+            "id": 109,
+            "vin": "KNAG64J79S5288023",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:32:19"
+        },
+        {
+            "id": 110,
+            "vin": "5XYRK4JF5TG413235",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:32:56"
+        },
+        {
+            "id": 111,
+            "vin": "3KPFW4DE2SE174989",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:33:25"
+        },
+        {
+            "id": 112,
+            "vin": "5XYP64GC2PG335771",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:49:05"
+        },
+        {
+            "id": 113,
+            "vin": "3KPFU4DE5SE167895",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:16:39"
+        },
+        {
+            "id": 114,
+            "vin": "KNDJ53AU3S7959301",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:17:26"
+        },
+        {
+            "id": 115,
+            "vin": "5XYK23DF0TG336801",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-14 23:11:04",
+            "created_at": "2025-10-28 15:18:10"
+        },
+        {
+            "id": 116,
+            "vin": "KNAG44J86T5412605",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:18:38"
+        },
+        {
+            "id": 117,
+            "vin": "KNDPXDDG2T7299415",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:21:38"
+        },
+        {
+            "id": 118,
+            "vin": "KNDNE5K37T6572213",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:21:59"
+        },
+        {
+            "id": 119,
+            "vin": "KNDNE5KA1T6108719",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:22:21"
+        },
+        {
+            "id": 120,
+            "vin": "5XYK6CDF9RG180173",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:22:48"
+        },
+        {
+            "id": 121,
+            "vin": "5XYPG4A52LG685418",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:23:15"
+        },
+        {
+            "id": 122,
+            "vin": "KNDPUDDGXT7283410",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:20:17"
+        },
+        {
+            "id": 123,
+            "vin": "4T1C11AK9NU678905",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:21:19"
+        },
+        {
+            "id": 124,
+            "vin": "5XYK33DF0TG374459",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:21:57"
+        },
+        {
+            "id": 125,
+            "vin": "KNAG64J75S5390631",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:22:24"
+        },
+        {
+            "id": 126,
+            "vin": "KNDPVDDG3T7290356",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:23:18"
+        },
+        {
+            "id": 127,
+            "vin": "KNDCR3LE0S5246225",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:23:54"
+        },
+        {
+            "id": 128,
+            "vin": "KNDJ33AU0S7269849",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:24:29"
+        },
+        {
+            "id": 129,
+            "vin": "5XYK33DF0TG365549",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:25:01"
+        },
+        {
+            "id": 130,
+            "vin": "7FARS5H51RE026706",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:25:27"
+        },
+        {
+            "id": 131,
+            "vin": "KNDCR3L11R5120429",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:25:48"
+        },
+        {
+            "id": 137,
+            "vin": "KNAG64J73T5417701",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:52:40"
+        },
+        {
+            "id": 139,
+            "vin": "3KPFT4DE0SE196238",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:53:41"
+        },
+        {
+            "id": 140,
+            "vin": "KNDPM3AC3N7026460",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:53:55"
+        },
+        {
+            "id": 142,
+            "vin": "5NMS34AJ1PH653767",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:54:21"
+        },
+        {
+            "id": 143,
+            "vin": "KNDPU3DG8S7248454",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:54:46"
+        },
+        {
+            "id": 144,
+            "vin": "5XYP64GC9RG432243",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:55:04"
+        },
+        {
+            "id": 145,
+            "vin": "1GTPHDED9RZ182297",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:55:25"
+        },
+        {
+            "id": 146,
+            "vin": "3KPFT4DE0SE220232",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:55:44"
+        },
+        {
+            "id": 147,
+            "vin": "KNAG64J76T5427171",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:55:59"
+        },
+        {
+            "id": 148,
+            "vin": "5NMJC3AE6NH153013",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:56:13"
+        },
+        {
+            "id": 149,
+            "vin": "5XYRK4LF0PG201782",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:56:28"
+        },
+        {
+            "id": 150,
+            "vin": "5XYRKDJF9RG273389",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:56:45"
+        },
+        {
+            "id": 151,
+            "vin": "KNDPV3DF5S7368992",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:57:02"
+        },
+        {
+            "id": 152,
+            "vin": "5XYRLDLC0PG193301",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:57:16"
+        },
+        {
+            "id": 153,
+            "vin": "5XYK33DF0SG270147",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:57:29"
+        },
+        {
+            "id": 154,
+            "vin": "KNDPVDDGXT7300851",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:57:42"
+        },
+        {
+            "id": 155,
+            "vin": "5XYP54HC1NG225647",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:58:15"
+        },
+        {
+            "id": 156,
+            "vin": "KNDEPCAAXS7732611",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:58:27"
+        },
+        {
+            "id": 157,
+            "vin": "3KPF24AD8ME360014",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:58:40"
+        },
+        {
+            "id": 158,
+            "vin": "5XYRL4JC4SG396901",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:58:55"
+        },
+        {
+            "id": 159,
+            "vin": "2T2BZMCA0KC204070",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:29:28"
+        },
+        {
+            "id": 160,
+            "vin": "5XYK33DF5TG367149",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:29:50"
+        },
+        {
+            "id": 161,
+            "vin": "5XYP34GC0SG650974",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:30:14"
+        },
+        {
+            "id": 162,
+            "vin": "KNDCR3LEXS5238651",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:30:30"
+        },
+        {
+            "id": 163,
+            "vin": "3KPF54AD7NE492366",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:30:45"
+        },
+        {
+            "id": 164,
+            "vin": "KNDPVDDGXT7280617",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:30:58"
+        },
+        {
+            "id": 165,
+            "vin": "5NPD84LF9HH202416",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:02:44"
+        },
+        {
+            "id": 166,
+            "vin": "5XYP3DGC3PG325680",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:03:08"
+        },
+        {
+            "id": 167,
+            "vin": "5XYRGDLC1NG077641",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:03:26"
+        },
+        {
+            "id": 168,
+            "vin": "KNDCR3LE8P5056342",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:03:41"
+        },
+        {
+            "id": 169,
+            "vin": "5XYP54GC7SG683870",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:03:57"
+        },
+        {
+            "id": 170,
+            "vin": "5XYK33AF1PG034926",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-14 23:10:30"
+        },
+        {
+            "id": 171,
+            "vin": "KMHLP4AG6NU236529",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-14 23:10:48"
+        },
+        {
+            "id": 172,
+            "vin": "5XYK33DF8TG389629",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:37:32"
+        },
+        {
+            "id": 173,
+            "vin": "KNDJ23AU2L7081872",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:37:48"
+        }
+    ],
+    "service": [
+        {
+            "id": 22,
+            "vin": "5XYRL4JC9SG349072",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-01 20:33:39",
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 23,
+            "vin": "3KPA24AD7PE519989",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 24,
+            "vin": "5XYRHDJF8SG361466",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 25,
+            "vin": "5XYRH4LF4MG035616",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 26,
+            "vin": "5XYRKDLF9PG214322",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 27,
+            "vin": "5XYK23DF0TG348110",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 28,
+            "vin": "5XYRL4JC0SG345816",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 29,
+            "vin": "5XYK33DF1SG322899",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 30,
+            "vin": "5XXG64J28NG088175",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-10-22 08:56:48",
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 31,
+            "vin": "3KPFT4DE8SE004936",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 32,
+            "vin": "5XXG34J23NG118160",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 33,
+            "vin": "KNDJ53AF0L7005351",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 34,
+            "vin": "KNDJ23AU3R7237734",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 35,
+            "vin": "KNDNE5K31S6468279",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 36,
+            "vin": "5XYP64GC0SG608991",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 37,
+            "vin": "KNDEPCAA7P7385102",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 38,
+            "vin": "5XXG14J20PG175344",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 39,
+            "vin": "5XYP34HC7NG208096",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 40,
+            "vin": "KNDEPCAA8P7442701",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 41,
+            "vin": "5XYP24GC7RG495319",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 42,
+            "vin": "5XYRL4JC1SG363662",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 43,
+            "vin": "5XYPGDA34GG060880",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 44,
+            "vin": "3KPF44AC3PE643703",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 45,
+            "vin": "3KPF54AD0ME403512",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 46,
+            "vin": "3KPF24AD7PE505712",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 47,
+            "vin": "KNDJN2A23E7040220",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 48,
+            "vin": "5XYRL4LC9NG158429",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 49,
+            "vin": "5XYP34GC4RG410661",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 50,
+            "vin": "KNDER2AA3S7687807",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 51,
+            "vin": "5XYRKDLF2NG099222",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 52,
+            "vin": "5XXG64J26PG225701",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 53,
+            "vin": "KNDNE5H37R6320705",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 54,
+            "vin": "3KPFT4DEXSE010107",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 55,
+            "vin": "KNDJP3A56G7401551",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 56,
+            "vin": "5XXG64J20PG172025",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 57,
+            "vin": "5XXG64J26PG201544",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 58,
+            "vin": "5XYP34HC9MG161393",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 59,
+            "vin": "5XYRLDJC3SG353344",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-08 22:45:19",
+            "created_at": "2025-10-16 22:26:36"
+        },
+        {
+            "id": 64,
+            "vin": "3KPF44AC6RE791606",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 23:57:42"
+        },
+        {
+            "id": 65,
+            "vin": "KNDER2AA9S7667545",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 23:58:10"
+        },
+        {
+            "id": 66,
+            "vin": "5XYPG4A37LG662778",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 23:58:28"
+        },
+        {
+            "id": 67,
+            "vin": "KNDRJDJH3S5299683",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 23:58:57"
+        },
+        {
+            "id": 68,
+            "vin": "3KPFK4A71HE068351",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 23:59:21"
+        },
+        {
+            "id": 69,
+            "vin": "KNAE45LC8K6044368",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-16 23:59:40"
+        },
+        {
+            "id": 70,
+            "vin": "KNDPM3AC8K7565975",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 00:00:09"
+        },
+        {
+            "id": 71,
+            "vin": "5XYK33AF5PG093560",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 00:00:41"
+        },
+        {
+            "id": 72,
+            "vin": "5XYP5DGC4RG461765",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 00:01:06"
+        },
+        {
+            "id": 73,
+            "vin": "KNDEUCA23N7245126",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 00:01:23"
+        },
+        {
+            "id": 74,
+            "vin": "3KPA24AD8ME426684",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 00:01:48"
+        },
+        {
+            "id": 75,
+            "vin": "KNDJ23AU2M7763796",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 00:02:11"
+        },
+        {
+            "id": 76,
+            "vin": "3KPFW4DC0SE140077",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 00:02:37"
+        },
+        {
+            "id": 77,
+            "vin": "5XYPGDA50HG307007",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 00:02:59"
+        },
+        {
+            "id": 78,
+            "vin": "KNDJ23AUXS7265357",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 00:03:25"
+        },
+        {
+            "id": 79,
+            "vin": "5XYRK4JF8SG354938",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 00:05:40"
+        },
+        {
+            "id": 80,
+            "vin": "KNDJ23AU0P7895797",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:45:50"
+        },
+        {
+            "id": 81,
+            "vin": "KNDETCA2XM7057947",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:46:15"
+        },
+        {
+            "id": 82,
+            "vin": "3KPFT4DE1SE157285",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:46:40"
+        },
+        {
+            "id": 83,
+            "vin": "5XYRL4JC2SG338138",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:47:50"
+        },
+        {
+            "id": 84,
+            "vin": "5XYK3CDF5SG289650",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:48:14"
+        },
+        {
+            "id": 85,
+            "vin": "KNDEPCAA8P7408600",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:49:01"
+        },
+        {
+            "id": 86,
+            "vin": "5XYRG4JC3RG276456",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:50:59"
+        },
+        {
+            "id": 87,
+            "vin": "5XYRKDLF9PG219925",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:51:22"
+        },
+        {
+            "id": 88,
+            "vin": "5XYRL4JC8SG350455",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 2,
+            "last_repeated_at": "2025-11-12 23:07:39",
+            "created_at": "2025-10-17 22:51:51"
+        },
+        {
+            "id": 89,
+            "vin": "5XYRL4JC6SG352236",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 3,
+            "last_repeated_at": "2025-10-29 23:30:30",
+            "created_at": "2025-10-17 22:52:33"
+        },
+        {
+            "id": 90,
+            "vin": "5XYRL4JCXSG338601",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:53:17"
+        },
+        {
+            "id": 91,
+            "vin": "5XYRL4JC3SG343350",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-08 22:44:27",
+            "created_at": "2025-10-17 22:53:42"
+        },
+        {
+            "id": 92,
+            "vin": "KNDCR3LE3S5235820",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:54:13"
+        },
+        {
+            "id": 93,
+            "vin": "5XYP5DGC9PG376806",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:54:44"
+        },
+        {
+            "id": 94,
+            "vin": "5XYRH4JFXSG389589",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:55:21"
+        },
+        {
+            "id": 95,
+            "vin": "3KPFW4DE5SE097468",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:57:43"
+        },
+        {
+            "id": 96,
+            "vin": "KNDPM3AC6N7026808",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:58:15"
+        },
+        {
+            "id": 97,
+            "vin": "3KPF44AC4RE811397",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:58:41"
+        },
+        {
+            "id": 98,
+            "vin": "KNDER2AA0T7854870",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:59:07"
+        },
+        {
+            "id": 99,
+            "vin": "5XXG34J20RG229271",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 22:59:39"
+        },
+        {
+            "id": 100,
+            "vin": "KNDJ23AU4L7012214",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 23:00:53"
+        },
+        {
+            "id": 101,
+            "vin": "KNDPU3DF9R7283893",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-17 23:01:18"
+        },
+        {
+            "id": 108,
+            "vin": "5XYP54GC3SG601522",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 17:59:03"
+        },
+        {
+            "id": 109,
+            "vin": "5XYRK4JF8SG386496",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:00:08"
+        },
+        {
+            "id": 110,
+            "vin": "5XYRHDJF0SG361655",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:00:37"
+        },
+        {
+            "id": 111,
+            "vin": "KNAG34J74S5268447",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:01:13"
+        },
+        {
+            "id": 112,
+            "vin": "5XYRL4JC4SG346175",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-01 20:33:00",
+            "created_at": "2025-10-21 18:01:53"
+        },
+        {
+            "id": 113,
+            "vin": "5XYRL4JC7SG352651",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 3,
+            "last_repeated_at": "2025-11-12 23:07:29",
+            "created_at": "2025-10-21 18:02:27"
+        },
+        {
+            "id": 114,
+            "vin": "KNDJT2A66D7547684",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:02:51"
+        },
+        {
+            "id": 115,
+            "vin": "KNAG64J78S5315941",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-10-29 23:24:29",
+            "created_at": "2025-10-21 18:12:44"
+        },
+        {
+            "id": 116,
+            "vin": "KNDCR3LEXS5239153",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:13:02"
+        },
+        {
+            "id": 117,
+            "vin": "KNDNE5K31S6468847",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:16:13"
+        },
+        {
+            "id": 118,
+            "vin": "KNDJ23AU1N7156791",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:16:28"
+        },
+        {
+            "id": 119,
+            "vin": "5XYP34GC6RG467332",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:16:59"
+        },
+        {
+            "id": 120,
+            "vin": "KNDPU3DG3S7201977",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:17:23"
+        },
+        {
+            "id": 121,
+            "vin": "KNADM4A37G6586903",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-10-22 08:59:12",
+            "created_at": "2025-10-21 18:17:50"
+        },
+        {
+            "id": 122,
+            "vin": "5XYP5DHC2MG107931",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:21:23"
+        },
+        {
+            "id": 123,
+            "vin": "5XYRGDLC1NG077641",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:22:42"
+        },
+        {
+            "id": 124,
+            "vin": "5XXGU4L18KG331103",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:25:05"
+        },
+        {
+            "id": 125,
+            "vin": "3KPF24AD6ME382576",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:26:54"
+        },
+        {
+            "id": 126,
+            "vin": "5XYRL4JC8SG349242",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:27:49"
+        },
+        {
+            "id": 127,
+            "vin": "5XYK33DF4SG250208",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:28:21"
+        },
+        {
+            "id": 128,
+            "vin": "KNDNE5KA6S6064571",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:29:11"
+        },
+        {
+            "id": 129,
+            "vin": "3KPA25AD0ME388714",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-10-22 08:59:36",
+            "created_at": "2025-10-21 18:29:46"
+        },
+        {
+            "id": 130,
+            "vin": "5XYRKDJF5SG370353",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:30:29"
+        },
+        {
+            "id": 131,
+            "vin": "5XYP5DGC4SG674656",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:33:16"
+        },
+        {
+            "id": 132,
+            "vin": "5XXG64J2XPG214989",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:34:50"
+        },
+        {
+            "id": 133,
+            "vin": "KNDJ33AU9R7902164",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:35:24"
+        },
+        {
+            "id": 134,
+            "vin": "3KPA24AD2PE565424",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:35:51"
+        },
+        {
+            "id": 135,
+            "vin": "3KPFL4A75JE281841",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:36:25"
+        },
+        {
+            "id": 136,
+            "vin": "KNDJN2A25H7455625",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:37:01"
+        },
+        {
+            "id": 137,
+            "vin": "5XXG64J25PG172733",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:37:44"
+        },
+        {
+            "id": 138,
+            "vin": "5XXGR4A64FG378229",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-10-25 11:49:39",
+            "created_at": "2025-10-21 18:38:13"
+        },
+        {
+            "id": 139,
+            "vin": "5XYP34HC9NG300505",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:38:53"
+        },
+        {
+            "id": 140,
+            "vin": "5XYRL4LC5PG236854",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-21 18:40:25"
+        },
+        {
+            "id": 142,
+            "vin": "5XYRKDJF1SG335860",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-22 09:58:06"
+        },
+        {
+            "id": 143,
+            "vin": "5XYP6DHC8LG062067",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:34:09"
+        },
+        {
+            "id": 144,
+            "vin": "5XYRLDJC0SG311343",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-01 20:26:33",
+            "created_at": "2025-10-25 11:34:39"
+        },
+        {
+            "id": 145,
+            "vin": "5XYRG4JC6SG349745",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-08 22:48:09",
+            "created_at": "2025-10-25 11:38:40"
+        },
+        {
+            "id": 146,
+            "vin": "5XYK43DF1SG320700",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:40:12"
+        },
+        {
+            "id": 147,
+            "vin": "5XYPH4A58JG407486",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:40:32"
+        },
+        {
+            "id": 148,
+            "vin": "KNDJ23AUXS7257209",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:40:55"
+        },
+        {
+            "id": 149,
+            "vin": "5XYRH4LF3MG031671",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:41:34"
+        },
+        {
+            "id": 150,
+            "vin": "5XYK33DF7SG279931",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 2,
+            "last_repeated_at": "2025-11-01 20:34:36",
+            "created_at": "2025-10-25 11:42:00"
+        },
+        {
+            "id": 151,
+            "vin": "5XYRH4JF0RG286420",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:42:21"
+        },
+        {
+            "id": 152,
+            "vin": "3KPFW4DC3SE109292",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:42:42"
+        },
+        {
+            "id": 153,
+            "vin": "KNDRH4LG3P5151671",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:44:13"
+        },
+        {
+            "id": 154,
+            "vin": "KNAG64J7XS5315939",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:44:43"
+        },
+        {
+            "id": 155,
+            "vin": "KNDCT3LE4S5234905",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 2,
+            "last_repeated_at": "2025-10-29 23:31:10",
+            "created_at": "2025-10-25 11:45:07"
+        },
+        {
+            "id": 156,
+            "vin": "5XYRHDJFXSG361677",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:45:40"
+        },
+        {
+            "id": 157,
+            "vin": "5XYRL4JC4SG345091",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 3,
+            "last_repeated_at": "2025-11-08 22:47:48",
+            "created_at": "2025-10-25 11:46:05"
+        },
+        {
+            "id": 158,
+            "vin": "5XYRL4JC8SG345367",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:46:33"
+        },
+        {
+            "id": 159,
+            "vin": "5XYRL4JC4SG338044",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:46:54"
+        },
+        {
+            "id": 160,
+            "vin": "5XYRL4JC2SG344960",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:47:19"
+        },
+        {
+            "id": 161,
+            "vin": "5XYK7CDF5SG286932",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:50:14"
+        },
+        {
+            "id": 162,
+            "vin": "5XXGU4L32GG009971",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:50:36"
+        },
+        {
+            "id": 163,
+            "vin": "5XYRKDLF2PG206725",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:50:58"
+        },
+        {
+            "id": 164,
+            "vin": "KNAGN4A7XB5088089",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:51:24"
+        },
+        {
+            "id": 165,
+            "vin": "5XYP5DHC0NG317140",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:51:45"
+        },
+        {
+            "id": 166,
+            "vin": "5XYK33DF6SG261842",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:52:16"
+        },
+        {
+            "id": 167,
+            "vin": "5XXG14J25NG158228",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:52:39"
+        },
+        {
+            "id": 168,
+            "vin": "5XYRL4JC6SG342497",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 2,
+            "last_repeated_at": "2025-11-14 23:17:02",
+            "created_at": "2025-10-25 11:53:07"
+        },
+        {
+            "id": 169,
+            "vin": "5XYPG4A30JG409301",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:56:38"
+        },
+        {
+            "id": 170,
+            "vin": "KNDNC5H34R6348256",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:58:07"
+        },
+        {
+            "id": 171,
+            "vin": "KMHL64JA5MA145931",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:58:33"
+        },
+        {
+            "id": 172,
+            "vin": "KNDPZDDH9S7191665",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-25 11:59:01"
+        },
+        {
+            "id": 173,
+            "vin": "5XXG34J27PG171737",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:20:08"
+        },
+        {
+            "id": 174,
+            "vin": "KNDNB4H33N6123494",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:20:37"
+        },
+        {
+            "id": 175,
+            "vin": "KNDJ23AU0N7823138",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-10-28 15:34:59",
+            "created_at": "2025-10-28 15:21:22"
+        },
+        {
+            "id": 176,
+            "vin": "5XYP24GC4SG699761",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:21:55"
+        },
+        {
+            "id": 178,
+            "vin": "5XYKU3A63CG300230",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:22:52"
+        },
+        {
+            "id": 179,
+            "vin": "5XYP34HC8NG246839",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-10 22:36:49",
+            "created_at": "2025-10-28 15:24:44"
+        },
+        {
+            "id": 180,
+            "vin": "KNAG24J79S5275896",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 2,
+            "last_repeated_at": "2025-10-29 23:36:49",
+            "created_at": "2025-10-28 15:25:12"
+        },
+        {
+            "id": 181,
+            "vin": "KNDRKDLG5R5247435",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:26:34"
+        },
+        {
+            "id": 182,
+            "vin": "5XYP34HC3NG325383",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:27:04"
+        },
+        {
+            "id": 183,
+            "vin": "KNDPM3AC1L7650397",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:27:33"
+        },
+        {
+            "id": 184,
+            "vin": "5XYK53DF4TG368691",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:28:12"
+        },
+        {
+            "id": 185,
+            "vin": "5XXG34J20PG216128",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:28:33"
+        },
+        {
+            "id": 186,
+            "vin": "3KPF24AD4PE684548",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:29:01"
+        },
+        {
+            "id": 187,
+            "vin": "KNDNB4H31N6057642",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:29:31"
+        },
+        {
+            "id": 188,
+            "vin": "5XYK6CAF2PG115618",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:29:56"
+        },
+        {
+            "id": 189,
+            "vin": "5XYRH4LF4PG200505",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:30:39"
+        },
+        {
+            "id": 190,
+            "vin": "5XYK6CAF7PG033139",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:31:20"
+        },
+        {
+            "id": 191,
+            "vin": "3KPFU4DE9SE010533",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:31:50"
+        },
+        {
+            "id": 192,
+            "vin": "KNDPU3DF8S7340591",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:32:31"
+        },
+        {
+            "id": 193,
+            "vin": "5XYRL4JC0SG351714",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:33:11"
+        },
+        {
+            "id": 194,
+            "vin": "5XXG14J23RG253778",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:33:39"
+        },
+        {
+            "id": 195,
+            "vin": "5XXG64J20PG200146",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:34:08"
+        },
+        {
+            "id": 196,
+            "vin": "5XXGR4A61FG361663",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:35:29"
+        },
+        {
+            "id": 197,
+            "vin": "5XXGT4L31HG128938",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-28 15:38:04"
+        },
+        {
+            "id": 198,
+            "vin": "KNDMB5C10G6180570",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-10-29 23:27:21",
+            "created_at": "2025-10-29 23:24:00"
+        },
+        {
+            "id": 199,
+            "vin": "5XYRKDJF1RG298903",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:26:14"
+        },
+        {
+            "id": 200,
+            "vin": "5XYPGDA58HG335458",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:26:35"
+        },
+        {
+            "id": 201,
+            "vin": "KNDPN3ACXH7279714",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:26:53"
+        },
+        {
+            "id": 202,
+            "vin": "5XYRKDLF0NG130757",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-10-29 23:28:52",
+            "created_at": "2025-10-29 23:27:48"
+        },
+        {
+            "id": 203,
+            "vin": "5XXGT4L39HG151691",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:28:04"
+        },
+        {
+            "id": 204,
+            "vin": "KNAE15LA3M6098011",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:28:25"
+        },
+        {
+            "id": 205,
+            "vin": "KNDCR3LE2P5036507",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:29:15"
+        },
+        {
+            "id": 206,
+            "vin": "5XYK33AF6PG118059",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:29:33"
+        },
+        {
+            "id": 207,
+            "vin": "5XYP34GC3SG590642",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-01 20:31:58",
+            "created_at": "2025-10-29 23:31:52"
+        },
+        {
+            "id": 208,
+            "vin": "5XYK3CDFXSG289496",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-08 22:42:50",
+            "created_at": "2025-10-29 23:32:08"
+        },
+        {
+            "id": 209,
+            "vin": "5XYRL4JC1SG338535",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 3,
+            "last_repeated_at": "2025-11-12 23:06:51",
+            "created_at": "2025-10-29 23:32:22"
+        },
+        {
+            "id": 210,
+            "vin": "3KPF24AD0RE762049",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:32:37"
+        },
+        {
+            "id": 211,
+            "vin": "5XYPG4A50GG142087",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:33:02"
+        },
+        {
+            "id": 212,
+            "vin": "5XYRH4LF2NG123582",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-14 23:13:05",
+            "created_at": "2025-10-29 23:33:25"
+        },
+        {
+            "id": 213,
+            "vin": "5XYK33DF4RG210754",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-10-29 23:34:23",
+            "created_at": "2025-10-29 23:33:45"
+        },
+        {
+            "id": 214,
+            "vin": "5XYK33AF4PG063403",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:34:01"
+        },
+        {
+            "id": 215,
+            "vin": "KNDER2AA4R7588343",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:35:16"
+        },
+        {
+            "id": 216,
+            "vin": "3KPA24AD6NE480373",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:35:33"
+        },
+        {
+            "id": 217,
+            "vin": "3KPF44AC5NE486818",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:35:59"
+        },
+        {
+            "id": 218,
+            "vin": "5XYRK4JF1RG269210",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:36:17"
+        },
+        {
+            "id": 219,
+            "vin": "5XYK43DF8TG364968",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:37:17"
+        },
+        {
+            "id": 220,
+            "vin": "5XYRL4JC8RG297587",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:37:39"
+        },
+        {
+            "id": 221,
+            "vin": "5XXG34J20MG036482",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:38:02"
+        },
+        {
+            "id": 222,
+            "vin": "KNDJN2A28K7682170",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:38:21"
+        },
+        {
+            "id": 223,
+            "vin": "KNDNE5H37P6289713",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-10-29 23:38:41"
+        },
+        {
+            "id": 224,
+            "vin": "1FMJU1H8XREA91413",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:27:54"
+        },
+        {
+            "id": 225,
+            "vin": "5XXG64J2XPG207864",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:28:15"
+        },
+        {
+            "id": 226,
+            "vin": "5XYPG4A37LG676521",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:28:48"
+        },
+        {
+            "id": 227,
+            "vin": "5XYRK4LF5NG086836",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:29:05"
+        },
+        {
+            "id": 228,
+            "vin": "KNDEU2AA1R7582739",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:29:26"
+        },
+        {
+            "id": 229,
+            "vin": "KNDJ33AU0S7255482",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:29:53"
+        },
+        {
+            "id": 230,
+            "vin": "KNDJ53AF7N7159252",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:30:21"
+        },
+        {
+            "id": 231,
+            "vin": "KNDJP3A5XG7317362",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:30:49"
+        },
+        {
+            "id": 232,
+            "vin": "5XYPG4A54KG597887",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:31:10"
+        },
+        {
+            "id": 233,
+            "vin": "5XYP34GCXRG448329",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:31:32"
+        },
+        {
+            "id": 234,
+            "vin": "KNAG64J78S5316006",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 2,
+            "last_repeated_at": "2025-11-08 22:47:59",
+            "created_at": "2025-11-01 20:34:30"
+        },
+        {
+            "id": 235,
+            "vin": "KNDJN2A2XG7345118",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:34:40"
+        },
+        {
+            "id": 236,
+            "vin": "5XYP5DHC3LG067163",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:34:44"
+        },
+        {
+            "id": 237,
+            "vin": "5XYK33DFXSG306667",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:34:47"
+        },
+        {
+            "id": 238,
+            "vin": "KNDPU3DF3S7396843",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:34:51"
+        },
+        {
+            "id": 240,
+            "vin": "KNDNB4H31R6420396",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:34:58"
+        },
+        {
+            "id": 241,
+            "vin": "5XYP5DGC3RG448036",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 20:35:01"
+        },
+        {
+            "id": 242,
+            "vin": "KNDC44LA3N5061314",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-01 21:03:55"
+        },
+        {
+            "id": 243,
+            "vin": "5XXG64J28MG063355",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:40:35"
+        },
+        {
+            "id": 244,
+            "vin": "5XYK33AF0PG058389",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:40:59"
+        },
+        {
+            "id": 245,
+            "vin": "1HGCV1F39NA018750",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:41:17"
+        },
+        {
+            "id": 246,
+            "vin": "KNDJ23AU0S7924272",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:41:38"
+        },
+        {
+            "id": 247,
+            "vin": "KNDJT2A21B7291853",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:42:21"
+        },
+        {
+            "id": 248,
+            "vin": "5XYRL4JC6SG338613",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-08 22:46:18",
+            "created_at": "2025-11-08 22:42:32"
+        },
+        {
+            "id": 249,
+            "vin": "5XYP34GC1PG331980",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:43:09"
+        },
+        {
+            "id": 250,
+            "vin": "KNDME5C17J6345917",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-08 22:46:50",
+            "created_at": "2025-11-08 22:43:19"
+        },
+        {
+            "id": 251,
+            "vin": "5XYK33AF9PG086952",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:43:31"
+        },
+        {
+            "id": 252,
+            "vin": "5XYP34HC8LG083168",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:43:45"
+        },
+        {
+            "id": 253,
+            "vin": "5XYK43DF9RG231659",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:43:55"
+        },
+        {
+            "id": 254,
+            "vin": "KNDJN2A28G7366016",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:44:11"
+        },
+        {
+            "id": 255,
+            "vin": "5XYRK4LF5MG037747",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:44:52"
+        },
+        {
+            "id": 256,
+            "vin": "5XYPG4A34JG374620",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:45:06"
+        },
+        {
+            "id": 257,
+            "vin": "KNAG64J77S5378593",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:45:34"
+        },
+        {
+            "id": 258,
+            "vin": "5XYPG4A37LG6\/6521",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:46:29"
+        },
+        {
+            "id": 259,
+            "vin": "KNDC44LA3N5060314",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:46:39"
+        },
+        {
+            "id": 260,
+            "vin": "KNDJ23AU6N7157421",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:47:00"
+        },
+        {
+            "id": 261,
+            "vin": "KNDPU3DF0R7259983",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:47:10"
+        },
+        {
+            "id": 262,
+            "vin": "KNDPU3DF8R7228030",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:47:21"
+        },
+        {
+            "id": 263,
+            "vin": "5XYK53DF8SG327009",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:47:33"
+        },
+        {
+            "id": 264,
+            "vin": "3KPFL4A70JE179458",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:48:34"
+        },
+        {
+            "id": 265,
+            "vin": "KNDJ53AU6P7211939",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:48:45"
+        },
+        {
+            "id": 266,
+            "vin": "5XYK33DF4SG289557",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:48:58"
+        },
+        {
+            "id": 267,
+            "vin": "KNDJ23AU0R7224293",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:49:07"
+        },
+        {
+            "id": 268,
+            "vin": "3KPFT4DE2SE007718",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:49:17"
+        },
+        {
+            "id": 269,
+            "vin": "5XYP64HC3LG008529",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:49:28"
+        },
+        {
+            "id": 270,
+            "vin": "5XYRK4JF9SG348758",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:49:42"
+        },
+        {
+            "id": 271,
+            "vin": "KNDJ33AU1P7213992",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:49:54"
+        },
+        {
+            "id": 272,
+            "vin": "KNDJN2A26G7863565",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:50:06"
+        },
+        {
+            "id": 273,
+            "vin": "KNDJX3AA2J7520038",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:50:17"
+        },
+        {
+            "id": 274,
+            "vin": "KNAFK4A61G5486021",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:50:35"
+        },
+        {
+            "id": 275,
+            "vin": "5XYP3DHC0NG238105",
+            "char_count": 17,
+            "registered": 1,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-08 22:50:51"
+        },
+        {
+            "id": 276,
+            "vin": "5XYRH4LFXMG013913",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:36:04"
+        },
+        {
+            "id": 277,
+            "vin": "5XYRK4JF1SG353033",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:36:19"
+        },
+        {
+            "id": 278,
+            "vin": "KNDCR3LE5P5066312",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:36:31"
+        },
+        {
+            "id": 279,
+            "vin": "KNDPXCAG2P7044316",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:37:04"
+        },
+        {
+            "id": 280,
+            "vin": "5XYK33DF2SG284843",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:37:15"
+        },
+        {
+            "id": 281,
+            "vin": "5XYK33AF3PG112431",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:37:28"
+        },
+        {
+            "id": 282,
+            "vin": "5XXGT4L36JG218835",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:37:43"
+        },
+        {
+            "id": 283,
+            "vin": "KNDEU2AA2S7771910",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:37:56"
+        },
+        {
+            "id": 284,
+            "vin": "3KPF24AD4RE802911",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:38:09"
+        },
+        {
+            "id": 285,
+            "vin": "KNDEU2AA6N7303053",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-10 22:38:24"
+        },
+        {
+            "id": 286,
+            "vin": "5XYK53DF2RG191860",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:04:36"
+        },
+        {
+            "id": 287,
+            "vin": "KNAG64J70S5335830",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:04:50"
+        },
+        {
+            "id": 288,
+            "vin": "KNDJ23AU8N7818253",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:05:06"
+        },
+        {
+            "id": 289,
+            "vin": "5XYRLDLC8NG078846",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:05:18"
+        },
+        {
+            "id": 290,
+            "vin": "KNDNE5H33P6298778",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:05:28"
+        },
+        {
+            "id": 291,
+            "vin": "5XYK6CDF9RG146573",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:05:40"
+        },
+        {
+            "id": 292,
+            "vin": "5XYK43DF6RG182596",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:05:56"
+        },
+        {
+            "id": 293,
+            "vin": "KNDPUCDF2R7317592",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:06:15"
+        },
+        {
+            "id": 294,
+            "vin": "KNDC34LA6R5214359",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:06:26"
+        },
+        {
+            "id": 295,
+            "vin": "5XYP64GC6SG599374",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:06:38"
+        },
+        {
+            "id": 296,
+            "vin": "5XXG64J27NG085929",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:07:09"
+        },
+        {
+            "id": 297,
+            "vin": "5XYK43DF4TG340943",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-12 23:07:19"
+        },
+        {
+            "id": 298,
+            "vin": "KNALC4J10K5170929",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-14 23:12:45"
+        },
+        {
+            "id": 299,
+            "vin": "5XYP64GC6PG382625",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-14 23:12:55"
+        },
+        {
+            "id": 300,
+            "vin": "KNDJ23AU9N7821520",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-14 23:13:14"
+        },
+        {
+            "id": 301,
+            "vin": "5XYK33DF0SG284355",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-14 23:13:27"
+        },
+        {
+            "id": 302,
+            "vin": "KNAE55LC6J6022798",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-14 23:13:42"
+        },
+        {
+            "id": 303,
+            "vin": "KNDER2AA4S7772736",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-14 23:13:51"
+        },
+        {
+            "id": 304,
+            "vin": "5XXG64J26RG253842",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-14 23:14:02"
+        },
+        {
+            "id": 305,
+            "vin": "5XYRG4LC2MG021478",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-14 23:14:15"
+        },
+        {
+            "id": 306,
+            "vin": "5NPEU46F97H211286",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-14 23:14:38"
+        },
+        {
+            "id": 307,
+            "vin": "KM8K12AA8JU181296",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-14 23:16:27",
+            "created_at": "2025-11-14 23:14:55"
+        },
+        {
+            "id": 308,
+            "vin": "5XXG64J26RG231551",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-14 23:16:38",
+            "created_at": "2025-11-14 23:15:07"
+        },
+        {
+            "id": 309,
+            "vin": "5XYP5DHC1LG066867",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-15 19:38:40",
+            "created_at": "2025-11-14 23:15:17"
+        },
+        {
+            "id": 310,
+            "vin": "5XYP3DGC3PG325680",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 1,
+            "last_repeated_at": "2025-11-14 23:16:02",
+            "created_at": "2025-11-14 23:15:28"
+        },
+        {
+            "id": 311,
+            "vin": "5XXGT4L38KG363716",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-14 23:15:44"
+        },
+        {
+            "id": 312,
+            "vin": "KNDEU2AA3R7524115",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-14 23:16:15"
+        },
+        {
+            "id": 313,
+            "vin": "KNDJ23AU7P7865034",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-14 23:16:52"
+        },
+        {
+            "id": 314,
+            "vin": "3KPF24AD6RE745711",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:38:28"
+        },
+        {
+            "id": 315,
+            "vin": "5XYRGDLC3PG177095",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:38:51"
+        },
+        {
+            "id": 316,
+            "vin": "5XYP64HC1NG240954",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:39:01"
+        },
+        {
+            "id": 317,
+            "vin": "3KPA24AD2PE576178",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:39:16"
+        },
+        {
+            "id": 318,
+            "vin": "JN8AT2MT3LW007560",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:39:35"
+        },
+        {
+            "id": 319,
+            "vin": "3KPFW4DEXSE064479",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:39:50"
+        },
+        {
+            "id": 320,
+            "vin": "KNDNC5H35R6442565",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:40:12"
+        },
+        {
+            "id": 321,
+            "vin": "5XYPG4A31KG549794",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:40:24"
+        },
+        {
+            "id": 322,
+            "vin": "5XXG64J2XNG103114",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:40:47"
+        },
+        {
+            "id": 323,
+            "vin": "5XYP6DHC1NG271623",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:40:59"
+        },
+        {
+            "id": 324,
+            "vin": "KNDNC5H38R6433035",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:41:09"
+        },
+        {
+            "id": 325,
+            "vin": "3KPF54AD1PE610950",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:41:23"
+        },
+        {
+            "id": 326,
+            "vin": "5XYK33AF6PG045338",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:41:33"
+        },
+        {
+            "id": 327,
+            "vin": "5XYK33AF7PG034221",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:41:44"
+        },
+        {
+            "id": 328,
+            "vin": "KNAGM4A77F5565098",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:41:54"
+        },
+        {
+            "id": 329,
+            "vin": "3KPF54AD3PE669885",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:42:09"
+        },
+        {
+            "id": 330,
+            "vin": "KNDPU3DF8S7396644",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:42:19"
+        },
+        {
+            "id": 331,
+            "vin": "KNDETCA74R7602074",
+            "char_count": 17,
+            "registered": 0,
+            "repeat_count": 0,
+            "last_repeated_at": null,
+            "created_at": "2025-11-15 19:42:38"
+        }
+    ],
+    "exported_at": "2025-11-16 02:23:49"
+}

@@ -1,0 +1,368 @@
+/* ========================================
+   VIN TRACKER - TEMA PROFESIONAL
+   Inspirado en Coffee-Shop-SPA
+   ======================================== */
+
+/* ========================================
+   IMPORTS
+   ======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700;800&display=swap');
+
+/* ========================================
+   VARIABLES CSS
+   ======================================== */
+:root {
+  /* Colores principales - Dorado/Negro/Blanco */
+  --vin-golden: #D4A762;
+  --vin-golden-light: #F5D98D;
+  --vin-golden-dark: #B8935A;
+
+  --vin-dark-primary: #1E1E1E;
+  --vin-dark-secondary: #2C2C2C;
+  --vin-dark-tertiary: #3A3A3A;
+
+  --vin-light: #F5F5F5;
+  --vin-light-muted: rgba(245, 245, 245, 0.8);
+
+  /* Estados */
+  --vin-success: #28A745;
+  --vin-error: #DC3545;
+  --vin-warning: #FFC107;
+  --vin-info: #007BFF;
+
+  /* Transparencias */
+  --golden-transparent: rgba(212, 167, 98, 0.1);
+  --golden-semi: rgba(212, 167, 98, 0.15);
+
+  /* Utilidades */
+  --border-radius-default: 12px;
+  --border-radius-card: 10px;
+  --border-radius-button: 8px;
+  --box-shadow-card: 0 4px 15px rgba(0, 0, 0, 0.3);
+  --box-shadow-hover: 0 10px 30px rgba(212, 167, 98, 0.3);
+  --box-shadow-golden: 0 4px 20px rgba(212, 167, 98, 0.25);
+  --transition-default: all 0.3s ease;
+  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   ESTILOS GLOBALES
+   ======================================== */
+* {
+  font-family: 'Lexend Deca', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-optical-sizing: auto;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(to bottom, var(--vin-dark-primary), var(--vin-dark-secondary)) !important;
+  color: var(--vin-light);
+  min-height: 100vh;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+   SCROLLBAR PERSONALIZADA
+   ======================================== */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--vin-dark-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--vin-golden), var(--vin-golden-dark));
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--vin-golden-light), var(--vin-golden));
+}
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-golden {
+  0% {
+    box-shadow: 0 0 0 0 rgba(212, 167, 98, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(212, 167, 98, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 167, 98, 0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease;
+}
+
+/* ========================================
+   UIKIT OVERRIDES - BOTONES
+   ======================================== */
+.uk-button-primary,
+button.uk-button-primary,
+a.uk-button-primary {
+  background: linear-gradient(135deg, var(--vin-golden), var(--vin-golden-dark)) !important;
+  color: #000000 !important;
+  border: none !important;
+  border-radius: var(--border-radius-button) !important;
+  padding: 12px 28px !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  transition: var(--transition-default) !important;
+  text-shadow: none !important;
+  text-transform: none !important;
+  letter-spacing: 0.5px !important;
+  box-shadow: var(--box-shadow-golden) !important;
+}
+
+.uk-button-primary:hover,
+button.uk-button-primary:hover,
+a.uk-button-primary:hover {
+  background: linear-gradient(135deg, var(--vin-golden-light), var(--vin-golden)) !important;
+  color: #000000 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 25px rgba(212, 167, 98, 0.4) !important;
+}
+
+.uk-button-secondary,
+button.uk-button-secondary {
+  background-color: var(--vin-dark-tertiary) !important;
+  color: var(--vin-light) !important;
+  border: 2px solid var(--vin-golden) !important;
+  border-radius: var(--border-radius-button) !important;
+  padding: 10px 24px !important;
+  font-weight: 600 !important;
+  transition: var(--transition-default) !important;
+}
+
+.uk-button-secondary:hover,
+button.uk-button-secondary:hover {
+  background-color: var(--vin-golden) !important;
+  color: #000000 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 15px rgba(212, 167, 98, 0.4) !important;
+}
+
+.uk-button-danger {
+  background: var(--vin-error) !important;
+  color: var(--vin-light) !important;
+  border: none !important;
+  border-radius: var(--border-radius-button) !important;
+  font-weight: 600 !important;
+  transition: var(--transition-default) !important;
+}
+
+.uk-button-danger:hover {
+  background: #c82333 !important;
+  transform: translateY(-2px) !important;
+}
+
+.uk-button-small {
+  padding: 8px 18px !important;
+  font-size: 0.85rem !important;
+}
+
+/* ========================================
+   UIKIT OVERRIDES - CARDS
+   ======================================== */
+.uk-card {
+  background: var(--vin-dark-secondary) !important;
+  border: 1px solid var(--vin-dark-tertiary) !important;
+  border-radius: var(--border-radius-card) !important;
+  box-shadow: var(--box-shadow-card) !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.uk-card-hover:hover {
+  border-color: var(--vin-golden) !important;
+  box-shadow: var(--box-shadow-hover) !important;
+  transform: translateY(-5px) !important;
+}
+
+.uk-card-body {
+  padding: 30px !important;
+}
+
+.uk-card-title {
+  color: var(--vin-golden) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  font-size: 1.5rem !important;
+}
+
+/* ========================================
+   UIKIT OVERRIDES - INPUTS
+   ======================================== */
+.uk-input,
+.uk-select,
+.uk-textarea {
+  background: var(--vin-dark-tertiary) !important;
+  border: 2px solid var(--vin-dark-tertiary) !important;
+  border-radius: var(--border-radius-button) !important;
+  color: var(--vin-light) !important;
+  padding: 12px 16px !important;
+  font-size: 0.95rem !important;
+  transition: var(--transition-default) !important;
+}
+
+.uk-input:focus,
+.uk-select:focus,
+.uk-textarea:focus {
+  background: var(--vin-dark-secondary) !important;
+  border-color: var(--vin-golden) !important;
+  color: var(--vin-light) !important;
+  box-shadow: 0 0 0 3px rgba(212, 167, 98, 0.15) !important;
+  outline: none !important;
+}
+
+.uk-input::placeholder {
+  color: rgba(245, 245, 245, 0.4) !important;
+}
+
+.uk-form-label {
+  color: var(--vin-light-muted) !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.8px !important;
+  margin-bottom: 8px !important;
+}
+
+/* ========================================
+   UIKIT OVERRIDES - TABLAS
+   ======================================== */
+.uk-table {
+  color: var(--vin-light) !important;
+}
+
+.uk-table thead {
+  background: var(--vin-dark-tertiary) !important;
+  border-bottom: 3px solid var(--vin-golden) !important;
+}
+
+.uk-table th {
+  color: var(--vin-golden) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  font-size: 0.85rem !important;
+  padding: 15px !important;
+}
+
+.uk-table tbody tr {
+  border-bottom: 1px solid var(--vin-dark-tertiary) !important;
+  transition: var(--transition-default) !important;
+}
+
+.uk-table tbody tr:hover {
+  background: var(--vin-dark-tertiary) !important;
+}
+
+.uk-table td {
+  color: var(--vin-light-muted) !important;
+  padding: 15px !important;
+}
+
+/* ========================================
+   UIKIT OVERRIDES - NOTIFICACIONES
+   ======================================== */
+.uk-notification-message {
+  background: var(--vin-dark-secondary) !important;
+  border-left: 4px solid var(--vin-golden) !important;
+  color: var(--vin-light) !important;
+  border-radius: var(--border-radius-button) !important;
+  box-shadow: var(--box-shadow-card) !important;
+  padding: 15px 20px !important;
+}
+
+.uk-notification-message-success {
+  border-left-color: var(--vin-success) !important;
+  background: rgba(40, 167, 69, 0.15) !important;
+}
+
+.uk-notification-message-danger {
+  border-left-color: var(--vin-error) !important;
+  background: rgba(220, 53, 69, 0.15) !important;
+}
+
+.uk-notification-message-warning {
+  border-left-color: var(--vin-warning) !important;
+  background: rgba(255, 193, 7, 0.15) !important;
+}
+
+/* ========================================
+   UIKIT OVERRIDES - MODAL
+   ======================================== */
+.uk-modal-dialog {
+  background: var(--vin-dark-secondary) !important;
+  border: 2px solid var(--vin-golden) !important;
+  border-radius: var(--border-radius-card) !important;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5) !important;
+}
+
+.uk-modal-header {
+  border-bottom: 2px solid var(--vin-golden) !important;
+  padding: 20px 30px !important;
+}
+
+.uk-modal-title {
+  color: var(--vin-golden) !important;
+  font-weight: 700 !important;
+}
+
+.uk-modal-body {
+  color: var(--vin-light) !important;
+  padding: 30px !important;
+}
+
+/* ========================================
+   UIKIT OVERRIDES - SPINNER
+   ======================================== */
+.uk-spinner > * {
+  animation: uk-spinner-rotate 1.4s linear infinite !important;
+  stroke: var(--vin-golden) !important;
+}

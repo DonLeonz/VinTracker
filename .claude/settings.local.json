@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(php:*)"
+      "Bash(cat:*)",
+      "Bash(/tmp/custom_backup.css)"
     ],
     "deny": [],
     "ask": []
