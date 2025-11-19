@@ -172,11 +172,38 @@ a.uk-button-primary:hover {
   box-shadow: 0 6px 25px rgba(212, 167, 98, 0.4) !important;
 }
 
-/* Iconos dentro de botones primary siempre negros */
+/* Iconos dentro de botones primary siempre negros - Sin transiciones de color */
 .uk-button-primary [data-uk-icon],
-.uk-button-primary svg {
+.uk-button-primary [data-uk-icon] *,
+.uk-button-primary svg,
+.uk-button-primary svg * {
   color: #000000 !important;
   fill: #000000 !important;
+  stroke: #000000 !important;
+}
+
+/* Prevenir cualquier transición de color en iconos de botones primarios */
+.uk-button-primary [data-uk-icon],
+.uk-button-primary [data-uk-icon] *,
+.uk-button-primary svg,
+.uk-button-primary svg *,
+.uk-button-primary:hover [data-uk-icon],
+.uk-button-primary:hover [data-uk-icon] *,
+.uk-button-primary:hover svg,
+.uk-button-primary:hover svg *,
+.uk-card .uk-button-primary [data-uk-icon],
+.uk-card .uk-button-primary [data-uk-icon] *,
+.uk-card .uk-button-primary svg,
+.uk-card .uk-button-primary svg *,
+.uk-card:hover .uk-button-primary [data-uk-icon],
+.uk-card:hover .uk-button-primary [data-uk-icon] *,
+.uk-card:hover .uk-button-primary svg,
+.uk-card:hover .uk-button-primary svg * {
+  color: #000000 !important;
+  fill: #000000 !important;
+  stroke: #000000 !important;
+  transition-property: transform, opacity !important;
+  transition-duration: 0.3s !important;
 }
 
 .uk-button-secondary,
