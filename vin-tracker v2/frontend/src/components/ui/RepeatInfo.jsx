@@ -1,14 +1,14 @@
 import { memo } from 'react';
 import { formatDate } from '../../utils/helpers';
 
-const RepeatInfo = ({ repeatCount, lastRepeatedAt, createdAt }) => {
+const RepeatInfo = ({ repeatCount, lastRegisteredAt, createdAt }) => {
   if (!repeatCount || repeatCount === 0) return null;
 
   return (
     <div className="repeat-info">
       🔄 Repetido {repeatCount} {repeatCount === 1 ? 'vez' : 'veces'}
       <br />
-      Última: {formatDate(lastRepeatedAt || createdAt)}
+      Último registro: {formatDate(lastRegisteredAt || createdAt)}
     </div>
   );
 };

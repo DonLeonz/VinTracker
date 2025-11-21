@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS delivery_records (
     char_count INTEGER NOT NULL,
     registered BOOLEAN DEFAULT FALSE,
     repeat_count INTEGER DEFAULT 0,
-    last_repeated_at TIMESTAMP,
+    last_registered_at TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS service_records (
     char_count INTEGER NOT NULL,
     registered BOOLEAN DEFAULT FALSE,
     repeat_count INTEGER DEFAULT 0,
-    last_repeated_at TIMESTAMP,
+    last_registered_at TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

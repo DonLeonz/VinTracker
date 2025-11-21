@@ -166,10 +166,11 @@ export const addRepeatedVin = async (req, res) => {
     const existing = checkResult.rows[0];
     const newRepeatCount = existing.repeat_count + 1;
 
-    // Update repeat count and last_repeated_at
+    // Update repeat count and set as not registered
+    // DO NOT update last_registered_at here - it should only update when actually registered
     const updateQuery = `
       UPDATE ${tableName}
-      SET repeat_count = $1, last_repeated_at = CURRENT_TIMESTAMP, registered = false
+      SET repeat_count = $1, registered = false
       WHERE id = $2
       RETURNING *
     `;
@@ -300,12 +301,20 @@ export const toggleRegistered = async (req, res) => {
     const newStatus = !getResult.rows[0].registered;
 
     // Update status
-    const updateQuery = `
-      UPDATE ${tableName}
-      SET registered = $1
-      WHERE id = $2
-      RETURNING *
-    `;
+    // If registering (false → true), update last_registered_at to track when it was last registered
+    const updateQuery = newStatus
+      ? `
+        UPDATE ${tableName}
+        SET registered = $1, last_registered_at = CURRENT_TIMESTAMP
+        WHERE id = $2
+        RETURNING *
+      `
+      : `
+        UPDATE ${tableName}
+        SET registered = $1
+        WHERE id = $2
+        RETURNING *
+      `;
     const result = await pool.query(updateQuery, [newStatus, id]);
 
     res.json({
@@ -326,8 +335,8 @@ export const registerAll = async (req, res) => {
     const { type } = req.body;
 
     if (type === 'all') {
-      const query1 = `UPDATE delivery_records SET registered = true WHERE registered = false`;
-      const query2 = `UPDATE service_records SET registered = true WHERE registered = false`;
+      const query1 = `UPDATE delivery_records SET registered = true, last_registered_at = CURRENT_TIMESTAMP WHERE registered = false`;
+      const query2 = `UPDATE service_records SET registered = true, last_registered_at = CURRENT_TIMESTAMP WHERE registered = false`;
 
       const result1 = await pool.query(query1);
       const result2 = await pool.query(query2);
@@ -341,7 +350,7 @@ export const registerAll = async (req, res) => {
     }
 
     const tableName = getTableName(type);
-    const query = `UPDATE ${tableName} SET registered = true WHERE registered = false`;
+    const query = `UPDATE ${tableName} SET registered = true, last_registered_at = CURRENT_TIMESTAMP WHERE registered = false`;
     const result = await pool.query(query);
 
     res.json({
@@ -410,7 +419,7 @@ export const exportData = async (req, res) => {
 
     if (type === 'all' || type === 'delivery') {
       const query = `
-        SELECT vin, repeat_count, last_repeated_at, created_at
+        SELECT vin, repeat_count, last_registered_at, created_at
         FROM delivery_records ${whereClause}
         ORDER BY id ASC
       `;
@@ -419,9 +428,9 @@ export const exportData = async (req, res) => {
       deliveryVins = result.rows.map(record => {
         let vinLine = record.vin;
         if (record.repeat_count > 0) {
-          const dateToShow = record.last_repeated_at || record.created_at;
+          const dateToShow = record.last_registered_at || record.created_at;
           const formattedDate = new Date(dateToShow).toLocaleString('es-ES');
-          vinLine += ` - Última repetición: ${formattedDate}`;
+          vinLine += ` - Último registro: ${formattedDate}`;
         }
         return vinLine;
       });
@@ -429,7 +438,7 @@ export const exportData = async (req, res) => {
 
     if (type === 'all' || type === 'service') {
       const query = `
-        SELECT vin, repeat_count, last_repeated_at, created_at
+        SELECT vin, repeat_count, last_registered_at, created_at
         FROM service_records ${whereClause}
         ORDER BY id ASC
       `;
@@ -438,9 +447,9 @@ export const exportData = async (req, res) => {
       serviceVins = result.rows.map(record => {
         let vinLine = record.vin;
         if (record.repeat_count > 0) {
-          const dateToShow = record.last_repeated_at || record.created_at;
+          const dateToShow = record.last_registered_at || record.created_at;
           const formattedDate = new Date(dateToShow).toLocaleString('es-ES');
-          vinLine += ` - Última repetición: ${formattedDate}`;
+          vinLine += ` - Último registro: ${formattedDate}`;
         }
         return vinLine;
       });

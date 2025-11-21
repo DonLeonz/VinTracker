@@ -40,7 +40,7 @@ const TableRow = ({
         <VinBadge vin={record.vin} type={type} />
         <RepeatInfo
           repeatCount={record.repeat_count}
-          lastRepeatedAt={record.last_repeated_at}
+          lastRegisteredAt={record.last_registered_at}
           createdAt={record.created_at}
         />
       </td>
