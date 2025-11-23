@@ -120,6 +120,24 @@ export const vinService = {
       throw error.response?.data || error;
     }
   },
+
+  // Check database connection
+  checkConnection: async () => {
+    try {
+      const response = await api.get('/health');
+      return {
+        isConnected: response.data.database === 'connected',
+        status: response.data.status,
+        message: response.data.message
+      };
+    } catch (error) {
+      return {
+        isConnected: false,
+        status: 'ERROR',
+        message: error.response?.data?.message || 'No se puede conectar con el servidor'
+      };
+    }
+  },
 };
 
 export default api;

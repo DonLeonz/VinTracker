@@ -3,6 +3,7 @@ import VinInput from './components/VinInput';
 import VinTable from './components/VinTable';
 import Filters from './components/Filters';
 import ScrollToTop from './components/ScrollToTop';
+import DatabaseStatus from './components/DatabaseStatus';
 import { vinService } from './services/api';
 import { showNotification } from './utils/helpers';
 
@@ -85,6 +86,9 @@ function App() {
 
   return (
     <div className="main-container">
+      {/* Database Status Indicator */}
+      <DatabaseStatus />
+
       <h1 className="app-title fade-in">
         🚗 VIN Tracker System
       </h1>

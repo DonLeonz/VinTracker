@@ -1,0 +1,167 @@
+/* ========================================
+   DATABASE STATUS INDICATOR
+   ======================================== */
+
+.database-status {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  animation: slideInFromRight 0.5s ease-out;
+  cursor: pointer;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.database-status.connected {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.database-status.disconnected {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.status-indicator.checking {
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.status-text {
+  font-size: 0.85rem;
+  letter-spacing: 0.3px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .database-status {
+    top: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .status-indicator {
+    width: 20px;
+    height: 20px;
+  }
+
+  .status-text {
+    font-size: 0.75rem;
+  }
+}
+
+/* Mobile - hide text, only show icon */
+@media (max-width: 480px) {
+  .status-text {
+    display: none;
+  }
+
+  .database-status {
+    padding: 10px;
+  }
+}
+
+/* Hover effect */
+.database-status:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.database-status:hover .status-indicator {
+  transform: scale(1.1);
+}
+
+/* Tooltips personalizados para el database status */
+
+/* Tooltip para estado conectado */
+.tooltip-connected {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: white !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  padding: 12px 18px !important;
+  border-radius: 10px !important;
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(12px) !important;
+  animation: tooltipSlideIn 0.3s ease-out !important;
+  max-width: 280px !important;
+  text-align: center !important;
+}
+
+/* Tooltip para estado desconectado */
+.tooltip-disconnected {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  color: white !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  padding: 12px 18px !important;
+  border-radius: 10px !important;
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(12px) !important;
+  animation: tooltipSlideIn 0.3s ease-out !important;
+  max-width: 280px !important;
+  text-align: center !important;
+}
+
+@keyframes tooltipSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

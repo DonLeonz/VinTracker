@@ -72,6 +72,17 @@ const VinInput = ({ onVinAdded }) => {
 
     setIsLoading(true);
 
+    // Check database connection before adding VIN
+    const connectionStatus = await vinService.checkConnection();
+    if (!connectionStatus.isConnected) {
+      showNotification(
+        '❌ No se puede agregar el VIN: La base de datos está desconectada',
+        'danger'
+      );
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const result = await vinService.addVin(trimmedVin, type);
 

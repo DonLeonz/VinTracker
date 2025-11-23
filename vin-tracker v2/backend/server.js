@@ -16,9 +16,26 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/api/vins', vinRoutes);
 
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'VIN Tracker API is running' });
+// Health check with database connection status
+app.get('/api/health', async (req, res) => {
+  try {
+    // Test database connection
+    const { default: pool } = await import('./db/config.js');
+    await pool.query('SELECT 1');
+
+    res.json({
+      status: 'OK',
+      message: 'VIN Tracker API is running',
+      database: 'connected'
+    });
+  } catch (error) {
+    res.status(503).json({
+      status: 'ERROR',
+      message: 'VIN Tracker API is running but database is disconnected',
+      database: 'disconnected',
+      error: error.message
+    });
+  }
 });
 
 // Error handling middleware

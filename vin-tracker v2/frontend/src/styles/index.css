@@ -10,6 +10,7 @@
 @import './custom.css';
 
 /* Componentes */
+@import './components/DatabaseStatus.css';
 @import './components/Filters.css';
 @import './components/VinInput.css';
 @import './components/Table.css';

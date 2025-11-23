@@ -435,3 +435,32 @@ button.uk-button-secondary:hover {
   animation: uk-spinner-rotate 1.4s linear infinite !important;
   stroke: var(--vin-golden) !important;
 }
+
+/* ========================================
+   UIKIT OVERRIDES - TOOLTIPS
+   ======================================== */
+.uk-tooltip {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%) !important;
+  color: white !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  padding: 10px 16px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(10px) !important;
+  animation: tooltipFadeIn 0.2s ease-out !important;
+  max-width: 250px !important;
+  text-align: center !important;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
