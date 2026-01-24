@@ -1,4 +1,6 @@
-const StatusBadge = ({ isRegistered, onClick }) => {
+import { memo } from 'react';
+
+const StatusBadge = memo(({ isRegistered, onClick }) => {
   const handleClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -16,6 +18,8 @@ const StatusBadge = ({ isRegistered, onClick }) => {
       {isRegistered ? '✅ Registrado' : '❌ No Registrado'}
     </span>
   );
-};
+});
+
+StatusBadge.displayName = 'StatusBadge';
 
 export default StatusBadge;

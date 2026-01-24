@@ -7,7 +7,8 @@ const TableHeader = ({
   isCollapsed, 
   onToggle, 
   onRegisterAll, 
-  onUnregisterAll 
+  onUnregisterAll,
+  onDeleteAll 
 }) => {
   return (
     <div className="table-header-wrapper">
@@ -37,6 +38,13 @@ const TableHeader = ({
           >
             <span data-uk-icon="close"></span>
             <span className="uk-margin-small-left">Desregistrar Todos</span>
+          </button>
+          <button
+            className="uk-button uk-button-danger uk-button-small"
+            onClick={onDeleteAll}
+          >
+            <span data-uk-icon="trash"></span>
+            <span className="uk-margin-small-left">Eliminar Todos</span>
           </button>
         </div>
       </div>

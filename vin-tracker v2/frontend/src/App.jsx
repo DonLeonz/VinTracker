@@ -1,26 +1,63 @@
-import { useState, useEffect, useCallback } from 'react';
-import VinInput from './components/VinInput';
-import VinTable from './components/VinTable';
-import Filters from './components/Filters';
-import ScrollToTop from './components/ScrollToTop';
+import { useState, useEffect, useCallback, lazy, Suspense, useMemo, useTransition } from 'react';
 import DatabaseStatus from './components/DatabaseStatus';
+import ScrollToTop from './components/ScrollToTop';
 import { vinService } from './services/api';
 import { showNotification } from './utils/helpers';
+import { useRecordsCache } from './hooks/useRecordsCache';
+
+// Lazy load components for better initial load performance
+const VinInput = lazy(() => import('./components/VinInput'));
+const Filters = lazy(() => import('./components/Filters'));
+const VinTable = lazy(() => import('./components/VinTable'));
+const VinPreview = lazy(() => import('./components/VinPreview'));
 
 function App() {
   const [deliveryRecords, setDeliveryRecords] = useState([]);
   const [serviceRecords, setServiceRecords] = useState([]);
   const [filters, setFilters] = useState({ date: '', registered: 'all' });
   const [isLoading, setIsLoading] = useState(false);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+  const [isPending, startTransition] = useTransition();
+  
+  // Use cache hook
+  const { getCached, setCache, clearCache, generateKey } = useRecordsCache();
 
-  // Load records
-  const loadRecords = useCallback(async () => {
+  // Memoize records counts for better performance
+  const recordsStats = useMemo(() => ({
+    deliveryCount: deliveryRecords.length,
+    serviceCount: serviceRecords.length,
+    totalCount: deliveryRecords.length + serviceRecords.length
+  }), [deliveryRecords.length, serviceRecords.length]);
+
+  // Load records with caching
+  const loadRecords = useCallback(async (bypassCache = false) => {
+    const cacheKey = generateKey(filters);
+    
+    // Check cache first (unless bypassed)
+    if (!bypassCache) {
+      const cachedData = getCached(cacheKey);
+      if (cachedData) {
+        startTransition(() => {
+          setDeliveryRecords(cachedData.delivery);
+          setServiceRecords(cachedData.service);
+        });
+        return;
+      }
+    }
+
     setIsLoading(true);
     try {
       const data = await vinService.getRecords(filters);
       if (data.success) {
-        setDeliveryRecords(data.delivery);
-        setServiceRecords(data.service);
+        // Cache the result
+        setCache(cacheKey, data);
+        
+        // Use transition for non-urgent state updates
+        startTransition(() => {
+          setDeliveryRecords(data.delivery);
+          setServiceRecords(data.service);
+          setRefreshTrigger(prev => prev + 1);
+        });
       }
     } catch (error) {
       showNotification('❌ Error al cargar registros', 'danger');
@@ -28,22 +65,29 @@ function App() {
     } finally {
       setIsLoading(false);
     }
-  }, [filters]);
+  }, [filters, startTransition, getCached, setCache, generateKey]);
 
   // Load records on mount and filter change
   useEffect(() => {
     loadRecords();
   }, [filters]);
 
+  // Handle VIN added - clear cache and reload
+  const handleVinAdded = useCallback(() => {
+    clearCache(); // Clear cache when new VIN is added
+    loadRecords(true); // Bypass cache
+  }, [clearCache, loadRecords]);
+
   // Handle filter change
   const handleFilterChange = useCallback((newFilters) => {
     setFilters(newFilters);
   }, []);
 
-  // Clear filters
+  // Clear filters and cache
   const handleClearFilters = useCallback(() => {
     setFilters({ date: '', registered: 'all' });
-  }, []);
+    clearCache(); // Clear cache when filters are cleared
+  }, [clearCache]);
 
   // Handle export
   const handleExport = useCallback(async (type) => {
@@ -93,34 +137,79 @@ function App() {
         🚗 VIN Tracker System
       </h1>
 
-      {/* VIN Input */}
-      <VinInput onVinAdded={loadRecords} />
+      {/* Tabs Navigation */}
+      <div className="uk-card uk-card-default uk-card-body" style={{ marginBottom: '30px' }}>
+        <ul className="uk-tab" data-uk-tab="{connect:'#tab-content', animation: 'uk-animation-fade'}">
+          <li className="uk-active">
+            <a href="#">
+              <span uk-icon="icon: plus-circle; ratio: 1.2" style={{ marginRight: '8px' }}></span>
+              Agregar VINs
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span uk-icon="icon: search; ratio: 1.2" style={{ marginRight: '8px' }}></span>
+              Ver Registros
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span uk-icon="icon: file-text; ratio: 1.2" style={{ marginRight: '8px' }}></span>
+              Visualización
+            </a>
+          </li>
+        </ul>
 
-      {/* Filters and Export */}
-      <Filters
-        filters={filters}
-        onFilterChange={handleFilterChange}
-        onClearFilters={handleClearFilters}
-        onExport={handleExport}
-      />
+        <Suspense fallback={
+          <div className="uk-text-center uk-padding-large">
+            <span data-uk-spinner="ratio: 2"></span>
+            <p className="uk-margin-top">Cargando componente...</p>
+          </div>
+        }>
+          <ul id="tab-content" className="uk-switcher">
+            {/* Tab 1: Agregar VINs */}
+            <li>
+              <VinInput onVinAdded={handleVinAdded} />
+            </li>
 
-      {/* Delivery Table */}
-      <VinTable
-        title="📦 Delivery"
-        type="delivery"
-        records={deliveryRecords}
-        isLoading={isLoading}
-        onRecordsChange={loadRecords}
-      />
+            {/* Tab 2: Ver Registros */}
+            <li>
+              {/* Filters and Export */}
+              <Filters
+                filters={filters}
+                onFilterChange={handleFilterChange}
+                onClearFilters={handleClearFilters}
+                onExport={handleExport}
+              />
 
-      {/* Service Table */}
-      <VinTable
-        title="🔧 Service"
-        type="service"
-        records={serviceRecords}
-        isLoading={isLoading}
-        onRecordsChange={loadRecords}
-      />
+              {/* Delivery Table */}
+              <VinTable
+                title="📦 Delivery"
+                type="delivery"
+                records={deliveryRecords}
+                isLoading={isLoading || isPending}
+                onRecordsChange={handleVinAdded}
+                filters={filters}
+              />
+
+              {/* Service Table */}
+              <VinTable
+                title="🔧 Service"
+                type="service"
+                records={serviceRecords}
+                isLoading={isLoading || isPending}
+                onRecordsChange={handleVinAdded}
+                filters={filters}
+              />
+            </li>
+
+            {/* Tab 3: Visualización */}
+            <li>
+              <VinPreview filters={filters} refreshTrigger={refreshTrigger} />
+            </li>
+          </ul>
+        </Suspense>
+      </div>
 
       {/* Scroll to Top Button */}
       <ScrollToTop />

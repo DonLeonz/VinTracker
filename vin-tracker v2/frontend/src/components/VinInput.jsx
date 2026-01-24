@@ -3,7 +3,7 @@ import { processVin, validateVinLength, showNotification } from '../utils/helper
 import { vinService } from '../services/api';
 import ConfirmModal from './modals/ConfirmModal';
 
-const VinInput = ({ onVinAdded }) => {
+const VinInput = memo(({ onVinAdded }) => {
   const [vin, setVin] = useState('');
   const [type, setType] = useState('delivery');
   const [preview, setPreview] = useState('');
@@ -201,6 +201,8 @@ const VinInput = ({ onVinAdded }) => {
       />
     </>
   );
-};
+});
 
-export default memo(VinInput);
+VinInput.displayName = 'VinInput';
+
+export default VinInput;

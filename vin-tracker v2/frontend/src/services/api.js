@@ -75,20 +75,30 @@ export const vinService = {
     }
   },
 
-  // Register all
-  registerAll: async (type) => {
+  // Register all (filtered)
+  registerAll: async (type, filters = {}) => {
     try {
-      const response = await api.post('/vins/register-all', { type });
+      const response = await api.post('/vins/register-all', { type, ...filters });
       return response.data;
     } catch (error) {
       throw error.response?.data || error;
     }
   },
 
-  // Unregister all
-  unregisterAll: async (type) => {
+  // Unregister all (filtered)
+  unregisterAll: async (type, filters = {}) => {
     try {
-      const response = await api.post('/vins/unregister-all', { type });
+      const response = await api.post('/vins/unregister-all', { type, ...filters });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
+  // Delete all (filtered)
+  deleteAll: async (type, filters = {}) => {
+    try {
+      const response = await api.post('/vins/delete-all', { type, ...filters });
       return response.data;
     } catch (error) {
       throw error.response?.data || error;

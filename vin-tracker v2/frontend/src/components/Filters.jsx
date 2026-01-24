@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, memo } from 'react';
 
-const Filters = ({ filters, onFilterChange, onClearFilters, onExport }) => {
+const Filters = memo(({ filters, onFilterChange, onClearFilters, onExport }) => {
   const [localFilters, setLocalFilters] = useState(filters);
 
   // Sincronizar con props cuando cambien externamente
@@ -92,6 +92,8 @@ const Filters = ({ filters, onFilterChange, onClearFilters, onExport }) => {
       </div>
     </div>
   );
-};
+});
 
-export default memo(Filters);
+Filters.displayName = 'Filters';
+
+export default Filters;

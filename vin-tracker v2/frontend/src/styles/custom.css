@@ -976,3 +976,44 @@
     height: 46px !important;
   }
 }
+/* ========================================
+   TABS PERSONALIZADOS
+   ======================================== */
+.uk-tab {
+  border-bottom: 2px solid var(--vin-dark-tertiary) !important;
+  margin-bottom: 30px !important;
+}
+
+.uk-tab > * > a {
+  color: var(--vin-light-muted) !important;
+  padding: 12px 28px !important;
+  font-size: 1.05rem !important;
+  font-weight: 600 !important;
+  border: none !important;
+  transition: var(--transition-default) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.uk-tab > * > a:hover {
+  color: var(--vin-golden) !important;
+  background: var(--golden-transparent) !important;
+}
+
+.uk-tab > .uk-active > a {
+  color: var(--vin-golden) !important;
+  border-bottom: 3px solid var(--vin-golden) !important;
+  background: var(--golden-transparent) !important;
+}
+
+.uk-switcher {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 640px) {
+  .uk-tab > * > a {
+    padding: 10px 18px !important;
+    font-size: 0.95rem !important;
+  }
+}

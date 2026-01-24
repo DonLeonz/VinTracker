@@ -329,29 +329,33 @@ export const toggleRegistered = async (req, res) => {
   }
 };
 
-// Register all
+// Register all (filtered)
 export const registerAll = async (req, res) => {
   try {
-    const { type } = req.body;
+    const { type, date, registered } = req.body;
 
-    if (type === 'all') {
-      const query1 = `UPDATE delivery_records SET registered = true, last_registered_at = CURRENT_TIMESTAMP WHERE registered = false`;
-      const query2 = `UPDATE service_records SET registered = true, last_registered_at = CURRENT_TIMESTAMP WHERE registered = false`;
+    let whereConditions = ['registered = false'];
+    let params = [];
+    let paramCount = 0;
 
-      const result1 = await pool.query(query1);
-      const result2 = await pool.query(query2);
-
-      const affected = result1.rowCount + result2.rowCount;
-
-      return res.json({
-        success: true,
-        message: `Se registraron ${affected} VINs correctamente`
-      });
+    if (date) {
+      paramCount++;
+      whereConditions.push(`DATE(created_at) = $${paramCount}`);
+      params.push(date);
     }
 
+    if (registered === 'not_registered') {
+      // Already included in base condition
+    } else if (registered === 'registered') {
+      // Can't register what's already registered, but respect filter
+      whereConditions[0] = 'registered = true';
+    }
+
+    const whereClause = `WHERE ${whereConditions.join(' AND ')}`;
+
     const tableName = getTableName(type);
-    const query = `UPDATE ${tableName} SET registered = true, last_registered_at = CURRENT_TIMESTAMP WHERE registered = false`;
-    const result = await pool.query(query);
+    const query = `UPDATE ${tableName} SET registered = true, last_registered_at = CURRENT_TIMESTAMP ${whereClause}`;
+    const result = await pool.query(query, params);
 
     res.json({
       success: true,
@@ -363,29 +367,33 @@ export const registerAll = async (req, res) => {
   }
 };
 
-// Unregister all
+// Unregister all (filtered)
 export const unregisterAll = async (req, res) => {
   try {
-    const { type } = req.body;
+    const { type, date, registered } = req.body;
 
-    if (type === 'all') {
-      const query1 = `UPDATE delivery_records SET registered = false WHERE registered = true`;
-      const query2 = `UPDATE service_records SET registered = false WHERE registered = true`;
+    let whereConditions = ['registered = true'];
+    let params = [];
+    let paramCount = 0;
 
-      const result1 = await pool.query(query1);
-      const result2 = await pool.query(query2);
-
-      const affected = result1.rowCount + result2.rowCount;
-
-      return res.json({
-        success: true,
-        message: `Se desregistraron ${affected} VINs correctamente`
-      });
+    if (date) {
+      paramCount++;
+      whereConditions.push(`DATE(created_at) = $${paramCount}`);
+      params.push(date);
     }
 
+    if (registered === 'registered') {
+      // Already included in base condition
+    } else if (registered === 'not_registered') {
+      // Can't unregister what's not registered, but respect filter
+      whereConditions[0] = 'registered = false';
+    }
+
+    const whereClause = `WHERE ${whereConditions.join(' AND ')}`;
+
     const tableName = getTableName(type);
-    const query = `UPDATE ${tableName} SET registered = false WHERE registered = true`;
-    const result = await pool.query(query);
+    const query = `UPDATE ${tableName} SET registered = false ${whereClause}`;
+    const result = await pool.query(query, params);
 
     res.json({
       success: true,
@@ -393,6 +401,52 @@ export const unregisterAll = async (req, res) => {
     });
   } catch (error) {
     console.error('Error unregistering all:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Delete all (filtered)
+export const deleteAll = async (req, res) => {
+  try {
+    const { type, date, registered } = req.body;
+
+    if (!type) {
+      return res.status(400).json({
+        success: false,
+        message: 'Tipo es requerido'
+      });
+    }
+
+    let whereConditions = [];
+    let params = [];
+    let paramCount = 0;
+
+    if (date) {
+      paramCount++;
+      whereConditions.push(`DATE(created_at) = $${paramCount}`);
+      params.push(date);
+    }
+
+    if (registered === 'registered') {
+      whereConditions.push('registered = true');
+    } else if (registered === 'not_registered') {
+      whereConditions.push('registered = false');
+    }
+
+    const whereClause = whereConditions.length > 0
+      ? `WHERE ${whereConditions.join(' AND ')}`
+      : '';
+
+    const tableName = getTableName(type);
+    const query = `DELETE FROM ${tableName} ${whereClause}`;
+    const result = await pool.query(query, params);
+
+    res.json({
+      success: true,
+      message: `Se eliminaron ${result.rowCount} VINs correctamente`
+    });
+  } catch (error) {
+    console.error('Error deleting all:', error);
     res.status(500).json({ success: false, message: error.message });
   }
 };

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { formatDate } from '../../utils/helpers';
 import CharBadge from '../ui/CharBadge';
 import VinBadge from '../ui/VinBadge';
@@ -5,7 +6,7 @@ import RepeatInfo from '../ui/RepeatInfo';
 import StatusBadge from '../ui/StatusBadge';
 import ActionButtons from '../ui/ActionButtons';
 
-const TableRow = ({ 
+const TableRow = memo(({ 
   record, 
   type, 
   onToggleRegistered, 
@@ -59,6 +60,8 @@ const TableRow = ({
       </td>
     </tr>
   );
-};
+});
+
+TableRow.displayName = 'TableRow';
 
 export default TableRow;

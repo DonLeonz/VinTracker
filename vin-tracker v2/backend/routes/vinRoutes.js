@@ -8,6 +8,7 @@ import {
   toggleRegistered,
   registerAll,
   unregisterAll,
+  deleteAll,
   exportData
 } from '../controllers/vinController.js';
 
@@ -25,5 +26,6 @@ router.post('/delete', deleteVin);
 router.post('/toggle-registered', toggleRegistered);
 router.post('/register-all', registerAll);
 router.post('/unregister-all', unregisterAll);
+router.post('/delete-all', deleteAll);
 
 export default router;

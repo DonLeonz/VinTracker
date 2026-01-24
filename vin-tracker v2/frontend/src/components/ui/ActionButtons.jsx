@@ -1,4 +1,6 @@
-const ActionButtons = ({ onEdit, onDelete }) => {
+import { memo } from 'react';
+
+const ActionButtons = memo(({ onEdit, onDelete }) => {
   const handleEdit = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -37,6 +39,8 @@ const ActionButtons = ({ onEdit, onDelete }) => {
       </button>
     </div>
   );
-};
+});
+
+ActionButtons.displayName = 'ActionButtons';
 
 export default ActionButtons;

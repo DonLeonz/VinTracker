@@ -10,7 +10,7 @@
 .table-header-top {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   gap: 20px;
   flex-wrap: wrap;
 }
@@ -21,8 +21,9 @@
 
 .table-header-actions {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 /* Table Columns Width */
@@ -65,7 +66,7 @@
 
 @media (max-width: 960px) {
   .table-header-actions {
-    gap: 16px;
+    gap: 14px;
   }
 }
 

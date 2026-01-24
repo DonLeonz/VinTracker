@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import TableRow from './TableRow';
 
-const TableBody = ({ 
+const TableBody = memo(({ 
   records, 
   type, 
   isLoading, 
@@ -54,6 +55,8 @@ const TableBody = ({
       </table>
     </div>
   );
-};
+});
+
+TableBody.displayName = 'TableBody';
 
 export default TableBody;

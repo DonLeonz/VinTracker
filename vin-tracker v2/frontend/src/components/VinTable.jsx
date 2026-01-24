@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo, memo } from 'react';
 import { vinService } from '../services/api';
 import { showNotification } from '../utils/helpers';
 import ConfirmModal from './modals/ConfirmModal';
@@ -6,7 +6,7 @@ import EditVinModal from './modals/EditVinModal';
 import TableHeader from './table/TableHeader';
 import TableBody from './table/TableBody';
 
-const VinTable = ({ title, type, records, isLoading, onRecordsChange }) => {
+const VinTable = memo(({ title, type, records, isLoading, onRecordsChange, filters }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   // Modal states
@@ -96,15 +96,29 @@ const VinTable = ({ title, type, records, isLoading, onRecordsChange }) => {
   }, [type, onRecordsChange]);
 
   const handleRegisterAll = useCallback(() => {
+    // Construir mensaje con información sobre los filtros activos
+    let filterInfo = '';
+    if (filters.date) {
+      filterInfo += `\nFecha: ${filters.date}`;
+    }
+    if (filters.registered === 'registered') {
+      filterInfo += '\nEstado: Solo registrados';
+    } else if (filters.registered === 'not_registered') {
+      filterInfo += '\nEstado: Solo no registrados';
+    }
+    if (!filterInfo) {
+      filterInfo = '\nSin filtros - Se registrarán TODOS los no registrados';
+    }
+
     setConfirmModal({
       isOpen: true,
       type: 'success',
       title: 'Registrar Todos',
-      message: `¿Registrar TODOS los VINs sin registrar de ${type.toUpperCase()}?\n\nEsta acción marcará todos los VINs como registrados.`,
+      message: `¿Registrar los VINs de ${type.toUpperCase()} con los siguientes filtros?${filterInfo}`,
       confirmText: 'Registrar Todos',
       onConfirm: async () => {
         try {
-          const result = await vinService.registerAll(type);
+          const result = await vinService.registerAll(type, filters);
           if (result.success) {
             showNotification('✅ ' + result.message, 'success');
             onRecordsChange && onRecordsChange();
@@ -114,18 +128,32 @@ const VinTable = ({ title, type, records, isLoading, onRecordsChange }) => {
         }
       }
     });
-  }, [type, onRecordsChange]);
+  }, [type, filters, onRecordsChange]);
 
   const handleUnregisterAll = useCallback(() => {
+    // Construir mensaje con información sobre los filtros activos
+    let filterInfo = '';
+    if (filters.date) {
+      filterInfo += `\nFecha: ${filters.date}`;
+    }
+    if (filters.registered === 'registered') {
+      filterInfo += '\nEstado: Solo registrados';
+    } else if (filters.registered === 'not_registered') {
+      filterInfo += '\nEstado: Solo no registrados';
+    }
+    if (!filterInfo) {
+      filterInfo = '\nSin filtros - Se desregistrarán TODOS los registrados';
+    }
+
     setConfirmModal({
       isOpen: true,
       type: 'danger',
       title: 'Desregistrar Todos',
-      message: `¿Desregistrar TODOS los VINs registrados de ${type.toUpperCase()}?\n\nTodos los VINs volverán al estado "No Registrado" (❌).`,
+      message: `¿Desregistrar los VINs de ${type.toUpperCase()} con los siguientes filtros?${filterInfo}`,
       confirmText: 'Desregistrar Todos',
       onConfirm: async () => {
         try {
-          const result = await vinService.unregisterAll(type);
+          const result = await vinService.unregisterAll(type, filters);
           if (result.success) {
             showNotification('✅ ' + result.message, 'success');
             onRecordsChange && onRecordsChange();
@@ -135,7 +163,42 @@ const VinTable = ({ title, type, records, isLoading, onRecordsChange }) => {
         }
       }
     });
-  }, [type, onRecordsChange]);
+  }, [type, filters, onRecordsChange]);
+
+  const handleDeleteAll = useCallback(() => {
+    // Construir mensaje con información sobre los filtros activos
+    let filterInfo = '';
+    if (filters.date) {
+      filterInfo += `\nFecha: ${filters.date}`;
+    }
+    if (filters.registered === 'registered') {
+      filterInfo += '\nEstado: Solo registrados';
+    } else if (filters.registered === 'not_registered') {
+      filterInfo += '\nEstado: Solo no registrados';
+    }
+    if (!filterInfo) {
+      filterInfo = '\nSin filtros - Se eliminarán TODOS los registros';
+    }
+
+    setConfirmModal({
+      isOpen: true,
+      type: 'danger',
+      title: 'Eliminar Todos',
+      message: `⚠️ ¿Eliminar los VINs de ${type.toUpperCase()} con los siguientes filtros?${filterInfo}\n\n⚠️ ESTA ACCIÓN NO SE PUEDE DESHACER`,
+      confirmText: 'Eliminar Todos',
+      onConfirm: async () => {
+        try {
+          const result = await vinService.deleteAll(type, filters);
+          if (result.success) {
+            showNotification('✅ ' + result.message, 'success');
+            onRecordsChange && onRecordsChange();
+          }
+        } catch (error) {
+          showNotification('❌ ' + (error.message || 'Error al eliminar todos'), 'danger');
+        }
+      }
+    });
+  }, [type, filters, onRecordsChange]);
 
   return (
     <>
@@ -148,6 +211,7 @@ const VinTable = ({ title, type, records, isLoading, onRecordsChange }) => {
           onToggle={toggleCollapse}
           onRegisterAll={handleRegisterAll}
           onUnregisterAll={handleUnregisterAll}
+          onDeleteAll={handleDeleteAll}
         />
 
         {/* Table */}
@@ -182,6 +246,8 @@ const VinTable = ({ title, type, records, isLoading, onRecordsChange }) => {
       />
     </>
   );
-};
+});
+
+VinTable.displayName = 'VinTable';
 
 export default VinTable;
