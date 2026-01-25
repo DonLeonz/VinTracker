@@ -148,6 +148,16 @@ export const vinService = {
       };
     }
   },
+
+  // Get verification data
+  getVerification: async () => {
+    try {
+      const response = await api.get('/vins/verification');
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
 };
 
 export default api;

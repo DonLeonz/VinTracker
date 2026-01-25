@@ -13,7 +13,7 @@ const processVin = (vin) => {
 // Get all records
 export const getRecords = async (req, res) => {
   try {
-    const { date, registered } = req.query;
+    const { date, registered, search, repeated } = req.query;
 
     let whereConditions = [];
     let params = [];
@@ -29,6 +29,18 @@ export const getRecords = async (req, res) => {
       whereConditions.push('registered = true');
     } else if (registered === 'not_registered') {
       whereConditions.push('registered = false');
+    }
+
+    if (search && search.trim() !== '') {
+      paramCount++;
+      whereConditions.push(`vin LIKE $${paramCount}`);
+      params.push(`%${search.trim().toUpperCase()}%`);
+    }
+
+    if (repeated === 'repeated') {
+      whereConditions.push('repeat_count > 0');
+    } else if (repeated === 'not_repeated') {
+      whereConditions.push('repeat_count = 0');
     }
 
     const whereClause = whereConditions.length > 0
@@ -535,6 +547,74 @@ export const exportData = async (req, res) => {
     res.send(textContent);
   } catch (error) {
     console.error('Error exporting data:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Get verification data
+export const getVerification = async (req, res) => {
+  try {
+    // Get total counts
+    const deliveryCountResult = await pool.query('SELECT COUNT(*) FROM delivery_records');
+    const serviceCountResult = await pool.query('SELECT COUNT(*) FROM service_records');
+    
+    // Get registered/not registered counts
+    const deliveryRegisteredResult = await pool.query('SELECT COUNT(*) FROM delivery_records WHERE registered = true');
+    const deliveryNotRegisteredResult = await pool.query('SELECT COUNT(*) FROM delivery_records WHERE registered = false');
+    const serviceRegisteredResult = await pool.query('SELECT COUNT(*) FROM service_records WHERE registered = true');
+    const serviceNotRegisteredResult = await pool.query('SELECT COUNT(*) FROM service_records WHERE registered = false');
+
+    // Find duplicates within delivery_records
+    const deliveryDuplicatesQuery = `
+      SELECT vin, COUNT(*) as count, array_agg(id) as ids
+      FROM delivery_records
+      GROUP BY vin
+      HAVING COUNT(*) > 1
+      ORDER BY count DESC, vin
+    `;
+    const deliveryDuplicatesResult = await pool.query(deliveryDuplicatesQuery);
+
+    // Find duplicates within service_records
+    const serviceDuplicatesQuery = `
+      SELECT vin, COUNT(*) as count, array_agg(id) as ids
+      FROM service_records
+      GROUP BY vin
+      HAVING COUNT(*) > 1
+      ORDER BY count DESC, vin
+    `;
+    const serviceDuplicatesResult = await pool.query(serviceDuplicatesQuery);
+
+    // Find VINs that exist in both tables
+    const crossTableQuery = `
+      SELECT 
+        d.vin,
+        d.id as delivery_id,
+        d.created_at as delivery_created_at,
+        d.registered as delivery_registered,
+        s.id as service_id,
+        s.created_at as service_created_at,
+        s.registered as service_registered,
+        s.repeat_count as service_repeat_count
+      FROM delivery_records d
+      INNER JOIN service_records s ON d.vin = s.vin
+      ORDER BY d.vin
+    `;
+    const crossTableResult = await pool.query(crossTableQuery);
+
+    res.json({
+      success: true,
+      totalDelivery: parseInt(deliveryCountResult.rows[0].count),
+      totalService: parseInt(serviceCountResult.rows[0].count),
+      registeredDelivery: parseInt(deliveryRegisteredResult.rows[0].count),
+      notRegisteredDelivery: parseInt(deliveryNotRegisteredResult.rows[0].count),
+      registeredService: parseInt(serviceRegisteredResult.rows[0].count),
+      notRegisteredService: parseInt(serviceNotRegisteredResult.rows[0].count),
+      duplicatesInDelivery: deliveryDuplicatesResult.rows,
+      duplicatesInService: serviceDuplicatesResult.rows,
+      crossTableDuplicates: crossTableResult.rows
+    });
+  } catch (error) {
+    console.error('Error getting verification:', error);
     res.status(500).json({ success: false, message: error.message });
   }
 };

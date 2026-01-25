@@ -9,7 +9,8 @@ import {
   registerAll,
   unregisterAll,
   deleteAll,
-  exportData
+  exportData,
+  getVerification
 } from '../controllers/vinController.js';
 
 const router = express.Router();
@@ -17,6 +18,7 @@ const router = express.Router();
 // GET routes
 router.get('/records', getRecords);
 router.get('/export', exportData);
+router.get('/verification', getVerification);
 
 // POST routes
 router.post('/add', addVin);

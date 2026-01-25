@@ -13,7 +13,9 @@
 @import './components/DatabaseStatus.css';
 @import './components/Filters.css';
 @import './components/VinInput.css';
+@import './components/VinImport.css';
 @import './components/VinPreview.css';
+@import './components/VinVerification.css';
 @import './components/Table.css';
 
 /* Modales */

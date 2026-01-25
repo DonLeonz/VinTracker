@@ -1,0 +1,308 @@
+/* ========================================
+   VIN VERIFICATION STYLES
+   ======================================== */
+
+.verification-container {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Status Card */
+.verification-status-card {
+  background: var(--vin-dark-secondary);
+  border: 2px solid var(--vin-golden);
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.verification-status-card.has-issues {
+  border-color: #f0506e;
+  background: linear-gradient(135deg, var(--vin-dark-secondary), rgba(240, 80, 110, 0.05));
+}
+
+.verification-status-card.no-issues {
+  border-color: #32d296;
+  background: linear-gradient(135deg, var(--vin-dark-secondary), rgba(50, 210, 150, 0.05));
+}
+
+.verification-status-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.verification-status-icon {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+/* Statistics Cards */
+.verification-stat-card {
+  background: var(--vin-dark-secondary);
+  border: 2px solid rgba(212, 167, 98, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.3s ease;
+}
+
+.verification-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.verification-stat-card.delivery {
+  border-color: rgba(100, 149, 237, 0.5);
+  background: linear-gradient(135deg, var(--vin-dark-secondary), rgba(100, 149, 237, 0.05));
+}
+
+.verification-stat-card.service {
+  border-color: rgba(255, 159, 64, 0.5);
+  background: linear-gradient(135deg, var(--vin-dark-secondary), rgba(255, 159, 64, 0.05));
+}
+
+.verification-stat-card.registered {
+  border-color: rgba(50, 210, 150, 0.5);
+  background: linear-gradient(135deg, var(--vin-dark-secondary), rgba(50, 210, 150, 0.05));
+}
+
+.verification-stat-card.not-registered {
+  border-color: rgba(189, 189, 189, 0.5);
+  background: linear-gradient(135deg, var(--vin-dark-secondary), rgba(189, 189, 189, 0.05));
+}
+
+.verification-stat-icon {
+  font-size: 3rem;
+  line-height: 1;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+.verification-stat-content {
+  flex: 1;
+}
+
+.verification-stat-label {
+  display: block;
+  color: var(--vin-text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.verification-stat-value {
+  display: block;
+  color: var(--vin-golden);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Issues Section */
+.verification-issues-section {
+  margin-top: 30px;
+}
+
+.verification-issues-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.verification-issue-item {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(212, 167, 98, 0.2);
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.2s ease;
+}
+
+.verification-issue-item:hover {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(212, 167, 98, 0.4);
+}
+
+.verification-issue-item.cross-table {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.verification-issue-vin {
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--vin-golden);
+  min-width: 200px;
+  letter-spacing: 1px;
+}
+
+.verification-issue-details {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.verification-issue-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  line-height: 1.4;
+}
+
+.verification-issue-badge.count {
+  background: rgba(212, 167, 98, 0.2);
+  color: var(--vin-golden);
+  border: 1px solid rgba(212, 167, 98, 0.4);
+}
+
+.verification-issue-badge.registered {
+  background: rgba(50, 210, 150, 0.2);
+  color: #32d296;
+  border: 1px solid rgba(50, 210, 150, 0.4);
+}
+
+.verification-issue-badge.not-registered {
+  background: rgba(189, 189, 189, 0.2);
+  color: #bdbdbd;
+  border: 1px solid rgba(189, 189, 189, 0.4);
+}
+
+.verification-issue-badge.repeat {
+  background: rgba(255, 159, 64, 0.2);
+  color: #ff9f40;
+  border: 1px solid rgba(255, 159, 64, 0.4);
+}
+
+.verification-issue-info {
+  color: var(--vin-text-muted);
+  font-size: 0.85rem;
+}
+
+/* Cross-table specific */
+.verification-cross-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.verification-cross-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  border-left: 3px solid var(--vin-golden);
+}
+
+.verification-cross-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--vin-golden);
+  margin-bottom: 5px;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .verification-cross-info {
+    grid-template-columns: 1fr;
+  }
+
+  .verification-stat-value {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .verification-status-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .verification-stat-card {
+    padding: 15px;
+  }
+
+  .verification-stat-icon {
+    font-size: 2rem;
+  }
+
+  .verification-stat-value {
+    font-size: 1.5rem;
+  }
+
+  .verification-issue-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .verification-issue-vin {
+    font-size: 1rem;
+  }
+}
+
+/* Accordion Styles */
+.verification-issues-section .uk-accordion-title {
+  background: linear-gradient(135deg, var(--vin-dark-secondary), rgba(212, 167, 98, 0.1));
+  color: var(--vin-golden);
+  font-weight: 600;
+  padding: 15px 20px;
+  border-radius: 8px 8px 0 0;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(212, 167, 98, 0.3);
+  border-bottom: none;
+}
+
+.verification-issues-section .uk-accordion-title:hover {
+  background: linear-gradient(135deg, var(--vin-dark-secondary), rgba(212, 167, 98, 0.2));
+  color: var(--vin-golden-light);
+  border-color: rgba(212, 167, 98, 0.5);
+}
+
+.verification-issues-section .uk-accordion-title::before {
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline fill='none' stroke='%23D4A762' stroke-width='1.5' points='4 7 10 13 16 7'/%3E%3C/svg%3E");
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.verification-issues-section .uk-accordion-title:hover::before {
+  opacity: 1;
+}
+
+.verification-issues-section .uk-open > .uk-accordion-title {
+  background: linear-gradient(135deg, rgba(212, 167, 98, 0.15), rgba(212, 167, 98, 0.05));
+  color: var(--vin-golden-light);
+  border-color: var(--vin-golden);
+}
+
+.verification-issues-section .uk-accordion-content {
+  background: rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(212, 167, 98, 0.3);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+
+.verification-issues-section .uk-open .uk-accordion-content {
+  border-color: var(--vin-golden);
+}
+
+.verification-issues-section .uk-accordion-title strong {
+  color: var(--vin-golden);
+  text-shadow: 0 0 10px rgba(212, 167, 98, 0.3);
+}

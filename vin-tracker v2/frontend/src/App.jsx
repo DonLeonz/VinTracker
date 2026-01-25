@@ -7,14 +7,16 @@ import { useRecordsCache } from './hooks/useRecordsCache';
 
 // Lazy load components for better initial load performance
 const VinInput = lazy(() => import('./components/VinInput'));
+const VinImport = lazy(() => import('./components/VinImport'));
 const Filters = lazy(() => import('./components/Filters'));
 const VinTable = lazy(() => import('./components/VinTable'));
 const VinPreview = lazy(() => import('./components/VinPreview'));
+const VinVerification = lazy(() => import('./components/VinVerification'));
 
 function App() {
   const [deliveryRecords, setDeliveryRecords] = useState([]);
   const [serviceRecords, setServiceRecords] = useState([]);
-  const [filters, setFilters] = useState({ date: '', registered: 'all' });
+  const [filters, setFilters] = useState({ date: '', registered: 'all', search: '', repeated: 'all' });
   const [isLoading, setIsLoading] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [isPending, startTransition] = useTransition();
@@ -85,7 +87,7 @@ function App() {
 
   // Clear filters and cache
   const handleClearFilters = useCallback(() => {
-    setFilters({ date: '', registered: 'all' });
+    setFilters({ date: '', registered: 'all', search: '', repeated: 'all' });
     clearCache(); // Clear cache when filters are cleared
   }, [clearCache]);
 
@@ -148,6 +150,12 @@ function App() {
           </li>
           <li>
             <a href="#">
+              <span uk-icon="icon: cloud-upload; ratio: 1.2" style={{ marginRight: '8px' }}></span>
+              Importar VINs
+            </a>
+          </li>
+          <li>
+            <a href="#">
               <span uk-icon="icon: search; ratio: 1.2" style={{ marginRight: '8px' }}></span>
               Ver Registros
             </a>
@@ -156,6 +164,12 @@ function App() {
             <a href="#">
               <span uk-icon="icon: file-text; ratio: 1.2" style={{ marginRight: '8px' }}></span>
               Visualización
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span uk-icon="icon: check; ratio: 1.2" style={{ marginRight: '8px' }}></span>
+              Verificación
             </a>
           </li>
         </ul>
@@ -172,7 +186,12 @@ function App() {
               <VinInput onVinAdded={handleVinAdded} />
             </li>
 
-            {/* Tab 2: Ver Registros */}
+            {/* Tab 2: Importar VINs */}
+            <li>
+              <VinImport onImportCompleted={handleVinAdded} />
+            </li>
+
+            {/* Tab 3: Ver Registros */}
             <li>
               {/* Filters and Export */}
               <Filters
@@ -192,7 +211,7 @@ function App() {
                 filters={filters}
               />
 
-              {/* Service Table */}
+              {/* Se4vice Table */}
               <VinTable
                 title="🔧 Service"
                 type="service"
@@ -203,9 +222,14 @@ function App() {
               />
             </li>
 
-            {/* Tab 3: Visualización */}
+            {/* Tab 4: Visualización */}
             <li>
               <VinPreview filters={filters} refreshTrigger={refreshTrigger} />
+            </li>
+
+            {/* Tab 5: Verificación */}
+            <li>
+              <VinVerification />
             </li>
           </ul>
         </Suspense>

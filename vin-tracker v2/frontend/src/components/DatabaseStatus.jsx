@@ -30,7 +30,7 @@ const DatabaseStatus = () => {
   return (
     <div
       className={`database-status ${isConnected ? 'connected' : 'disconnected'}`}
-      data-uk-tooltip={`cls: tooltip-${isConnected ? 'connected' : 'disconnected'}; title: ${isConnected ? '✓ Base de datos conectada y funcionando correctamente' : '⚠ Base de datos desconectada - No se pueden agregar VINs'}; pos: bottom-right`}
+      data-uk-tooltip={`cls: tooltip-${isConnected ? 'connected' : 'disconnected'}; title: ${isConnected ? '✔ Base de datos conectada y funcionando correctamente' : '⚠ Base de datos desconectada - No se pueden agregar VINs'}; pos: bottom-right`}
     >
       <span className={`status-indicator ${isChecking ? 'checking' : ''}`}>
         <span data-uk-icon={isConnected ? 'icon: database; ratio: 0.9' : 'icon: warning; ratio: 0.9'}></span>

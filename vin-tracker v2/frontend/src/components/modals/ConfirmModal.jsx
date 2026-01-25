@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 const ConfirmModal = ({
   isOpen,
@@ -10,26 +11,6 @@ const ConfirmModal = ({
   cancelText = 'Cancelar',
   type = 'warning'
 }) => {
-  useEffect(() => {
-    if (isOpen) {
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.overflow = 'hidden';
-      if (scrollbarWidth > 0) {
-        document.body.style.paddingRight = `${scrollbarWidth}px`;
-      }
-    } else {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
-    };
-  }, [isOpen]);
-
-  if (!isOpen) return null;
-
   const handleConfirm = () => {
     onConfirm();
     onClose();
@@ -48,7 +29,45 @@ const ConfirmModal = ({
     }
   };
 
-  return (
+  useEffect(() => {
+    if (isOpen) {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = 'hidden';
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    };
+  }, [isOpen]);
+
+  // Handle keyboard events
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleConfirm();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose, handleConfirm]);
+
+  if (!isOpen) return null;
+
+  return createPortal(
     <div className="confirm-modal-overlay" onClick={onClose}>
       <div className={`confirm-modal-container type-${type}`} onClick={(e) => e.stopPropagation()}>
         <div className={`confirm-modal-header type-${type}`}>
@@ -72,6 +91,7 @@ const ConfirmModal = ({
           >
             <span data-uk-icon="icon: close; ratio: 0.9"></span>
             {cancelText}
+            <span className="keyboard-hint">Esc</span>
           </button>
           <button
             className={`confirm-modal-btn confirm-modal-btn-confirm type-${type}`}
@@ -79,10 +99,12 @@ const ConfirmModal = ({
           >
             <span data-uk-icon="icon: check; ratio: 0.9"></span>
             {confirmText}
+            <span className="keyboard-hint">Enter ↵</span>
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

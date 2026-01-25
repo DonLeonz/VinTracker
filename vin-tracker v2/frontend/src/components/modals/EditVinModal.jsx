@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { processVin, validateVinLength } from '../../utils/helpers';
 
 const EditVinModal = ({
@@ -10,6 +11,17 @@ const EditVinModal = ({
 }) => {
   const [vin, setVin] = useState('');
   const [preview, setPreview] = useState('');
+
+  const handleSave = () => {
+    const trimmedVin = vin.trim();
+
+    if (!trimmedVin) {
+      return;
+    }
+
+    onSave(trimmedVin);
+    onClose();
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -33,6 +45,24 @@ const EditVinModal = ({
     };
   }, [isOpen, currentVin]);
 
+  // Handle keyboard events
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleSave();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose, handleSave]);
+
   const handleVinChange = (e) => {
     const value = e.target.value;
     setVin(value);
@@ -45,28 +75,11 @@ const EditVinModal = ({
     }
   };
 
-  const handleSave = () => {
-    const trimmedVin = vin.trim();
-
-    if (!trimmedVin) {
-      return;
-    }
-
-    onSave(trimmedVin);
-    onClose();
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleSave();
-    }
-  };
-
   if (!isOpen) return null;
 
   const isValid = validateVinLength(vin);
 
-  return (
+  return createPortal(
     <div className="edit-vin-modal-overlay" onClick={onClose}>
       <div className="edit-vin-modal-container" onClick={(e) => e.stopPropagation()}>
         <div className="edit-vin-modal-header">
@@ -89,7 +102,6 @@ const EditVinModal = ({
             placeholder="Ingrese el VIN (O se convierte en 0)"
             value={vin}
             onChange={handleVinChange}
-            onKeyPress={handleKeyPress}
             maxLength="25"
             autoFocus
           />
@@ -112,6 +124,7 @@ const EditVinModal = ({
           >
             <span data-uk-icon="icon: close; ratio: 0.9"></span>
             Cancelar
+            <span className="keyboard-hint">Esc</span>
           </button>
           <button
             className="edit-vin-modal-btn edit-vin-modal-btn-save"
@@ -120,10 +133,12 @@ const EditVinModal = ({
           >
             <span data-uk-icon="icon: check; ratio: 0.9"></span>
             Guardar Cambios
+            <span className="keyboard-hint">Enter ↵</span>
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

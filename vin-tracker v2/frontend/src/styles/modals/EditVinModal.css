@@ -62,15 +62,21 @@
 }
 
 .edit-vin-modal-icon {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #000000;
-  font-size: 24px;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.edit-vin-modal-icon svg {
+  width: 30px;
+  height: 30px;
 }
 
 .edit-vin-modal-title {
@@ -86,16 +92,18 @@
   background: rgba(0, 0, 0, 0.2);
   border: none;
   color: #000000;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 26px;
   font-weight: bold;
+  line-height: 1;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .edit-vin-modal-close-btn:hover {
@@ -254,4 +262,27 @@
     width: 100%;
     justify-content: center;
   }
+}
+
+/* Keyboard Hints */
+.keyboard-hint {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.8;
+  font-family: monospace;
+}
+
+.edit-vin-modal-btn-save .keyboard-hint {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+.edit-vin-modal-btn:hover .keyboard-hint {
+  opacity: 1;
 }
