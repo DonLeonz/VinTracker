@@ -27,6 +27,25 @@
 /* ========================================
    TÍTULO PRINCIPAL
    ======================================== */
+.trash-btn {
+  background: var(--vin-dark-secondary) !important;
+  color: var(--vin-light) !important;
+  border: 2px solid var(--vin-golden) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px !important;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.trash-btn:hover {
+  background: var(--vin-golden) !important;
+  color: #000 !important;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(212, 167, 98, 0.5);
+}
+
 .app-title {
   font-size: 4rem;
   font-weight: 800;

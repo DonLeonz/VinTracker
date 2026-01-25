@@ -10,7 +10,11 @@ import {
   unregisterAll,
   deleteAll,
   exportData,
-  getVerification
+  getVerification,
+  getDeleted,
+  restoreVin,
+  restoreAll,
+  emptyTrash
 } from '../controllers/vinController.js';
 
 const router = express.Router();
@@ -19,6 +23,7 @@ const router = express.Router();
 router.get('/records', getRecords);
 router.get('/export', exportData);
 router.get('/verification', getVerification);
+router.get('/trash', getDeleted);
 
 // POST routes
 router.post('/add', addVin);
@@ -29,5 +34,10 @@ router.post('/toggle-registered', toggleRegistered);
 router.post('/register-all', registerAll);
 router.post('/unregister-all', unregisterAll);
 router.post('/delete-all', deleteAll);
+
+// Trash/Recycle Bin routes
+router.post('/restore', restoreVin);
+router.post('/restore-all', restoreAll);
+router.post('/empty-trash', emptyTrash);
 
 export default router;

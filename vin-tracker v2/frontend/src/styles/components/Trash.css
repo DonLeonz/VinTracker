@@ -1,0 +1,419 @@
+/* ========================================
+   TRASH/RECYCLE BIN STYLES
+   ======================================== */
+
+.trash-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.trash-header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--vin-golden);
+}
+
+.back-btn {
+  background: var(--vin-dark-secondary) !important;
+  color: var(--vin-light) !important;
+  border: 2px solid var(--vin-golden) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px !important;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: var(--vin-golden) !important;
+  color: #000 !important;
+  transform: translateX(-5px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(212, 167, 98, 0.5);
+}
+
+.back-btn .btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-btn .btn-icon svg {
+  stroke: currentColor;
+  fill: none;
+}
+
+.trash-title-section {
+  flex: 1;
+}
+
+.trash-title {
+  color: var(--vin-golden);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.title-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: rgba(212, 167, 98, 0.2);
+  border-radius: 12px;
+}
+
+.title-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--vin-golden);
+  fill: none;
+}
+
+.trash-subtitle {
+  color: var(--vin-light-muted);
+  font-size: 1.1rem;
+  margin: 8px 0 0 65px;
+}
+
+/* Section */
+.trash-section {
+  background: var(--vin-dark-secondary);
+  border: 2px solid var(--vin-golden);
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0);
+}
+
+.trash-section:hover {
+  transform: translateY(-4px) translateZ(0);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--vin-golden);
+  border-color: var(--vin-golden-light);
+}
+
+.trash-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.trash-section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.trash-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(220, 53, 69, 0.2);
+  border-radius: 8px;
+}
+
+.trash-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: #DC3545;
+  fill: none;
+}
+
+.trash-section-title h3 {
+  color: var(--vin-light);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.trash-section:hover .trash-section-title h3 {
+  color: var(--vin-golden-light);
+}
+
+.trash-count {
+  background: rgba(212, 167, 98, 0.2);
+  color: var(--vin-golden);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.trash-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.trash-actions .uk-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.trash-actions .btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trash-actions .btn-icon svg {
+  stroke: currentColor;
+  fill: none;
+}
+
+.trash-actions .uk-button-default {
+  background: var(--vin-dark-tertiary) !important;
+  color: var(--vin-light) !important;
+  border: 2px solid var(--vin-golden) !important;
+}
+
+.trash-actions .uk-button-default:hover {
+  background: var(--vin-golden) !important;
+  color: #000 !important;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(212, 167, 98, 0.5);
+}
+
+.trash-actions .uk-button-danger {
+  background: #DC3545 !important;
+  color: #fff !important;
+  border: 2px solid #DC3545 !important;
+}
+
+.trash-actions .uk-button-danger:hover {
+  background: #c82333 !important;
+  border-color: #c82333 !important;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.5);
+}
+
+/* Empty State */
+.trash-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--vin-light-muted);
+  font-size: 1.2rem;
+}
+
+.trash-empty p {
+  margin: 0;
+}
+
+/* Table Styles */
+.trash-section table {
+  background: var(--vin-dark-primary);
+  color: var(--vin-light);
+}
+
+.trash-section thead th {
+  background: var(--vin-dark-tertiary);
+  color: var(--vin-golden);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  padding: 15px 12px;
+  border-bottom: 2px solid var(--vin-golden);
+}
+
+.trash-section tbody td {
+  padding: 12px;
+  vertical-align: middle;
+}
+
+.trash-section tbody tr {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.trash-section tbody tr:hover {
+  background: var(--vin-dark-secondary);
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(212, 167, 98, 0.2);
+  z-index: 1;
+}
+
+/* VIN Display */
+.vin-display {
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--vin-light);
+  font-size: 1rem;
+}
+
+/* Badges */
+.char-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.char-badge.valid {
+  background: rgba(40, 167, 69, 0.2);
+  color: var(--vin-success);
+  border: 1px solid var(--vin-success);
+}
+
+.char-badge.invalid {
+  background: rgba(220, 53, 69, 0.2);
+  color: var(--vin-error);
+  border: 1px solid var(--vin-error);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.status-badge.registered {
+  background: rgba(40, 167, 69, 0.2);
+  color: var(--vin-success);
+  border: 1px solid var(--vin-success);
+}
+
+.status-badge.not-registered {
+  background: rgba(255, 193, 7, 0.2);
+  color: #FFC107;
+  border: 1px solid #FFC107;
+}
+
+.repeat-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: rgba(212, 167, 98, 0.2);
+  color: var(--vin-golden);
+  border: 1px solid var(--vin-golden);
+}
+
+.deleted-date {
+  color: var(--vin-light-muted);
+  font-size: 0.9rem;
+  font-family: monospace;
+}
+
+/* Restore Button */
+.restore-btn {
+  background: var(--vin-golden) !important;
+  color: #000 !important;
+  border: none !important;
+  font-weight: 700 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+.restore-btn:hover {
+  background: var(--vin-golden-light) !important;
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 8px 20px rgba(212, 167, 98, 0.6);
+}
+
+.restore-btn .btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.restore-btn .btn-icon svg {
+  stroke: currentColor;
+  fill: none;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .trash-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .trash-title {
+    font-size: 2rem;
+  }
+
+  .trash-subtitle {
+    margin-left: 0;
+  }
+
+  .trash-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .trash-actions {
+    width: 100%;
+  }
+
+  .trash-actions .uk-button {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .trash-container {
+    padding: 20px 10px;
+  }
+
+  .trash-title {
+    font-size: 1.5rem;
+  }
+
+  .trash-section {
+    padding: 15px;
+  }
+
+  .trash-section-title h3 {
+    font-size: 1.2rem;
+  }
+
+  .trash-actions {
+    flex-direction: column;
+  }
+
+  .trash-actions .uk-button {
+    width: 100%;
+  }
+}

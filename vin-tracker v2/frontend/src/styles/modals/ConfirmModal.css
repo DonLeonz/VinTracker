@@ -176,27 +176,38 @@
   padding: 20px 30px 30px;
   display: flex;
   gap: 15px;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: stretch;
 }
 
 .confirm-modal-btn {
-  padding: 12px 28px;
+  padding: 12px 20px;
   border: none;
   border-radius: 8px;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: clamp(0.75rem, 2vw, 0.95rem);
   cursor: pointer;
   transition: all 0.3s ease;
   letter-spacing: 0.5px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 6px;
+  flex: 0 1 auto;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.confirm-modal-btn > span:not(.keyboard-hint) {
+  flex-shrink: 0;
 }
 
 .confirm-modal-btn-cancel {
   background: var(--vin-dark-tertiary);
   color: var(--vin-light);
   border: 2px solid var(--vin-dark-tertiary);
+  max-width: 40%;
+  white-space: normal;
 }
 
 .confirm-modal-btn-cancel:hover {
@@ -209,6 +220,10 @@
 .confirm-modal-btn-confirm {
   color: #ffffff;
   box-shadow: 0 4px 15px rgba(212, 167, 98, 0.44);
+  white-space: normal;
+  max-width: 55%;
+  line-height: 1.4;
+  padding: 12px 20px;
 }
 
 .confirm-modal-btn-confirm.type-danger {

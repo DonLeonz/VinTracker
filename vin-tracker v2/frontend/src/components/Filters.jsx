@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback, memo } from 'react';
 
-const Filters = memo(({ filters, onFilterChange, onClearFilters, onExport }) => {
+const Filters = memo(({ filters, onFilterChange, onClearFilters, onExport, onRefresh, hideExportButtons = false }) => {
   const [localFilters, setLocalFilters] = useState(filters);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   // Sincronizar con props cuando cambien externamente
   useEffect(() => {
@@ -42,6 +43,17 @@ const Filters = memo(({ filters, onFilterChange, onClearFilters, onExport }) => 
     setLocalFilters({ date: '', registered: 'all', search: '', repeated: 'all' });
     onClearFilters();
   }, [onClearFilters]);
+
+  const handleRefresh = useCallback(async () => {
+    if (onRefresh) {
+      setIsRefreshing(true);
+      try {
+        await onRefresh();
+      } finally {
+        setIsRefreshing(false);
+      }
+    }
+  }, [onRefresh]);
 
   return (
     <div className="uk-card uk-card-default uk-card-body uk-margin-medium fade-in">
@@ -110,6 +122,17 @@ const Filters = memo(({ filters, onFilterChange, onClearFilters, onExport }) => 
       {/* Action Buttons Row */}
       <div className="uk-margin-top uk-text-right">
         <div className="uk-flex uk-flex-middle uk-flex-right uk-flex-wrap" data-uk-margin>
+          {onRefresh && (
+            <button
+              className="uk-button uk-button-secondary uk-button-small"
+              onClick={handleRefresh}
+              disabled={isRefreshing}
+              title="Actualizar registros"
+            >
+              <span uk-icon="icon: refresh; ratio: 0.9"></span>
+              <span className="uk-margin-small-left">{isRefreshing ? 'Actualizando...' : 'Actualizar'}</span>
+            </button>
+          )}
           <button
             className="uk-button uk-button-secondary uk-button-small"
             onClick={handleClear}
@@ -117,27 +140,31 @@ const Filters = memo(({ filters, onFilterChange, onClearFilters, onExport }) => 
             <span data-uk-icon="refresh"></span>
             <span className="uk-margin-small-left">Ver Todos</span>
           </button>
-          <button
-            className="uk-button uk-button-primary uk-button-small"
-            onClick={() => onExport('all')}
-          >
-            <span data-uk-icon="download"></span>
-            <span className="uk-margin-small-left">Exportar Sin Registrar</span>
-          </button>
-          <button
-            className="uk-button uk-button-primary uk-button-small filters-export-delivery"
-            onClick={() => onExport('delivery')}
-          >
-            <span data-uk-icon="download"></span>
-            <span className="uk-margin-small-left">Export. Delivery</span>
-          </button>
-          <button
-            className="uk-button uk-button-primary uk-button-small filters-export-service"
-            onClick={() => onExport('service')}
-          >
-            <span data-uk-icon="download"></span>
-            <span className="uk-margin-small-left">Export. Service</span>
-          </button>
+          {!hideExportButtons && onExport && (
+            <>
+              <button
+                className="uk-button uk-button-primary uk-button-small"
+                onClick={() => onExport('all')}
+              >
+                <span data-uk-icon="download"></span>
+                <span className="uk-margin-small-left">Exportar Sin Registrar</span>
+              </button>
+              <button
+                className="uk-button uk-button-primary uk-button-small filters-export-delivery"
+                onClick={() => onExport('delivery')}
+              >
+                <span data-uk-icon="download"></span>
+                <span className="uk-margin-small-left">Export. Delivery</span>
+              </button>
+              <button
+                className="uk-button uk-button-primary uk-button-small filters-export-service"
+                onClick={() => onExport('service')}
+              >
+                <span data-uk-icon="download"></span>
+                <span className="uk-margin-small-left">Export. Service</span>
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

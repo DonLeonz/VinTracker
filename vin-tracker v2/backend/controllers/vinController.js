@@ -11,11 +11,16 @@ const processVin = (vin) => {
 };
 
 // Helper function to build WHERE clause from filters
-const buildWhereClause = (filters) => {
+const buildWhereClause = (filters, includeDeleted = false) => {
   const { date, registered, search, repeated } = filters;
   let whereConditions = [];
   let params = [];
   let paramCount = 0;
+
+  // Exclude deleted records by default unless explicitly requested
+  if (!includeDeleted) {
+    whereConditions.push('deleted = false');
+  }
 
   if (date) {
     paramCount++;
@@ -265,7 +270,7 @@ export const updateVin = async (req, res) => {
   }
 };
 
-// Delete VIN
+// Delete VIN (Soft Delete - move to trash)
 export const deleteVin = async (req, res) => {
   try {
     const { id, type } = req.body;
@@ -279,7 +284,13 @@ export const deleteVin = async (req, res) => {
 
     const tableName = getTableName(type);
 
-    const deleteQuery = `DELETE FROM ${tableName} WHERE id = $1 RETURNING *`;
+    // Soft delete: mark as deleted and set deletion timestamp
+    const deleteQuery = `
+      UPDATE ${tableName} 
+      SET deleted = true, deleted_at = CURRENT_TIMESTAMP 
+      WHERE id = $1 AND deleted = false 
+      RETURNING *
+    `;
     const result = await pool.query(deleteQuery, [id]);
 
     if (result.rows.length === 0) {
@@ -288,7 +299,7 @@ export const deleteVin = async (req, res) => {
 
     res.json({
       success: true,
-      message: 'VIN eliminado correctamente'
+      message: 'VIN movido a la papelera'
     });
   } catch (error) {
     console.error('Error deleting VIN:', error);
@@ -399,7 +410,7 @@ export const unregisterAll = async (req, res) => {
   }
 };
 
-// Delete all (filtered)
+// Delete all (filtered) - Soft Delete
 export const deleteAll = async (req, res) => {
   try {
     const { type, ...filters } = req.body;
@@ -414,12 +425,16 @@ export const deleteAll = async (req, res) => {
     const { whereClause, params } = buildWhereClause(filters);
 
     const tableName = getTableName(type);
-    const query = `DELETE FROM ${tableName} ${whereClause}`;
+    const query = `
+      UPDATE ${tableName} 
+      SET deleted = true, deleted_at = CURRENT_TIMESTAMP 
+      ${whereClause}
+    `;
     const result = await pool.query(query, params);
 
     res.json({
       success: true,
-      message: `Se eliminaron ${result.rowCount} VINs correctamente`
+      message: `Se movieron ${result.rowCount} VINs a la papelera`
     });
   } catch (error) {
     console.error('Error deleting all:', error);
@@ -505,6 +520,168 @@ export const exportData = async (req, res) => {
     res.send(textContent);
   } catch (error) {
     console.error('Error exporting data:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// ========================================
+// TRASH/RECYCLE BIN FUNCTIONS
+// ========================================
+
+// Get deleted records (trash)
+export const getDeleted = async (req, res) => {
+  try {
+    const { type } = req.query;
+
+    if (type && type !== 'delivery' && type !== 'service') {
+      return res.status(400).json({
+        success: false,
+        message: 'Tipo debe ser delivery o service'
+      });
+    }
+
+    let deliveryRecords = [];
+    let serviceRecords = [];
+
+    if (!type || type === 'delivery') {
+      const deliveryQuery = `
+        SELECT * FROM delivery_records 
+        WHERE deleted = true 
+        ORDER BY deleted_at DESC
+      `;
+      const deliveryResult = await pool.query(deliveryQuery);
+      deliveryRecords = deliveryResult.rows.map((record, index) => ({
+        ...record,
+        counter: index + 1,
+        type: 'delivery'
+      }));
+    }
+
+    if (!type || type === 'service') {
+      const serviceQuery = `
+        SELECT * FROM service_records 
+        WHERE deleted = true 
+        ORDER BY deleted_at DESC
+      `;
+      const serviceResult = await pool.query(serviceQuery);
+      serviceRecords = serviceResult.rows.map((record, index) => ({
+        ...record,
+        counter: index + 1,
+        type: 'service'
+      }));
+    }
+
+    res.json({
+      success: true,
+      delivery: deliveryRecords,
+      service: serviceRecords,
+      total: deliveryRecords.length + serviceRecords.length
+    });
+  } catch (error) {
+    console.error('Error getting deleted records:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Restore single VIN from trash
+export const restoreVin = async (req, res) => {
+  try {
+    const { id, type } = req.body;
+
+    if (!id || !type) {
+      return res.status(400).json({
+        success: false,
+        message: 'ID y tipo son requeridos'
+      });
+    }
+
+    const tableName = getTableName(type);
+
+    const restoreQuery = `
+      UPDATE ${tableName} 
+      SET deleted = false, deleted_at = NULL 
+      WHERE id = $1 AND deleted = true 
+      RETURNING *
+    `;
+    const result = await pool.query(restoreQuery, [id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Registro no encontrado en la papelera' 
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'VIN restaurado correctamente',
+      data: result.rows[0]
+    });
+  } catch (error) {
+    console.error('Error restoring VIN:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Restore all VINs from trash (filtered)
+export const restoreAll = async (req, res) => {
+  try {
+    const { type } = req.body;
+
+    if (!type) {
+      return res.status(400).json({
+        success: false,
+        message: 'Tipo es requerido'
+      });
+    }
+
+    const tableName = getTableName(type);
+
+    const restoreQuery = `
+      UPDATE ${tableName} 
+      SET deleted = false, deleted_at = NULL 
+      WHERE deleted = true
+    `;
+    const result = await pool.query(restoreQuery);
+
+    res.json({
+      success: true,
+      message: `Se restauraron ${result.rowCount} VINs correctamente`
+    });
+  } catch (error) {
+    console.error('Error restoring all:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Empty trash - permanently delete records older than 30 days or all
+export const emptyTrash = async (req, res) => {
+  try {
+    const { type, permanent } = req.body;
+
+    if (!type) {
+      return res.status(400).json({
+        success: false,
+        message: 'Tipo es requerido'
+      });
+    }
+
+    const tableName = getTableName(type);
+
+    // If permanent = true, delete all trash
+    // Otherwise, only delete items older than 30 days
+    const deleteQuery = permanent
+      ? `DELETE FROM ${tableName} WHERE deleted = true`
+      : `DELETE FROM ${tableName} WHERE deleted = true AND deleted_at < NOW() - INTERVAL '30 days'`;
+    
+    const result = await pool.query(deleteQuery);
+
+    res.json({
+      success: true,
+      message: `Se eliminaron permanentemente ${result.rowCount} VINs de la papelera`
+    });
+  } catch (error) {
+    console.error('Error emptying trash:', error);
     res.status(500).json({ success: false, message: error.message });
   }
 };

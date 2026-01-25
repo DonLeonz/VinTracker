@@ -17,6 +17,7 @@
 @import './components/VinPreview.css';
 @import './components/VinVerification.css';
 @import './components/Table.css';
+@import './components/Trash.css';
 
 /* Modales */
 @import './modals/ConfirmModal.css';

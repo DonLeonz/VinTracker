@@ -158,6 +158,51 @@ export const vinService = {
       throw error.response?.data || error;
     }
   },
+
+  // ========================================
+  // TRASH/RECYCLE BIN SERVICES
+  // ========================================
+
+  // Get deleted records (trash)
+  getDeleted: async (type = null) => {
+    try {
+      const params = type ? { type } : {};
+      const response = await api.get('/vins/trash', { params });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
+  // Restore single VIN from trash
+  restoreVin: async (id, type) => {
+    try {
+      const response = await api.post('/vins/restore', { id, type });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
+  // Restore all VINs from trash (by type)
+  restoreAll: async (type) => {
+    try {
+      const response = await api.post('/vins/restore-all', { type });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
+  // Empty trash - permanently delete
+  emptyTrash: async (type, permanent = false) => {
+    try {
+      const response = await api.post('/vins/empty-trash', { type, permanent });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
 };
 
 export default api;

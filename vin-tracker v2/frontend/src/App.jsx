@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, lazy, Suspense, useMemo, useTransition } from 'react';
 import DatabaseStatus from './components/DatabaseStatus';
 import ScrollToTop from './components/ScrollToTop';
+import Trash from './components/Trash';
 import { vinService } from './services/api';
 import { showNotification } from './utils/helpers';
 import { useRecordsCache } from './hooks/useRecordsCache';
@@ -20,6 +21,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [isPending, startTransition] = useTransition();
+  const [showTrash, setShowTrash] = useState(false);
   
   // Use cache hook
   const { getCached, setCache, clearCache, generateKey } = useRecordsCache();
@@ -130,14 +132,38 @@ function App() {
     }
   }, [filters.date]);
 
+  // Show trash view
+  if (showTrash) {
+    return (
+      <div className="main-container">
+        <DatabaseStatus />
+        <Trash onBack={() => setShowTrash(false)} />
+        <ScrollToTop />
+      </div>
+    );
+  }
+
   return (
     <div className="main-container">
       {/* Database Status Indicator */}
       <DatabaseStatus />
 
+      {/* Título Principal */}
       <h1 className="app-title fade-in">
         🚗 VIN Tracker System
       </h1>
+
+      {/* Botón de Papelera */}
+      <div style={{ textAlign: 'right', marginBottom: '20px' }}>
+        <button 
+          className="uk-button uk-button-default trash-btn"
+          onClick={() => setShowTrash(true)}
+          title="Abrir Papelera de Reciclaje"
+        >
+          <span uk-icon="icon: trash; ratio: 1.2"></span>
+          Papelera
+        </button>
+      </div>
 
       {/* Tabs Navigation */}
       <div className="uk-card uk-card-default uk-card-body card-spacing-bottom">
@@ -199,6 +225,7 @@ function App() {
                 onFilterChange={handleFilterChange}
                 onClearFilters={handleClearFilters}
                 onExport={handleExport}
+                onRefresh={handleVinAdded}
               />
 
               {/* Delivery Table */}
@@ -237,6 +264,48 @@ function App() {
 
       {/* Scroll to Top Button */}
       <ScrollToTop />
+
+      {/* Inline styles for trash button */}
+      <style>{`
+        .app-header-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 20px;
+          margin-bottom: 20px;
+          flex-wrap: wrap;
+        }
+        
+        .trash-btn {
+          background: var(--vin-dark-secondary) !important;
+          color: var(--vin-light) !important;
+          border: 2px solid var(--vin-golden) !important;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-weight: 600;
+          padding: 10px 20px !important;
+          transition: all 0.3s ease;
+        }
+        
+        .trash-btn:hover {
+          background: var(--vin-golden) !important;
+          color: #000 !important;
+          transform: translateY(-2px);
+        }
+        
+        @media (max-width: 640px) {
+          .app-header-container {
+            flex-direction: column;
+            align-items: stretch;
+          }
+          
+          .trash-btn {
+            width: 100%;
+            justify-content: center;
+          }
+        }
+      `}</style>
     </div>
   );
 }
