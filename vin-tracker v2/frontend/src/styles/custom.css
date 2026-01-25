@@ -1017,3 +1017,28 @@
     font-size: 0.95rem !important;
   }
 }
+/* ========================================
+   CALENDARIO PERSONALIZADO (CHROME/EDGE)
+   ======================================== */
+
+/* Nota: Los estilos del calendario interno son limitados por seguridad del navegador.
+   Chrome/Edge permiten personalizar algunos aspectos mediante pseudo-elementos de WebKit */
+
+/* Mejora visual para dark mode en navegadores modernos */
+@supports (color-scheme: dark) {
+  input[type="date"] {
+    color-scheme: dark;
+  }
+}
+
+/* Estilos adicionales para mejorar la apariencia del calendario nativo */
+/* El icono del calendario ya está estilizado en Filters.css */
+
+/* Asegura que el texto sea visible en todos los navegadores */
+input[type="date"]:invalid::-webkit-datetime-edit {
+  color: rgba(245, 245, 245, 0.4);
+}
+
+input[type="date"]:valid::-webkit-datetime-edit {
+  color: var(--vin-light);
+}

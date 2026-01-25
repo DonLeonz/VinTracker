@@ -112,7 +112,7 @@ const VinPreview = memo(({ filters, refreshTrigger }) => {
     <div className="uk-card uk-card-default uk-card-body fade-in preview-main-card">
       <div className="uk-flex uk-flex-between uk-flex-middle uk-margin-medium-bottom">
         <h3 className="uk-card-title uk-margin-remove">
-          <span uk-icon="icon: file-text; ratio: 1.3" style={{ marginRight: '10px' }}></span>
+          <span uk-icon="icon: file-text; ratio: 1.3" className="icon-spacing-md"></span>
           Vista Previa - VINs No Registrados
         </h3>
         <button

@@ -97,7 +97,7 @@ const VinVerification = memo(() => {
         </div>
         <div>
           <div className="verification-stat-card registered">
-            <div className="verification-stat-icon">✔</div>
+            <div className="verification-stat-icon icon-golden">✔</div>
             <div className="verification-stat-content">
               <div className="verification-stat-label">Registrados</div>
               <div className="verification-stat-value">{registeredDelivery + registeredService}</div>
@@ -106,7 +106,7 @@ const VinVerification = memo(() => {
         </div>
         <div>
           <div className="verification-stat-card not-registered">
-            <div className="verification-stat-icon">○</div>
+            <div className="verification-stat-icon icon-golden">○</div>
             <div className="verification-stat-content">
               <div className="verification-stat-label">No Registrados</div>
               <div className="verification-stat-value">{notRegisteredDelivery + notRegisteredService}</div>
@@ -123,7 +123,7 @@ const VinVerification = memo(() => {
             {duplicatesInDelivery.length > 0 && (
               <li className="uk-card uk-card-default uk-margin">
                 <a className="uk-accordion-title uk-card-header" href="#">
-                  <span uk-icon="icon: warning; ratio: 1.2" style={{ marginRight: '10px', color: '#f0506e' }}></span>
+                  <span uk-icon="icon: warning; ratio: 1.2" className="icon-warning-red"></span>
                   <strong>Duplicados en Delivery ({duplicatesInDelivery.length})</strong>
                   <span className="uk-text-meta uk-margin-small-left">- Mismo VIN aparece múltiples veces</span>
                 </a>
@@ -151,7 +151,7 @@ const VinVerification = memo(() => {
             {duplicatesInService.length > 0 && (
               <li className="uk-card uk-card-default uk-margin">
                 <a className="uk-accordion-title uk-card-header" href="#">
-                  <span uk-icon="icon: warning; ratio: 1.2" style={{ marginRight: '10px', color: '#f0506e' }}></span>
+                  <span uk-icon="icon: warning; ratio: 1.2" className="icon-warning-red"></span>
                   <strong>Duplicados en Service ({duplicatesInService.length})</strong>
                   <span className="uk-text-meta uk-margin-small-left">- Mismo VIN aparece múltiples veces</span>
                 </a>
@@ -179,7 +179,7 @@ const VinVerification = memo(() => {
             {crossTableDuplicates.length > 0 && (
               <li className="uk-card uk-card-default uk-margin">
                 <a className="uk-accordion-title uk-card-header" href="#">
-                  <span uk-icon="icon: info; ratio: 1.2" style={{ marginRight: '10px', color: '#faa05a' }}></span>
+                  <span uk-icon="icon: info; ratio: 1.2" className="icon-warning-orange"></span>
                   <strong>VINs en Ambas Tablas ({crossTableDuplicates.length})</strong>
                   <span className="uk-text-meta uk-margin-small-left">- VINs que existen en Delivery y Service</span>
                 </a>

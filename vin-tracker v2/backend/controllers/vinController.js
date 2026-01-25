@@ -10,42 +10,50 @@ const processVin = (vin) => {
   return vin.toUpperCase().replace(/O/g, '0');
 };
 
+// Helper function to build WHERE clause from filters
+const buildWhereClause = (filters) => {
+  const { date, registered, search, repeated } = filters;
+  let whereConditions = [];
+  let params = [];
+  let paramCount = 0;
+
+  if (date) {
+    paramCount++;
+    whereConditions.push(`DATE(created_at) = $${paramCount}`);
+    params.push(date);
+  }
+
+  if (registered === 'registered') {
+    whereConditions.push('registered = true');
+  } else if (registered === 'not_registered') {
+    whereConditions.push('registered = false');
+  }
+
+  if (search && search.trim() !== '') {
+    paramCount++;
+    whereConditions.push(`vin LIKE $${paramCount}`);
+    params.push(`%${search.trim().toUpperCase()}%`);
+  }
+
+  if (repeated === 'repeated') {
+    whereConditions.push('repeat_count > 0');
+  } else if (repeated === 'not_repeated') {
+    whereConditions.push('repeat_count = 0');
+  }
+
+  return {
+    whereClause: whereConditions.length > 0 
+      ? `WHERE ${whereConditions.join(' AND ')}`
+      : '',
+    params,
+    paramCount
+  };
+};
+
 // Get all records
 export const getRecords = async (req, res) => {
   try {
-    const { date, registered, search, repeated } = req.query;
-
-    let whereConditions = [];
-    let params = [];
-    let paramCount = 0;
-
-    if (date) {
-      paramCount++;
-      whereConditions.push(`DATE(created_at) = $${paramCount}`);
-      params.push(date);
-    }
-
-    if (registered === 'registered') {
-      whereConditions.push('registered = true');
-    } else if (registered === 'not_registered') {
-      whereConditions.push('registered = false');
-    }
-
-    if (search && search.trim() !== '') {
-      paramCount++;
-      whereConditions.push(`vin LIKE $${paramCount}`);
-      params.push(`%${search.trim().toUpperCase()}%`);
-    }
-
-    if (repeated === 'repeated') {
-      whereConditions.push('repeat_count > 0');
-    } else if (repeated === 'not_repeated') {
-      whereConditions.push('repeat_count = 0');
-    }
-
-    const whereClause = whereConditions.length > 0
-      ? `WHERE ${whereConditions.join(' AND ')}`
-      : '';
+    const { whereClause, params } = buildWhereClause(req.query);
 
     // Get delivery records
     const deliveryQuery = `SELECT * FROM delivery_records ${whereClause} ORDER BY id ASC`;
@@ -344,26 +352,13 @@ export const toggleRegistered = async (req, res) => {
 // Register all (filtered)
 export const registerAll = async (req, res) => {
   try {
-    const { type, date, registered } = req.body;
-
-    let whereConditions = ['registered = false'];
-    let params = [];
-    let paramCount = 0;
-
-    if (date) {
-      paramCount++;
-      whereConditions.push(`DATE(created_at) = $${paramCount}`);
-      params.push(date);
-    }
-
-    if (registered === 'not_registered') {
-      // Already included in base condition
-    } else if (registered === 'registered') {
-      // Can't register what's already registered, but respect filter
-      whereConditions[0] = 'registered = true';
-    }
-
-    const whereClause = `WHERE ${whereConditions.join(' AND ')}`;
+    const { type, ...filters } = req.body;
+    
+    // Force registered filter to 'not_registered' for safety
+    const { whereClause, params } = buildWhereClause({ 
+      ...filters, 
+      registered: 'not_registered' 
+    });
 
     const tableName = getTableName(type);
     const query = `UPDATE ${tableName} SET registered = true, last_registered_at = CURRENT_TIMESTAMP ${whereClause}`;
@@ -382,26 +377,13 @@ export const registerAll = async (req, res) => {
 // Unregister all (filtered)
 export const unregisterAll = async (req, res) => {
   try {
-    const { type, date, registered } = req.body;
-
-    let whereConditions = ['registered = true'];
-    let params = [];
-    let paramCount = 0;
-
-    if (date) {
-      paramCount++;
-      whereConditions.push(`DATE(created_at) = $${paramCount}`);
-      params.push(date);
-    }
-
-    if (registered === 'registered') {
-      // Already included in base condition
-    } else if (registered === 'not_registered') {
-      // Can't unregister what's not registered, but respect filter
-      whereConditions[0] = 'registered = false';
-    }
-
-    const whereClause = `WHERE ${whereConditions.join(' AND ')}`;
+    const { type, ...filters } = req.body;
+    
+    // Force registered filter to 'registered' for safety
+    const { whereClause, params } = buildWhereClause({ 
+      ...filters, 
+      registered: 'registered' 
+    });
 
     const tableName = getTableName(type);
     const query = `UPDATE ${tableName} SET registered = false ${whereClause}`;
@@ -420,7 +402,7 @@ export const unregisterAll = async (req, res) => {
 // Delete all (filtered)
 export const deleteAll = async (req, res) => {
   try {
-    const { type, date, registered } = req.body;
+    const { type, ...filters } = req.body;
 
     if (!type) {
       return res.status(400).json({
@@ -429,25 +411,7 @@ export const deleteAll = async (req, res) => {
       });
     }
 
-    let whereConditions = [];
-    let params = [];
-    let paramCount = 0;
-
-    if (date) {
-      paramCount++;
-      whereConditions.push(`DATE(created_at) = $${paramCount}`);
-      params.push(date);
-    }
-
-    if (registered === 'registered') {
-      whereConditions.push('registered = true');
-    } else if (registered === 'not_registered') {
-      whereConditions.push('registered = false');
-    }
-
-    const whereClause = whereConditions.length > 0
-      ? `WHERE ${whereConditions.join(' AND ')}`
-      : '';
+    const { whereClause, params } = buildWhereClause(filters);
 
     const tableName = getTableName(type);
     const query = `DELETE FROM ${tableName} ${whereClause}`;
@@ -466,19 +430,13 @@ export const deleteAll = async (req, res) => {
 // Export data
 export const exportData = async (req, res) => {
   try {
-    const { type, date } = req.query;
+    const { type, ...queryFilters } = req.query;
 
-    let whereConditions = ['registered = false'];
-    let params = [];
-    let paramCount = 0;
-
-    if (date) {
-      paramCount++;
-      whereConditions.push(`DATE(created_at) = $${paramCount}`);
-      params.push(date);
-    }
-
-    const whereClause = `WHERE ${whereConditions.join(' AND ')}`;
+    // Always export only non-registered records
+    const { whereClause, params } = buildWhereClause({ 
+      ...queryFilters, 
+      registered: 'not_registered' 
+    });
 
     let deliveryVins = [];
     let serviceVins = [];

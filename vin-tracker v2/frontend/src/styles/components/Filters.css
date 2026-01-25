@@ -47,3 +47,87 @@
     width: 100%;
   }
 }
+
+/* ========================================
+   DATE INPUT CUSTOM STYLING
+   ======================================== */
+
+/* Estilo del input de fecha */
+input[type="date"] {
+  position: relative;
+  background: var(--vin-dark-tertiary) !important;
+  border: 2px solid rgba(212, 167, 98, 0.3) !important;
+  color: var(--vin-light) !important;
+  padding: 10px 40px 10px 15px !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+input[type="date"]:hover {
+  border-color: var(--vin-golden) !important;
+  box-shadow: 0 0 0 3px rgba(212, 167, 98, 0.1);
+}
+
+input[type="date"]:focus {
+  border-color: var(--vin-golden) !important;
+  box-shadow: 0 0 0 4px rgba(212, 167, 98, 0.2) !important;
+  outline: none !important;
+}
+
+/* Icono del calendario dorado - posicionado a la derecha */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+  filter: brightness(0) saturate(100%) invert(71%) sepia(26%) saturate(672%) hue-rotate(358deg) brightness(93%) contrast(87%);
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  transform: scale(1.1);
+}
+
+/* Personalización del calendario desplegable */
+input[type="date"]::-webkit-datetime-edit {
+  color: var(--vin-light);
+  padding: 0;
+}
+
+input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+input[type="date"]::-webkit-datetime-edit-text {
+  color: var(--vin-golden);
+  padding: 0 3px;
+}
+
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  color: var(--vin-light);
+  background: transparent;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+input[type="date"]::-webkit-datetime-edit-month-field:focus,
+input[type="date"]::-webkit-datetime-edit-day-field:focus,
+input[type="date"]::-webkit-datetime-edit-year-field:focus {
+  background: rgba(212, 167, 98, 0.15);
+  color: var(--vin-golden-light);
+  outline: none;
+}
+
+/* Firefox */
+input[type="date"]::-moz-placeholder {
+  color: rgba(245, 245, 245, 0.5);
+}
+
+/* Dark mode support */
+input[type="date"] {
+  color-scheme: dark;
+}

@@ -140,35 +140,35 @@ function App() {
       </h1>
 
       {/* Tabs Navigation */}
-      <div className="uk-card uk-card-default uk-card-body" style={{ marginBottom: '30px' }}>
+      <div className="uk-card uk-card-default uk-card-body card-spacing-bottom">
         <ul className="uk-tab" data-uk-tab="{connect:'#tab-content', animation: 'uk-animation-fade'}">
           <li className="uk-active">
             <a href="#">
-              <span uk-icon="icon: plus-circle; ratio: 1.2" style={{ marginRight: '8px' }}></span>
+              <span uk-icon="icon: plus-circle; ratio: 1.2" className="icon-spacing-sm icon-golden"></span>
               Agregar VINs
             </a>
           </li>
           <li>
             <a href="#">
-              <span uk-icon="icon: cloud-upload; ratio: 1.2" style={{ marginRight: '8px' }}></span>
+              <span uk-icon="icon: cloud-upload; ratio: 1.2" className="icon-spacing-sm icon-golden"></span>
               Importar VINs
             </a>
           </li>
           <li>
             <a href="#">
-              <span uk-icon="icon: search; ratio: 1.2" style={{ marginRight: '8px' }}></span>
+              <span uk-icon="icon: search; ratio: 1.2" className="icon-spacing-sm icon-golden"></span>
               Ver Registros
             </a>
           </li>
           <li>
             <a href="#">
-              <span uk-icon="icon: file-text; ratio: 1.2" style={{ marginRight: '8px' }}></span>
+              <span uk-icon="icon: file-text; ratio: 1.2" className="icon-spacing-sm icon-golden"></span>
               Visualización
             </a>
           </li>
           <li>
             <a href="#">
-              <span uk-icon="icon: check; ratio: 1.2" style={{ marginRight: '8px' }}></span>
+              <span uk-icon="icon: check; ratio: 1.2" className="icon-spacing-sm icon-golden"></span>
               Verificación
             </a>
           </li>

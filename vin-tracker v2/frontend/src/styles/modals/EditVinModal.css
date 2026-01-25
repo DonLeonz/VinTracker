@@ -75,8 +75,25 @@
 }
 
 .edit-vin-modal-icon svg {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
+  stroke: currentColor;
+  fill: none;
+}
+
+/* Estilos para iconos de botones */
+.edit-vin-modal-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.edit-vin-modal-btn-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
 }
 
 .edit-vin-modal-title {

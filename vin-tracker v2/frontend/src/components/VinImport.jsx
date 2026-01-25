@@ -240,7 +240,7 @@ const VinImport = memo(({ onImportCompleted }) => {
     <>
       <div className="uk-card uk-card-default uk-card-body fade-in import-main-card">
         <h3 className="uk-card-title">
-          <span uk-icon="icon: cloud-upload; ratio: 1.3" style={{ marginRight: '10px' }}></span>
+          <span uk-icon="icon: cloud-upload; ratio: 1.3" className="icon-spacing-md"></span>
           Importar VINs desde Archivo
         </h3>
 

@@ -106,8 +106,25 @@
 }
 
 .confirm-modal-icon svg {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
+  stroke: currentColor;
+  fill: none;
+}
+
+/* Estilos para iconos de botones */
+.confirm-modal-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.confirm-modal-btn-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
 }
 
 .confirm-modal-title {

@@ -464,3 +464,41 @@ button.uk-button-secondary:hover {
     transform: translateY(0) scale(1);
   }
 }
+
+/* ========================================
+   CLASES DE UTILIDAD - ESPACIADO
+   ======================================== */
+
+/* Espaciado de iconos */
+.icon-spacing-sm {
+  margin-right: 8px;
+}
+
+.icon-spacing-md {
+  margin-right: 10px;
+}
+
+/* Color dorado para iconos */
+.icon-golden {
+  color: var(--vin-golden) !important;
+}
+
+.icon-golden svg {
+  fill: var(--vin-golden) !important;
+}
+
+/* Iconos con colores específicos */
+.icon-warning-red {
+  margin-right: 10px;
+  color: #f0506e;
+}
+
+.icon-warning-orange {
+  margin-right: 10px;
+  color: #faa05a;
+}
+
+/* Espaciado de cards */
+.card-spacing-bottom {
+  margin-bottom: 30px;
+}

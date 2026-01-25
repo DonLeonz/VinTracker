@@ -29,7 +29,6 @@ const VinTable = memo(({ title, type, records, isLoading, onRecordsChange, filte
   }, [isCollapsed]);
 
   const handleToggleRegistered = useCallback(async (id, isRegistered) => {
-    console.log('VinTable handleToggleRegistered:', id, isRegistered);
     const newStatus = isRegistered ? 'No Registrado' : 'Registrado';
     const actionText = isRegistered ? 'desregistrar' : 'registrar';
 
@@ -53,7 +52,6 @@ const VinTable = memo(({ title, type, records, isLoading, onRecordsChange, filte
   }, [type, onRecordsChange]);
 
   const handleEdit = useCallback((id, currentVin) => {
-    console.log('VinTable handleEdit:', id, currentVin);
     setEditModal({
       isOpen: true,
       id: id,
@@ -74,7 +72,6 @@ const VinTable = memo(({ title, type, records, isLoading, onRecordsChange, filte
   }, [editModal.id, type, onRecordsChange]);
 
   const handleDelete = useCallback((id, vin) => {
-    console.log('VinTable handleDelete:', id, vin);
     setConfirmModal({
       isOpen: true,
       type: 'danger',
