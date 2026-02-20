@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { processVin, validateVinLength } from '../../utils/helpers';
 
@@ -33,16 +33,16 @@ const EditVinModal = ({
   const [vin, setVin] = useState('');
   const [preview, setPreview] = useState('');
 
-  const handleSave = () => {
+  const handleSave = useCallback(() => {
     const trimmedVin = vin.trim();
 
-    if (!trimmedVin) {
+    if (!trimmedVin || !validateVinLength(trimmedVin)) {
       return;
     }
 
-    onSave(trimmedVin);
+    onSave(processVin(trimmedVin));
     onClose();
-  };
+  }, [vin, onSave, onClose]);
 
   useEffect(() => {
     if (isOpen) {
@@ -150,7 +150,7 @@ const EditVinModal = ({
           <button
             className="edit-vin-modal-btn edit-vin-modal-btn-save"
             onClick={handleSave}
-            disabled={!vin.trim()}
+            disabled={!vin.trim() || !validateVinLength(vin)}
           >
             <span className="edit-vin-modal-btn-icon">{Icons.check}</span>
             Guardar Cambios

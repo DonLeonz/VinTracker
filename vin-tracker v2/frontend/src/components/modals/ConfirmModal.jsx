@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 
 // Iconos SVG independientes - no dependen de UIKit
@@ -53,10 +53,10 @@ const ConfirmModal = ({
   cancelText = 'Cancelar',
   type = 'warning'
 }) => {
-  const handleConfirm = () => {
+  const handleConfirm = useCallback(() => {
     onConfirm();
     onClose();
-  };
+  }, [onConfirm, onClose]);
 
   const getHeaderIcon = () => {
     return Icons[type] || Icons.warning;

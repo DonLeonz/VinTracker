@@ -84,7 +84,7 @@ const VinInput = memo(({ onVinAdded }) => {
     }
 
     try {
-      const result = await vinService.addVin(trimmedVin, type);
+      const result = await vinService.addVin(processedVin, type);
 
       if (result.is_duplicate) {
         if (result.is_not_registered) {
@@ -98,7 +98,7 @@ const VinInput = memo(({ onVinAdded }) => {
             message: `${result.message}\n\n¿Desea agregarlo como repetido?\n\nContador actual: ${result.repeat_count} repeticiones`,
             confirmText: 'Agregar como Repetido',
             onConfirm: async () => {
-              await handleAddRepeated(trimmedVin);
+              await handleAddRepeated(processedVin);
             }
           });
         }

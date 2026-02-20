@@ -71,10 +71,10 @@ function App() {
     }
   }, [filters, startTransition, getCached, setCache, generateKey]);
 
-  // Load records on mount and filter change
+  // Load records on mount and when loadRecords changes (which happens when filters change)
   useEffect(() => {
     loadRecords();
-  }, [filters]);
+  }, [loadRecords]);
 
   // Handle VIN added - clear cache and reload
   const handleVinAdded = useCallback(() => {
@@ -96,8 +96,11 @@ function App() {
   // Handle export
   const handleExport = useCallback(async (type) => {
     try {
-      // Check if there are records to export
-      const data = await vinService.getRecords({ registered: 'not_registered' });
+      // Pre-check using the same filters (including date) that the export will use
+      const checkFilters = { registered: 'not_registered' };
+      if (filters.date) checkFilters.date = filters.date;
+
+      const data = await vinService.getRecords(checkFilters);
 
       let count = 0;
       if (type === 'all') {
@@ -110,12 +113,13 @@ function App() {
 
       if (count === 0) {
         let mensaje = '';
+        const sufijo = filters.date ? ` para la fecha ${filters.date}` : '';
         if (type === 'all') {
-          mensaje = '⚠️ No hay VINs sin registrar para exportar';
+          mensaje = `⚠️ No hay VINs sin registrar para exportar${sufijo}`;
         } else if (type === 'delivery') {
-          mensaje = '⚠️ No hay VINs de Delivery sin registrar para exportar';
+          mensaje = `⚠️ No hay VINs de Delivery sin registrar para exportar${sufijo}`;
         } else if (type === 'service') {
-          mensaje = '⚠️ No hay VINs de Service sin registrar para exportar';
+          mensaje = `⚠️ No hay VINs de Service sin registrar para exportar${sufijo}`;
         }
         showNotification(mensaje, 'warning');
         return;

@@ -14,17 +14,14 @@ const TableRow = memo(({
   onDelete 
 }) => {
   const handleToggleClick = () => {
-    console.log('Toggle clicked:', record.id, record.registered);
     onToggleRegistered(record.id, record.registered);
   };
 
   const handleEditClick = () => {
-    console.log('Edit clicked:', record.id, record.vin);
     onEdit(record.id, record.vin);
   };
 
   const handleDeleteClick = () => {
-    console.log('Delete clicked:', record.id, record.vin);
     onDelete(record.id, record.vin);
   };
 

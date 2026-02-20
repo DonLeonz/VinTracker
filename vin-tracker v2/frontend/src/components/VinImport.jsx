@@ -66,48 +66,46 @@ const VinImport = memo(({ onImportCompleted }) => {
         }
         seenInFile.add(processedVin);
 
-        // Check if exists in database
+        // Check if exists in database (read-only, does NOT insert)
         try {
-          const checkResult = await vinService.addVin(processedVin, selectedType);
+          const checkResult = await vinService.checkVin(processedVin, selectedType);
 
-          if (checkResult.success) {
-            // VIN doesn't exist, can be added
+          if (!checkResult.exists) {
+            // VIN doesn't exist, can be added on confirm
             results.toAdd.push({
               vin: processedVin,
               line: lineNumber,
               isNew: true
             });
-          } else if (checkResult.is_duplicate) {
-            if (checkResult.is_not_registered) {
-              // Exists but not registered - OMIT
+          } else if (checkResult.is_not_registered) {
+            // Exists but not registered - OMIT
+            results.omitted.push({
+              vin: processedVin,
+              reason: 'Ya existe en BD pero no está registrado',
+              line: lineNumber,
+              existingId: checkResult.existing_id
+            });
+          } else {
+            // Exists and is registered
+            if (selectedType === 'delivery') {
+              // DELIVERY: never repeat - OMIT
               results.omitted.push({
                 vin: processedVin,
-                reason: 'Ya existe en BD pero no está registrado',
+                reason: 'Ya existe y está registrado (Delivery no se repite)',
                 line: lineNumber,
-                existingId: checkResult.existing_id
+                existingId: checkResult.existing_id,
+                repeatCount: checkResult.repeat_count
               });
             } else {
-              // Exists and is registered
-              if (selectedType === 'delivery') {
-                // DELIVERY: never repeat - OMIT
-                results.omitted.push({
-                  vin: processedVin,
-                  reason: 'Ya existe y está registrado (Delivery no se repite)',
-                  line: lineNumber,
-                  existingId: checkResult.existing_id,
-                  repeatCount: checkResult.repeat_count
-                });
-              } else {
-                // SERVICE: can be added as repeated
-                results.toAdd.push({
-                  vin: processedVin,
-                  line: lineNumber,
-                  isNew: false,
-                  isRepeated: true,
-                  existingId: checkResult.existing_id,
-                  repeatCount: checkResult.repeat_count
-                });
-              }
+              // SERVICE: can be added as repeated on confirm
+              results.toAdd.push({
+                vin: processedVin,
+                line: lineNumber,
+                isNew: false,
+                isRepeated: true,
+                existingId: checkResult.existing_id,
+                repeatCount: checkResult.repeat_count
+              });
             }
           }
         } catch (error) {
@@ -189,8 +187,6 @@ const VinImport = memo(({ onImportCompleted }) => {
 
     setIsImporting(true);
 
-    // Note: VINs were already added during validation in processFileContent
-    // Here we just need to handle repeated VINs (Service type only)
     let successCount = 0;
     let errorCount = 0;
     const errors = [];
@@ -199,7 +195,7 @@ const VinImport = memo(({ onImportCompleted }) => {
       for (const item of preview.toAdd) {
         try {
           if (item.isRepeated) {
-            // Only repeated VINs need to be processed (increment counter)
+            // Exists and registered in Service: increment repeat counter
             const result = await vinService.addRepeatedVin(item.vin, type);
             if (result.success) {
               successCount++;
@@ -208,8 +204,14 @@ const VinImport = memo(({ onImportCompleted }) => {
               errors.push({ vin: item.vin, error: result.message });
             }
           } else {
-            // New VINs were already added during validation, just count them
-            successCount++;
+            // New VIN: insert now (first time writing to DB)
+            const result = await vinService.addVin(item.vin, type);
+            if (result.success) {
+              successCount++;
+            } else {
+              errorCount++;
+              errors.push({ vin: item.vin, error: result.message });
+            }
           }
         } catch (error) {
           errorCount++;

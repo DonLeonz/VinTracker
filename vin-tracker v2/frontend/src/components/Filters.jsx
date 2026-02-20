@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback, memo } from 'react';
+import { useState, useEffect, useCallback, useRef, memo } from 'react';
 
 const Filters = memo(({ filters, onFilterChange, onClearFilters, onExport, onRefresh, hideExportButtons = false }) => {
   const [localFilters, setLocalFilters] = useState(filters);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const searchDebounceRef = useRef(null);
 
   // Sincronizar con props cuando cambien externamente
   useEffect(() => {
@@ -23,11 +24,17 @@ const Filters = memo(({ filters, onFilterChange, onClearFilters, onExport, onRef
 
   const handleSearchChange = useCallback((e) => {
     const newFilters = { ...localFilters, search: e.target.value };
+    // Update local state immediately so the input feels responsive
     setLocalFilters(newFilters);
-    onFilterChange(newFilters);
+    // Debounce the parent notification to avoid a DB query on every keystroke
+    if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current);
+    searchDebounceRef.current = setTimeout(() => {
+      onFilterChange(newFilters);
+    }, 300);
   }, [localFilters, onFilterChange]);
 
   const handleClearSearch = useCallback(() => {
+    if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current);
     const newFilters = { ...localFilters, search: '' };
     setLocalFilters(newFilters);
     onFilterChange(newFilters);

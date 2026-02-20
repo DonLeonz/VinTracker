@@ -151,7 +151,9 @@ const Trash = ({ onBack }) => {
 
   const handleRestoreAll = useCallback((type) => {
     const typeName = type === 'delivery' ? 'DELIVERY' : 'SERVICE';
-    const count = type === 'delivery' ? filteredDeliveryRecords.length : filteredServiceRecords.length;
+    const filteredRecords = type === 'delivery' ? filteredDeliveryRecords : filteredServiceRecords;
+    const count = filteredRecords.length;
+    const ids = filteredRecords.map(r => r.id);
 
     setConfirmModal({
       isOpen: true,
@@ -161,7 +163,7 @@ const Trash = ({ onBack }) => {
       confirmText: 'Restaurar Todos',
       onConfirm: async () => {
         try {
-          const result = await vinService.restoreAll(type);
+          const result = await vinService.restoreAll(type, ids);
           if (result.success) {
             showNotification('✅ ' + result.message, 'success');
             loadDeletedRecords();
@@ -171,11 +173,13 @@ const Trash = ({ onBack }) => {
         }
       }
     });
-  }, [filteredDeliveryRecords.length, filteredServiceRecords.length, loadDeletedRecords]);
+  }, [filteredDeliveryRecords, filteredServiceRecords, loadDeletedRecords]);
 
   const handleEmptyTrash = useCallback((type) => {
     const typeName = type === 'delivery' ? 'DELIVERY' : 'SERVICE';
-    const count = type === 'delivery' ? filteredDeliveryRecords.length : filteredServiceRecords.length;
+    const filteredRecords = type === 'delivery' ? filteredDeliveryRecords : filteredServiceRecords;
+    const count = filteredRecords.length;
+    const ids = filteredRecords.map(r => r.id);
 
     setConfirmModal({
       isOpen: true,
@@ -185,7 +189,7 @@ const Trash = ({ onBack }) => {
       confirmText: 'Eliminar Permanentemente',
       onConfirm: async () => {
         try {
-          const result = await vinService.emptyTrash(type, true);
+          const result = await vinService.emptyTrash(type, true, ids);
           if (result.success) {
             showNotification('✅ ' + result.message, 'success');
             loadDeletedRecords();
@@ -195,7 +199,7 @@ const Trash = ({ onBack }) => {
         }
       }
     });
-  }, [filteredDeliveryRecords.length, filteredServiceRecords.length, loadDeletedRecords]);
+  }, [filteredDeliveryRecords, filteredServiceRecords, loadDeletedRecords]);
 
   const renderTable = (records, type, typeName) => {
     const hasRecords = records.length > 0;

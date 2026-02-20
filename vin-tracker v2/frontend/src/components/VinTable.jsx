@@ -76,7 +76,7 @@ const VinTable = memo(({ title, type, records, isLoading, onRecordsChange, filte
       isOpen: true,
       type: 'danger',
       title: 'Eliminar VIN',
-      message: `¿Está seguro de eliminar este registro?\n\nVIN: ${vin}\n\nEsta acción no se puede deshacer.`,
+      message: `¿Está seguro de eliminar este registro?\n\nVIN: ${vin}\n\nEl VIN será movido a la papelera y podrá restaurarse.`,
       confirmText: 'Eliminar',
       onConfirm: async () => {
         try {
@@ -181,7 +181,7 @@ const VinTable = memo(({ title, type, records, isLoading, onRecordsChange, filte
       isOpen: true,
       type: 'danger',
       title: 'Eliminar Todos',
-      message: `⚠️ ¿Eliminar los VINs de ${type.toUpperCase()} con los siguientes filtros?${filterInfo}\n\n⚠️ ESTA ACCIÓN NO SE PUEDE DESHACER`,
+      message: `¿Eliminar los VINs de ${type.toUpperCase()} con los siguientes filtros?${filterInfo}\n\nLos VINs serán movidos a la papelera y podrán restaurarse.`,
       confirmText: 'Eliminar Todos',
       onConfirm: async () => {
         try {

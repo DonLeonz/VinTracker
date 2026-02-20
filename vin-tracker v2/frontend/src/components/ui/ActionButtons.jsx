@@ -4,7 +4,6 @@ const ActionButtons = memo(({ onEdit, onDelete }) => {
   const handleEdit = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('Edit button clicked');
     if (onEdit) {
       onEdit();
     }
@@ -13,7 +12,6 @@ const ActionButtons = memo(({ onEdit, onDelete }) => {
   const handleDelete = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('Delete button clicked');
     if (onDelete) {
       onDelete();
     }

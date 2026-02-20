@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { formatDate } from '../../utils/helpers';
 
 const RestoreIcon = (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -14,17 +15,6 @@ const TrashTableRow = memo(({
   type, 
   onRestore 
 }) => {
-  const formatDate = (dateString) => {
-    if (!dateString) return '-';
-    return new Date(dateString).toLocaleString('es-ES', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
-
   return (
     <tr>
       <td>{index + 1}</td>

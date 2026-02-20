@@ -4,7 +4,6 @@ const StatusBadge = memo(({ isRegistered, onClick }) => {
   const handleClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('StatusBadge clicked, isRegistered:', isRegistered);
     if (onClick) {
       onClick();
     }

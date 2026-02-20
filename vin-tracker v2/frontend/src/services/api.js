@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:3001/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -15,6 +15,16 @@ export const vinService = {
   getRecords: async (filters = {}) => {
     try {
       const response = await api.get('/vins/records', { params: filters });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
+  // Check if VIN exists (read-only)
+  checkVin: async (vin, type) => {
+    try {
+      const response = await api.get('/vins/check', { params: { vin, type } });
       return response.data;
     } catch (error) {
       throw error.response?.data || error;
@@ -184,20 +194,23 @@ export const vinService = {
     }
   },
 
-  // Restore all VINs from trash (by type)
-  restoreAll: async (type) => {
+  // Restore all VINs from trash — pass ids[] to restore only filtered subset
+  restoreAll: async (type, ids = null) => {
     try {
-      const response = await api.post('/vins/restore-all', { type });
+      const body = ids ? { type, ids } : { type };
+      const response = await api.post('/vins/restore-all', body);
       return response.data;
     } catch (error) {
       throw error.response?.data || error;
     }
   },
 
-  // Empty trash - permanently delete
-  emptyTrash: async (type, permanent = false) => {
+  // Empty trash — pass ids[] to delete only filtered subset
+  emptyTrash: async (type, permanent = false, ids = null) => {
     try {
-      const response = await api.post('/vins/empty-trash', { type, permanent });
+      const body = { type, permanent };
+      if (ids) body.ids = ids;
+      const response = await api.post('/vins/empty-trash', body);
       return response.data;
     } catch (error) {
       throw error.response?.data || error;
