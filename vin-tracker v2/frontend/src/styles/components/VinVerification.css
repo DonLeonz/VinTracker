@@ -85,7 +85,7 @@
 
 .verification-stat-label {
   display: block;
-  color: var(--vin-text-muted);
+  color: var(--vin-light-muted);
   font-size: 0.85rem;
   margin-bottom: 5px;
   text-transform: uppercase;
@@ -188,7 +188,7 @@
 }
 
 .verification-issue-info {
-  color: var(--vin-text-muted);
+  color: var(--vin-light-muted);
   font-size: 0.85rem;
 }
 
