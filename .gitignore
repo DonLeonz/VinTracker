@@ -61,3 +61,6 @@ htmlcov/
 # OS
 Thumbs.db
 .DS_Store
+
+# Backups de datos (timestamped — no commitear, son archivos grandes de datos)
+backup_*.json

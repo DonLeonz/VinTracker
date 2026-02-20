@@ -92,6 +92,63 @@ export const getRecords = async (req, res) => {
   }
 };
 
+// Check if VIN exists (read-only, does NOT insert)
+export const checkVin = async (req, res) => {
+  try {
+    let { vin, type } = req.query;
+
+    if (!vin) {
+      return res.status(400).json({ success: false, message: 'VIN no puede estar vacío' });
+    }
+
+    vin = processVin(vin);
+    const charCount = vin.length;
+
+    if (charCount !== 17) {
+      return res.status(400).json({
+        success: false,
+        message: `El VIN debe tener exactamente 17 caracteres (tiene ${charCount})`
+      });
+    }
+
+    const tableName = getTableName(type);
+
+    // Only check active (non-deleted) records
+    const checkQuery = `SELECT id, repeat_count, created_at, registered FROM ${tableName} WHERE vin = $1 AND deleted = false`;
+    const checkResult = await pool.query(checkQuery, [vin]);
+
+    if (checkResult.rows.length === 0) {
+      return res.json({ exists: false, vin });
+    }
+
+    const existing = checkResult.rows[0];
+
+    if (!existing.registered) {
+      return res.json({
+        exists: true,
+        is_duplicate: true,
+        is_not_registered: true,
+        message: 'Este VIN ya está en la base de datos pero NO está registrado todavía',
+        existing_id: existing.id
+      });
+    }
+
+    return res.json({
+      exists: true,
+      is_duplicate: true,
+      is_not_registered: false,
+      message: `Este VIN ya existe en ${type} (ID: ${existing.id})`,
+      existing_id: existing.id,
+      existing_type: type,
+      repeat_count: existing.repeat_count,
+      created_at: existing.created_at
+    });
+  } catch (error) {
+    console.error('Error checking VIN:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 // Add VIN
 export const addVin = async (req, res) => {
   try {
@@ -115,8 +172,8 @@ export const addVin = async (req, res) => {
 
     const tableName = getTableName(type);
 
-    // Check if VIN already exists
-    const checkQuery = `SELECT id, repeat_count, created_at, registered FROM ${tableName} WHERE vin = $1`;
+    // Check if VIN already exists (active records only — deleted VINs can be re-added)
+    const checkQuery = `SELECT id, repeat_count, created_at, registered FROM ${tableName} WHERE vin = $1 AND deleted = false`;
     const checkResult = await pool.query(checkQuery, [vin]);
 
     if (checkResult.rows.length > 0) {
@@ -177,8 +234,8 @@ export const addRepeatedVin = async (req, res) => {
     vin = processVin(vin);
     const tableName = getTableName(type);
 
-    // Find existing VIN
-    const checkQuery = `SELECT id, repeat_count FROM ${tableName} WHERE vin = $1`;
+    // Find existing active VIN (don't touch deleted records)
+    const checkQuery = `SELECT id, repeat_count FROM ${tableName} WHERE vin = $1 AND deleted = false`;
     const checkResult = await pool.query(checkQuery, [vin]);
 
     if (checkResult.rows.length === 0) {
@@ -235,8 +292,8 @@ export const updateVin = async (req, res) => {
 
     const tableName = getTableName(type);
 
-    // Check if VIN exists in another record
-    const checkQuery = `SELECT id FROM ${tableName} WHERE vin = $1 AND id != $2`;
+    // Check if VIN exists in another active record (deleted VINs don't block edits)
+    const checkQuery = `SELECT id FROM ${tableName} WHERE vin = $1 AND id != $2 AND deleted = false`;
     const checkResult = await pool.query(checkQuery, [vin, id]);
 
     if (checkResult.rows.length > 0) {
@@ -623,10 +680,10 @@ export const restoreVin = async (req, res) => {
   }
 };
 
-// Restore all VINs from trash (filtered)
+// Restore all VINs from trash — if ids[] provided, only those; otherwise all
 export const restoreAll = async (req, res) => {
   try {
-    const { type } = req.body;
+    const { type, ids } = req.body;
 
     if (!type) {
       return res.status(400).json({
@@ -637,12 +694,26 @@ export const restoreAll = async (req, res) => {
 
     const tableName = getTableName(type);
 
-    const restoreQuery = `
-      UPDATE ${tableName} 
-      SET deleted = false, deleted_at = NULL 
-      WHERE deleted = true
-    `;
-    const result = await pool.query(restoreQuery);
+    let restoreQuery;
+    let params;
+
+    if (ids && ids.length > 0) {
+      restoreQuery = `
+        UPDATE ${tableName}
+        SET deleted = false, deleted_at = NULL
+        WHERE deleted = true AND id = ANY($1)
+      `;
+      params = [ids];
+    } else {
+      restoreQuery = `
+        UPDATE ${tableName}
+        SET deleted = false, deleted_at = NULL
+        WHERE deleted = true
+      `;
+      params = [];
+    }
+
+    const result = await pool.query(restoreQuery, params);
 
     res.json({
       success: true,
@@ -654,10 +725,10 @@ export const restoreAll = async (req, res) => {
   }
 };
 
-// Empty trash - permanently delete records older than 30 days or all
+// Empty trash — if ids[] provided, only those; otherwise all (or 30-day auto-purge)
 export const emptyTrash = async (req, res) => {
   try {
-    const { type, permanent } = req.body;
+    const { type, permanent, ids } = req.body;
 
     if (!type) {
       return res.status(400).json({
@@ -668,13 +739,26 @@ export const emptyTrash = async (req, res) => {
 
     const tableName = getTableName(type);
 
-    // If permanent = true, delete all trash
-    // Otherwise, only delete items older than 30 days
-    const deleteQuery = permanent
-      ? `DELETE FROM ${tableName} WHERE deleted = true`
-      : `DELETE FROM ${tableName} WHERE deleted = true AND deleted_at < NOW() - INTERVAL '30 days'`;
-    
-    const result = await pool.query(deleteQuery);
+    let deleteQuery;
+    let params;
+
+    if (permanent) {
+      if (ids && ids.length > 0) {
+        // Permanently delete only the specified records
+        deleteQuery = `DELETE FROM ${tableName} WHERE deleted = true AND id = ANY($1)`;
+        params = [ids];
+      } else {
+        // Permanently delete all trash
+        deleteQuery = `DELETE FROM ${tableName} WHERE deleted = true`;
+        params = [];
+      }
+    } else {
+      // Auto-purge: only delete items older than 30 days
+      deleteQuery = `DELETE FROM ${tableName} WHERE deleted = true AND deleted_at < NOW() - INTERVAL '30 days'`;
+      params = [];
+    }
+
+    const result = await pool.query(deleteQuery, params);
 
     res.json({
       success: true,
@@ -689,39 +773,41 @@ export const emptyTrash = async (req, res) => {
 // Get verification data
 export const getVerification = async (req, res) => {
   try {
-    // Get total counts
-    const deliveryCountResult = await pool.query('SELECT COUNT(*) FROM delivery_records');
-    const serviceCountResult = await pool.query('SELECT COUNT(*) FROM service_records');
-    
-    // Get registered/not registered counts
-    const deliveryRegisteredResult = await pool.query('SELECT COUNT(*) FROM delivery_records WHERE registered = true');
-    const deliveryNotRegisteredResult = await pool.query('SELECT COUNT(*) FROM delivery_records WHERE registered = false');
-    const serviceRegisteredResult = await pool.query('SELECT COUNT(*) FROM service_records WHERE registered = true');
-    const serviceNotRegisteredResult = await pool.query('SELECT COUNT(*) FROM service_records WHERE registered = false');
+    // Get total counts (active records only)
+    const deliveryCountResult = await pool.query('SELECT COUNT(*) FROM delivery_records WHERE deleted = false');
+    const serviceCountResult = await pool.query('SELECT COUNT(*) FROM service_records WHERE deleted = false');
 
-    // Find duplicates within delivery_records
+    // Get registered/not registered counts (active records only)
+    const deliveryRegisteredResult = await pool.query('SELECT COUNT(*) FROM delivery_records WHERE registered = true AND deleted = false');
+    const deliveryNotRegisteredResult = await pool.query('SELECT COUNT(*) FROM delivery_records WHERE registered = false AND deleted = false');
+    const serviceRegisteredResult = await pool.query('SELECT COUNT(*) FROM service_records WHERE registered = true AND deleted = false');
+    const serviceNotRegisteredResult = await pool.query('SELECT COUNT(*) FROM service_records WHERE registered = false AND deleted = false');
+
+    // Find duplicates within delivery_records (active records only)
     const deliveryDuplicatesQuery = `
       SELECT vin, COUNT(*) as count, array_agg(id) as ids
       FROM delivery_records
+      WHERE deleted = false
       GROUP BY vin
       HAVING COUNT(*) > 1
       ORDER BY count DESC, vin
     `;
     const deliveryDuplicatesResult = await pool.query(deliveryDuplicatesQuery);
 
-    // Find duplicates within service_records
+    // Find duplicates within service_records (active records only)
     const serviceDuplicatesQuery = `
       SELECT vin, COUNT(*) as count, array_agg(id) as ids
       FROM service_records
+      WHERE deleted = false
       GROUP BY vin
       HAVING COUNT(*) > 1
       ORDER BY count DESC, vin
     `;
     const serviceDuplicatesResult = await pool.query(serviceDuplicatesQuery);
 
-    // Find VINs that exist in both tables
+    // Find VINs that exist in both tables (active records only)
     const crossTableQuery = `
-      SELECT 
+      SELECT
         d.vin,
         d.id as delivery_id,
         d.created_at as delivery_created_at,
@@ -732,6 +818,7 @@ export const getVerification = async (req, res) => {
         s.repeat_count as service_repeat_count
       FROM delivery_records d
       INNER JOIN service_records s ON d.vin = s.vin
+      WHERE d.deleted = false AND s.deleted = false
       ORDER BY d.vin
     `;
     const crossTableResult = await pool.query(crossTableQuery);

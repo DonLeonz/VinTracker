@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   getRecords,
+  checkVin,
   addVin,
   addRepeatedVin,
   updateVin,
@@ -21,6 +22,7 @@ const router = express.Router();
 
 // GET routes
 router.get('/records', getRecords);
+router.get('/check', checkVin);
 router.get('/export', exportData);
 router.get('/verification', getVerification);
 router.get('/trash', getDeleted);
