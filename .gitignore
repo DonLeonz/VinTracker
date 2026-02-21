@@ -64,3 +64,12 @@ Thumbs.db
 
 # Backups de datos (timestamped — no commitear, son archivos grandes de datos)
 backup_*.json
+data_backup.json
+
+# Archivos personales / específicos del equipo local (no son código de la app)
+start.sh
+stop.sh
+setup-db.sh
+docker-compose.yml
+*.desktop
+README_BACKUP.md
