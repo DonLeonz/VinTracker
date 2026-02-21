@@ -72,4 +72,5 @@ stop.sh
 setup-db.sh
 docker-compose.yml
 *.desktop
+*.bat
 README_BACKUP.md
