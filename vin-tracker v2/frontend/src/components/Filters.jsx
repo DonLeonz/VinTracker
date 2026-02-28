@@ -127,7 +127,7 @@ const Filters = memo(({ filters, onFilterChange, onClearFilters, onExport, onRef
       </div>
 
       {/* Action Buttons Row */}
-      <div className="uk-margin-top uk-text-right">
+      <div className="filters-actions-row uk-text-right">
         <div className="uk-flex uk-flex-middle uk-flex-right uk-flex-wrap" data-uk-margin>
           {onRefresh && (
             <button

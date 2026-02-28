@@ -216,6 +216,16 @@ export const vinService = {
       throw error.response?.data || error;
     }
   },
+
+  // Extract VIN from image using Google Cloud Vision API
+  extractVinsFromImage: async (imageBase64, mimeType) => {
+    try {
+      const response = await api.post('/vins/extract-image', { imageBase64, mimeType });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
 };
 
 export default api;

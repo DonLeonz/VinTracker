@@ -1,6 +1,7 @@
 import { useState, useCallback, memo, useRef, useMemo } from 'react';
 import { processVin, validateVinLength, showNotification } from '../utils/helpers';
 import { vinService } from '../services/api';
+import VinImageImport from './VinImageImport';
 
 // --- Helpers para parsear el formato exportado ---
 
@@ -331,7 +332,7 @@ const VinImport = memo(({ onImportCompleted }) => {
           Importar VINs
         </h3>
 
-        {/* Tabs: Archivo .txt / Texto directo */}
+        {/* Tabs: Archivo .txt / Texto directo / Imagen */}
         <ul className="uk-tab">
           <li className={inputMode === 'file' ? 'uk-active' : ''}>
             <a onClick={() => handleModeChange('file')}>
@@ -343,6 +344,12 @@ const VinImport = memo(({ onImportCompleted }) => {
             <a onClick={() => handleModeChange('text')}>
               <span uk-icon="icon: pencil; ratio: 0.85"></span>
               Texto directo
+            </a>
+          </li>
+          <li className={inputMode === 'image' ? 'uk-active' : ''}>
+            <a onClick={() => handleModeChange('image')}>
+              <span uk-icon="icon: image; ratio: 0.85"></span>
+              Imagen
             </a>
           </li>
         </ul>
@@ -475,8 +482,15 @@ const VinImport = memo(({ onImportCompleted }) => {
           </div>
         )}
 
+        {/* MODO IMAGEN */}
+        {inputMode === 'image' && (
+          <div className="uk-margin-medium">
+            <VinImageImport onImportCompleted={onImportCompleted} />
+          </div>
+        )}
+
         {/* Spinner de procesamiento */}
-        {isProcessing && (
+        {isProcessing && inputMode !== 'image' && (
           <div className="uk-text-center uk-padding">
             <span data-uk-spinner="ratio: 2"></span>
             <p className="uk-margin-top">Procesando...</p>
@@ -484,7 +498,7 @@ const VinImport = memo(({ onImportCompleted }) => {
         )}
 
         {/* Preview de resultados */}
-        {preview && !isProcessing && (
+        {preview && !isProcessing && inputMode !== 'image' && (
           <div className="import-preview-section">
 
             {/* Stat cards */}

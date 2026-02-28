@@ -240,6 +240,552 @@
   background: var(--vin-golden-light);
 }
 
+/* ========================================
+   IMAGE IMPORT MODE
+   ======================================== */
+
+.import-image-dropzone {
+  border: 2px dashed var(--vin-golden);
+  border-radius: var(--border-radius-default);
+  background: var(--golden-transparent);
+  padding: 60px 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-default);
+}
+
+.import-image-dropzone:hover,
+.import-image-dropzone.drag-over {
+  background: var(--golden-semi);
+  border-color: var(--vin-golden-light);
+}
+
+.import-image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.import-image-card {
+  background: var(--vin-dark-primary);
+  border: 2px solid var(--vin-dark-tertiary);
+  border-radius: var(--border-radius-default);
+  overflow: hidden;
+  transition: var(--transition-default);
+  position: relative;
+}
+
+.import-image-card:hover {
+  border-color: var(--vin-golden);
+  box-shadow: 0 4px 16px rgba(212, 167, 98, 0.12);
+}
+
+.import-image-card.detected { border-color: var(--vin-success); }
+.import-image-card.manual-required { border-color: var(--vin-warning); }
+.import-image-card.error { border-color: var(--vin-error); }
+
+.import-image-manual-badge {
+  font-size: 0.8rem;
+  color: var(--vin-warning);
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.import-image-thumb {
+  position: relative;
+  height: 190px;
+  overflow: hidden;
+  background: #000;
+}
+
+.import-image-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.import-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.import-image-body {
+  padding: 12px;
+}
+
+.import-image-status-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* Thumbnail clickable hint */
+.import-image-thumb-clickable {
+  cursor: zoom-in;
+}
+
+.import-image-zoom-hint {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 4px;
+  padding: 3px 6px;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.import-image-thumb-clickable:hover .import-image-zoom-hint {
+  opacity: 1;
+}
+
+/* Image viewer (lightbox) */
+.import-image-viewer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.import-image-viewer-content {
+  background: var(--vin-dark-secondary);
+  border: 2px solid var(--vin-golden);
+  border-radius: var(--border-radius-default);
+  max-width: min(96vw, 1200px);
+  width: 100%;
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(212, 167, 98, 0.08);
+}
+
+.import-image-viewer-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--vin-dark-primary);
+  border-bottom: 1px solid var(--vin-golden);
+  flex-shrink: 0;
+}
+
+/* Separador vertical entre grupos de botones del visor */
+.import-image-viewer-sep {
+  width: 1px;
+  height: 20px;
+  background: var(--vin-dark-tertiary);
+  flex-shrink: 0;
+  margin: 0 2px;
+}
+
+/* Índice "X / Y" en el visor */
+.import-image-viewer-index {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--vin-golden);
+  white-space: nowrap;
+  min-width: 36px;
+  text-align: center;
+}
+
+/* Botones de nav ‹ › en la barra */
+.import-viewer-nav-btn {
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0 8px !important;
+  min-width: 30px;
+}
+
+/* Cuerpo: imagen + panel VIN lado a lado */
+.import-image-viewer-body {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.import-image-viewer-img-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  flex: 1;
+  min-width: 0;
+  padding: 20px;
+  background: #0a0a0a;
+}
+
+.import-image-viewer-img-wrap img {
+  max-width: 100%;
+  max-height: calc(94vh - 110px);
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+/* Panel lateral de edición de VIN */
+.import-image-viewer-panel {
+  width: 290px;
+  flex-shrink: 0;
+  padding: 20px 16px;
+  border-left: 1px solid var(--vin-golden);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+  background: var(--vin-dark-primary);
+}
+
+/* Fila de estado: icono + texto */
+.import-viewer-status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--vin-dark-tertiary);
+}
+
+.import-viewer-status-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.import-viewer-status-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--vin-light-muted);
+}
+
+.import-viewer-status-label.detected      { color: var(--vin-success); }
+.import-viewer-status-label.manual-required { color: var(--vin-warning); }
+.import-viewer-status-label.error          { color: var(--vin-error); }
+
+/* Input VIN en el visor */
+.import-image-viewer-vin-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+/* Texto de auto-guardado */
+.import-viewer-auto-save {
+  font-size: 0.75rem;
+  color: var(--vin-light-muted);
+  margin-top: auto;
+  padding-top: 12px;
+  opacity: 0.7;
+}
+
+/* Botones prev/next dentro del panel del visor */
+.import-viewer-panel-nav {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--vin-dark-tertiary);
+}
+
+.import-viewer-panel-nav .uk-button {
+  flex: 1;
+  font-size: 0.8rem;
+}
+
+/* En pantallas pequeñas: panel debajo de la imagen */
+@media (max-width: 600px) {
+  .import-image-viewer-body {
+    flex-direction: column;
+  }
+
+  .import-image-viewer-panel {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--vin-golden);
+    padding: 14px;
+  }
+
+  .import-viewer-status-row {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+  }
+
+  .import-image-viewer-img-wrap img {
+    max-height: 42vh;
+  }
+}
+
+/* X en esquina de la card — override del vin-clear-btn para posicionamiento */
+.import-image-card-remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 3;
+  transform: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.import-image-card-remove:hover {
+  transform: scale(1.1) rotate(90deg);
+}
+
+.import-image-card-remove:active {
+  transform: scale(0.95);
+}
+
+/* X del visor — override para uso en barra de controles (no absolute).
+   Reducido a 30px para igualar la altura de uk-button-small */
+.import-image-viewer-close {
+  position: static;
+  transform: none;
+  flex-shrink: 0;
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 1.05rem !important;
+  box-shadow: none !important;
+}
+
+.import-image-viewer-close:hover {
+  transform: scale(1.1) rotate(90deg);
+}
+
+.import-image-viewer-close:active {
+  transform: scale(0.95);
+}
+
+/* Badge de estado en la parte inferior del thumbnail */
+.import-image-status-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  background: rgba(0, 0, 0, 0.72);
+  color: var(--vin-light-muted);
+}
+
+.import-image-status-badge.detected { color: var(--vin-success); }
+.import-image-status-badge.manual-required { color: var(--vin-warning); }
+.import-image-status-badge.error { color: var(--vin-error); }
+
+/* Overlay tenue para estado "pending" */
+.import-image-overlay-pending {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Contenido centrado dentro del overlay (retrying) */
+.import-image-overlay-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+}
+
+.import-image-retry-icon {
+  font-size: 1.4rem;
+}
+
+/* Indicador "✅ VIN válido" en el panel del visor */
+.import-image-vin-valid {
+  color: var(--vin-success);
+  font-size: 0.8rem;
+}
+
+/* Nombre del archivo en la card body */
+.import-image-filename {
+  font-size: 0.78rem;
+  color: var(--vin-light-muted);
+  margin: 0 0 8px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Input VIN + fila de meta info debajo (contador y tipo sugerido) */
+.import-image-vin-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Fila debajo del input: tipo sugerido a la izq, contador a la der */
+.import-image-vin-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.import-image-vin-count {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--vin-light-muted);
+  white-space: nowrap;
+}
+
+.import-image-vin-count.partial { color: var(--vin-warning); }
+.import-image-vin-count.valid   { color: var(--vin-success); }
+
+/* Toolbar: stats + controles */
+.import-image-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--vin-dark-tertiary);
+  flex-wrap: wrap;
+}
+
+.import-image-toolbar-stats {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.import-image-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.import-image-type-select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.import-image-type-select .uk-select {
+  width: auto;
+}
+
+/* Separador vertical entre grupos del toolbar */
+.import-toolbar-sep {
+  width: 1px;
+  height: 22px;
+  background: var(--vin-dark-tertiary);
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* Pills de estadísticas */
+.import-image-stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: var(--vin-dark-tertiary);
+  color: var(--vin-light);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.import-image-stat-pill.success { background: rgba(40, 167, 69, 0.15); color: var(--vin-success); }
+.import-image-stat-pill.pending { background: rgba(212, 167, 98, 0.1); color: var(--vin-golden); }
+.import-image-stat-pill.manual  { background: rgba(255, 193, 7, 0.1);  color: var(--vin-warning); }
+.import-image-stat-pill.error   { background: rgba(220, 53, 69, 0.1);  color: var(--vin-error); }
+
+/* Barra de progreso de análisis */
+.import-image-progress {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.import-image-progress-track {
+  height: 4px;
+  background: var(--vin-dark-tertiary);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.import-image-progress-fill {
+  height: 100%;
+  background: var(--vin-golden);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* Nombre del archivo en la barra del visor */
+.import-image-viewer-filename {
+  flex: 1;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--vin-light-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 10px;
+}
+
+/* Responsive: tablet */
+@media (max-width: 720px) {
+  .import-image-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .import-image-toolbar-actions {
+    justify-content: flex-end;
+  }
+}
+
+/* Responsive: móvil — 2 columnas más compactas */
+@media (max-width: 540px) {
+  .import-image-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .import-image-thumb {
+    height: 130px;
+  }
+
+  .import-image-btn-label {
+    display: none;
+  }
+
+  .import-image-body {
+    padding: 10px;
+  }
+}
+
+/* Responsive: móvil pequeño — 1 columna */
+@media (max-width: 360px) {
+  .import-image-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .import-image-thumb {
+    height: 170px;
+  }
+}
+
 /* Section label for Delivery/Service split in text import preview */
 .import-section-label {
   color: var(--vin-golden);

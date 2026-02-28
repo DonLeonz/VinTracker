@@ -17,6 +17,7 @@ import {
   restoreAll,
   emptyTrash
 } from '../controllers/vinController.js';
+import { extractVinsFromImage } from '../controllers/geminiController.js';
 
 const router = express.Router();
 
@@ -36,6 +37,9 @@ router.post('/toggle-registered', toggleRegistered);
 router.post('/register-all', registerAll);
 router.post('/unregister-all', unregisterAll);
 router.post('/delete-all', deleteAll);
+
+// Gemini image analysis
+router.post('/extract-image', extractVinsFromImage);
 
 // Trash/Recycle Bin routes
 router.post('/restore', restoreVin);
