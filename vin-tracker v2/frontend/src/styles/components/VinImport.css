@@ -240,6 +240,15 @@
   background: var(--vin-golden-light);
 }
 
+/* Section label for Delivery/Service split in text import preview */
+.import-section-label {
+  color: var(--vin-golden);
+  border-bottom: 2px solid var(--vin-golden);
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
 /* Responsive */
 @media (max-width: 960px) {
   .import-stat-card {
