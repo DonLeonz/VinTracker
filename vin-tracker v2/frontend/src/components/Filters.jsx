@@ -1,9 +1,20 @@
 import { useState, useEffect, useCallback, useRef, memo } from 'react';
 
-const Filters = memo(({ filters, onFilterChange, onClearFilters, onExport, onRefresh, hideExportButtons = false }) => {
+const Filters = memo(({ filters, onFilterChange, onClearFilters, onExport, onRefresh, hideExportButtons = false, searchFocusTrigger = 0 }) => {
   const [localFilters, setLocalFilters] = useState(filters);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const searchDebounceRef = useRef(null);
+  const searchRef = useRef(null);
+
+  // Focus search input when triggered by keyboard shortcut
+  useEffect(() => {
+    if (!searchFocusTrigger) return;
+    const timer = setTimeout(() => {
+      searchRef.current?.focus();
+      searchRef.current?.select();
+    }, 80);
+    return () => clearTimeout(timer);
+  }, [searchFocusTrigger]);
 
   // Sincronizar con props cuando cambien externamente
   useEffect(() => {
@@ -93,6 +104,7 @@ const Filters = memo(({ filters, onFilterChange, onClearFilters, onExport, onRef
           <label className="uk-form-label">Buscar VIN</label>
           <div className="vin-input-wrapper">
             <input
+              ref={searchRef}
               type="text"
               className="uk-input vin-input-with-clear"
               placeholder="Buscar secuencia..."

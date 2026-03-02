@@ -2,6 +2,7 @@ import { useState, useCallback, memo, useRef, useMemo } from 'react';
 import { processVin, validateVinLength, showNotification } from '../utils/helpers';
 import { vinService } from '../services/api';
 import VinImageImport from './VinImageImport';
+import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 
 // --- Helpers para parsear el formato exportado ---
 
@@ -38,8 +39,14 @@ const parseSections = (text) => {
 
 // ---
 
+const MODES = ['file', 'text', 'image'];
+const cycleMode = (current, dir) =>
+  MODES[(MODES.indexOf(current) + dir + MODES.length) % MODES.length];
+
+// ---
+
 const VinImport = memo(({ onImportCompleted }) => {
-  const [inputMode, setInputMode] = useState('file'); // 'file' | 'text'
+  const [inputMode, setInputMode] = useState('file'); // 'file' | 'text' | 'image'
   const [type, setType] = useState('delivery');
   const [fileContent, setFileContent] = useState('');
   const [fileName, setFileName] = useState('');
@@ -48,6 +55,7 @@ const VinImport = memo(({ onImportCompleted }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
   const fileInputRef = useRef(null);
+  const textareaRef = useRef(null);
 
   // ¿El texto pegado tiene secciones Deliverys/Services?
   const hasSectionsInText = useMemo(
@@ -211,7 +219,24 @@ const VinImport = memo(({ onImportCompleted }) => {
   const handleModeChange = useCallback((mode) => {
     setInputMode(mode);
     handleClear();
+    if (mode === 'text') {
+      setTimeout(() => textareaRef.current?.focus(), 50);
+    }
   }, [handleClear]);
+
+  // Keyboard shortcuts for cycling import modes and triggering actions
+  useKeyboardShortcuts([
+    { key: 'ArrowLeft', alt: true, allowInInput: true, action: () => handleModeChange(cycleMode(inputMode, -1)) },
+    { key: 'ArrowRight', alt: true, allowInInput: true, action: () => handleModeChange(cycleMode(inputMode, +1)) },
+    { key: 'h', alt: true, allowInInput: true, action: () => {
+      if (inputMode === 'text' && !isProcessing && !isImporting && textInput.trim()) {
+        handleTextProcess();
+      }
+    }},
+    { key: 'x', alt: true, allowInInput: true, action: () => {
+      if (inputMode === 'text' && !isProcessing && !isImporting) handleClear();
+    }},
+  ]);
 
   // Ejecuta la importación confirmada
   const executeImport = useCallback(async () => {
@@ -411,6 +436,7 @@ const VinImport = memo(({ onImportCompleted }) => {
           <div className="uk-margin-medium">
             <label className="uk-form-label">Pegar texto con VINs</label>
             <textarea
+              ref={textareaRef}
               className="uk-textarea"
               rows={8}
               placeholder={

@@ -2,9 +2,11 @@ import { useState, useEffect, useCallback, lazy, Suspense, useMemo, useTransitio
 import DatabaseStatus from './components/DatabaseStatus';
 import ScrollToTop from './components/ScrollToTop';
 import Trash from './components/Trash';
+import KeyboardHelp from './components/KeyboardHelp';
 import { vinService } from './services/api';
 import { showNotification } from './utils/helpers';
 import { useRecordsCache } from './hooks/useRecordsCache';
+import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
 // Lazy load components for better initial load performance
 const VinInput = lazy(() => import('./components/VinInput'));
@@ -22,7 +24,11 @@ function App() {
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [isPending, startTransition] = useTransition();
   const [showTrash, setShowTrash] = useState(false);
-  
+  const [showHelp, setShowHelp] = useState(false);
+  const [pendingTab, setPendingTab] = useState(null);
+  const [searchFocusTrigger, setSearchFocusTrigger] = useState(0);
+  const [vinFocusTrigger, setVinFocusTrigger] = useState(0);
+
   // Use cache hook
   const { getCached, setCache, clearCache, generateKey } = useRecordsCache();
 
@@ -36,7 +42,7 @@ function App() {
   // Load records with caching
   const loadRecords = useCallback(async (bypassCache = false) => {
     const cacheKey = generateKey(filters);
-    
+
     // Check cache first (unless bypassed)
     if (!bypassCache) {
       const cachedData = getCached(cacheKey);
@@ -55,7 +61,7 @@ function App() {
       if (data.success) {
         // Cache the result
         setCache(cacheKey, data);
-        
+
         // Use transition for non-urgent state updates
         startTransition(() => {
           setDeliveryRecords(data.delivery);
@@ -136,6 +142,42 @@ function App() {
     }
   }, [filters.date]);
 
+  // Switch to a tab by index — uses UIkit.tab() to update both indicator and content
+  const switchToTab = useCallback((index) => {
+    if (showTrash) {
+      setShowTrash(false);
+      setPendingTab(index);
+    } else {
+      const tabEl = document.getElementById('app-main-tab');
+      if (tabEl && window.UIkit) window.UIkit.tab(tabEl).show(index);
+    }
+  }, [showTrash]);
+
+  // When returning from trash, apply any pending tab switch
+  useEffect(() => {
+    if (!showTrash && pendingTab !== null) {
+      const timer = setTimeout(() => {
+        const tabEl = document.getElementById('app-main-tab');
+        if (tabEl && window.UIkit) window.UIkit.tab(tabEl).show(pendingTab);
+        setPendingTab(null);
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [showTrash, pendingTab]);
+
+  // Global keyboard shortcuts
+  useKeyboardShortcuts([
+    { key: '1', alt: true, action: () => switchToTab(0) },
+    { key: '2', alt: true, action: () => switchToTab(1) },
+    { key: '3', alt: true, action: () => switchToTab(2) },
+    { key: '4', alt: true, action: () => switchToTab(3) },
+    { key: '5', alt: true, action: () => switchToTab(4) },
+    { key: 't', alt: true, action: () => setShowTrash(prev => !prev) },
+    { key: 'v', action: () => { switchToTab(0); setVinFocusTrigger(n => n + 1); } },
+    { key: '/', action: () => { switchToTab(2); setSearchFocusTrigger(n => n + 1); } },
+    { key: 'k', alt: true, action: () => setShowHelp(prev => !prev) },
+  ]);
+
   // Show trash view
   if (showTrash) {
     return (
@@ -143,6 +185,7 @@ function App() {
         <DatabaseStatus />
         <Trash onBack={() => setShowTrash(false)} />
         <ScrollToTop />
+        {showHelp && <KeyboardHelp onClose={() => setShowHelp(false)} />}
       </div>
     );
   }
@@ -157,9 +200,16 @@ function App() {
         🚗 VIN Tracker System
       </h1>
 
-      {/* Botón de Papelera */}
-      <div style={{ textAlign: 'right', marginBottom: '20px' }}>
-        <button 
+      {/* Botones superiores */}
+      <div className="app-top-actions">
+        <button
+          className="uk-button uk-button-default kbd-trigger-btn"
+          onClick={() => setShowHelp(true)}
+          title="Atajos de teclado (?)"
+        >
+          ?
+        </button>
+        <button
           className="uk-button uk-button-default trash-btn"
           onClick={() => setShowTrash(true)}
           title="Abrir Papelera de Reciclaje"
@@ -171,7 +221,7 @@ function App() {
 
       {/* Tabs Navigation */}
       <div className="uk-card uk-card-default uk-card-body card-spacing-bottom">
-        <ul className="uk-tab" data-uk-tab="{connect:'#tab-content', animation: 'uk-animation-fade'}">
+        <ul id="app-main-tab" className="uk-tab" data-uk-tab="{connect:'#tab-content', animation: 'uk-animation-fade'}">
           <li className="uk-active">
             <a href="#">
               <span uk-icon="icon: plus-circle; ratio: 1.2" className="icon-spacing-sm icon-golden"></span>
@@ -213,7 +263,7 @@ function App() {
           <ul id="tab-content" className="uk-switcher">
             {/* Tab 1: Agregar VINs */}
             <li>
-              <VinInput onVinAdded={handleVinAdded} />
+              <VinInput onVinAdded={handleVinAdded} vinFocusTrigger={vinFocusTrigger} />
             </li>
 
             {/* Tab 2: Importar VINs */}
@@ -230,6 +280,7 @@ function App() {
                 onClearFilters={handleClearFilters}
                 onExport={handleExport}
                 onRefresh={handleVinAdded}
+                searchFocusTrigger={searchFocusTrigger}
               />
 
               {/* Delivery Table */}
@@ -269,17 +320,19 @@ function App() {
       {/* Scroll to Top Button */}
       <ScrollToTop />
 
-      {/* Inline styles for trash button */}
+      {/* Keyboard help overlay */}
+      {showHelp && <KeyboardHelp onClose={() => setShowHelp(false)} />}
+
+      {/* Inline styles */}
       <style>{`
-        .app-header-container {
+        .app-top-actions {
           display: flex;
-          justify-content: space-between;
+          justify-content: flex-end;
           align-items: center;
-          gap: 20px;
+          gap: 10px;
           margin-bottom: 20px;
-          flex-wrap: wrap;
         }
-        
+
         .trash-btn {
           background: var(--vin-dark-secondary) !important;
           color: var(--vin-light) !important;
@@ -291,21 +344,20 @@ function App() {
           padding: 10px 20px !important;
           transition: all 0.3s ease;
         }
-        
+
         .trash-btn:hover {
           background: var(--vin-golden) !important;
           color: #000 !important;
           transform: translateY(-2px);
         }
-        
+
         @media (max-width: 640px) {
-          .app-header-container {
-            flex-direction: column;
-            align-items: stretch;
+          .app-top-actions {
+            flex-wrap: wrap;
           }
-          
+
           .trash-btn {
-            width: 100%;
+            flex: 1;
             justify-content: center;
           }
         }

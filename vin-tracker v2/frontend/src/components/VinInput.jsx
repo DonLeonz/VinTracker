@@ -1,11 +1,22 @@
-import { useState, useCallback, memo } from 'react';
+import { useState, useCallback, useEffect, useRef, memo } from 'react';
 import { processVin, validateVinLength, showNotification } from '../utils/helpers';
 import { vinService } from '../services/api';
 import ConfirmModal from './modals/ConfirmModal';
 
-const VinInput = memo(({ onVinAdded }) => {
+const VinInput = memo(({ onVinAdded, vinFocusTrigger = 0 }) => {
   const [vin, setVin] = useState('');
   const [type, setType] = useState('delivery');
+  const vinInputRef = useRef(null);
+
+  // Focus the VIN input when triggered by keyboard shortcut
+  useEffect(() => {
+    if (!vinFocusTrigger) return;
+    const timer = setTimeout(() => {
+      vinInputRef.current?.focus();
+      vinInputRef.current?.select();
+    }, 80);
+    return () => clearTimeout(timer);
+  }, [vinFocusTrigger]);
   const [preview, setPreview] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -125,6 +136,7 @@ const VinInput = memo(({ onVinAdded }) => {
               <label className="uk-form-label">Número VIN</label>
               <div className="vin-input-wrapper">
                 <input
+                  ref={vinInputRef}
                   type="text"
                   className="uk-input vin-input-with-clear"
                   placeholder="Ingrese el VIN (O se convierte en 0)"

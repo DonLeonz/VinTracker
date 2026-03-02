@@ -14,13 +14,30 @@ Sistema de gestión y seguimiento de números VIN (Vehicle Identification Number
 ## Funcionalidades
 
 - **Agregar VINs** — Ingreso manual con conversión automática O→0 y validación de 17 caracteres
-- **Importar VINs** — Carga masiva desde `.txt` con previsualización en dos fases antes de confirmar
+- **Importar VINs** — Carga masiva desde `.txt`, texto directo con formato exportado, o imagen vía OCR
 - **Ver registros** — Tablas filtradas por fecha, estado, búsqueda y repeticiones
 - **Visualización plana** — Vista compacta del inventario completo
 - **Verificación** — Diagnóstico de duplicados dentro de cada tabla y entre tablas
 - **Papelera** — Eliminación suave (soft delete) con restauración individual o masiva
 - **Exportar** — Descarga `.txt` de VINs sin registrar, con filtro de fecha
 - **Indicador de BD** — Estado de conexión en tiempo real
+- **Atajos de teclado** — Navegación y acciones rápidas sin ratón (ver tabla abajo)
+
+## Atajos de teclado
+
+| Atajo | Acción |
+|-------|--------|
+| `Alt + 1…5` | Cambiar entre tabs principales |
+| `Alt + T` | Abrir / Cerrar Papelera |
+| `V` | Ir a Agregar VINs y enfocar el campo |
+| `/` | Ir a Ver Registros y enfocar la búsqueda |
+| `Alt + ←` | Modo anterior de importación (Imagen ← Texto ← Archivo) |
+| `Alt + →` | Modo siguiente de importación (Archivo → Texto → Imagen) |
+| `Alt + H` | Analizar texto (modo Texto directo) |
+| `Alt + X` | Limpiar texto (modo Texto directo) |
+| `Enter / ↵` | Confirmar en modales |
+| `Esc` | Cancelar / Cerrar modal o ayuda |
+| `Alt + K` | Mostrar / Ocultar panel de ayuda de atajos |
 
 ## Configuración
 

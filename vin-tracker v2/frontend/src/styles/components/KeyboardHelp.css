@@ -1,0 +1,160 @@
+/* ========================================
+   KEYBOARD HELP OVERLAY
+   ======================================== */
+
+.kbd-help-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.15s ease;
+}
+
+.kbd-help-panel {
+  background: var(--vin-dark-secondary);
+  border: 1px solid var(--vin-golden-dark);
+  border-radius: var(--border-radius-card);
+  width: 100%;
+  max-width: 460px;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 167, 98, 0.15);
+  animation: slideUp 0.2s ease;
+}
+
+.kbd-help-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(212, 167, 98, 0.2);
+  background: var(--vin-dark-primary);
+}
+
+.kbd-help-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--vin-golden);
+  margin: 0;
+}
+
+/* Override vin-clear-btn to be static (not absolutely positioned) in the header */
+.kbd-help-close {
+  position: static !important;
+  transform: none !important;
+  flex-shrink: 0;
+}
+
+.kbd-help-close:hover {
+  transform: scale(1.1) rotate(90deg) !important;
+}
+
+.kbd-help-close:active {
+  transform: scale(0.95) !important;
+}
+
+.kbd-help-body {
+  padding: 8px 20px 16px;
+  overflow-y: auto;
+}
+
+.kbd-help-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.kbd-help-table tr + tr td {
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.kbd-help-section-row td {
+  padding-top: 14px;
+  padding-bottom: 2px;
+}
+
+.kbd-help-section {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--vin-golden-dark);
+  padding-left: 0;
+  border-bottom: 1px solid rgba(212, 167, 98, 0.15) !important;
+}
+
+.kbd-help-keys {
+  padding: 9px 16px 9px 0;
+  white-space: nowrap;
+  width: 1%;
+}
+
+.kbd-help-desc {
+  padding: 9px 0;
+  color: var(--vin-light-muted);
+  font-size: 0.88rem;
+}
+
+.kbd-key {
+  display: inline-block;
+  padding: 2px 7px;
+  background: var(--vin-dark-primary);
+  border: 1px solid var(--vin-golden-dark);
+  border-radius: 4px;
+  color: var(--vin-golden);
+  font-family: monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+  line-height: 1.5;
+}
+
+.kbd-plus {
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0 3px;
+  font-size: 0.78rem;
+}
+
+.kbd-help-footer {
+  padding: 10px 20px;
+  border-top: 1px solid rgba(212, 167, 98, 0.12);
+  background: var(--vin-dark-primary);
+  text-align: center;
+}
+
+.kbd-help-hint {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8rem;
+}
+
+/* Trigger button in header area */
+.kbd-trigger-btn {
+  background: var(--vin-dark-secondary) !important;
+  color: var(--vin-golden) !important;
+  border: 2px solid var(--vin-golden-dark) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 10px 14px !important;
+  transition: all 0.3s ease;
+  min-width: 42px;
+}
+
+.kbd-trigger-btn:hover {
+  background: var(--vin-golden-dark) !important;
+  color: #000 !important;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .kbd-help-panel {
+    max-width: calc(100% - 32px);
+    max-height: 72vh;
+  }
+}
