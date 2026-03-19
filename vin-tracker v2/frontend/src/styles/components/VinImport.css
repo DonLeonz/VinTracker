@@ -221,6 +221,12 @@
   border: 1px solid var(--vin-warning);
 }
 
+.import-item-badge.reset {
+  background: rgba(0, 123, 255, 0.15);
+  color: var(--vin-info);
+  border: 1px solid var(--vin-info);
+}
+
 /* Scrollbar for lists */
 .import-list::-webkit-scrollbar {
   width: 8px;

@@ -454,7 +454,7 @@ export const unregisterAll = async (req, res) => {
     });
 
     const tableName = getTableName(type);
-    const query = `UPDATE ${tableName} SET registered = false ${whereClause}`;
+    const query = `UPDATE ${tableName} SET registered = false, last_registered_at = NULL ${whereClause}`;
     const result = await pool.query(query, params);
 
     res.json({

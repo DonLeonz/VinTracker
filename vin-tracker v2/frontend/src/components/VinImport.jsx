@@ -112,10 +112,12 @@ const VinImport = memo(({ onImportCompleted }) => {
             existingId: check.existing_id
           });
         } else if (selectedType === 'delivery') {
-          results.omitted.push({
+          results.toAdd.push({
             vin,
-            reason: 'Ya existe y está registrado (Delivery no se repite)',
             line: pos,
+            isNew: false,
+            isRepeated: true,
+            isDeliveryReset: true,
             existingId: check.existing_id,
             repeatCount: check.repeat_count
           });
@@ -256,12 +258,44 @@ const VinImport = memo(({ onImportCompleted }) => {
     let errorCount = 0;
 
     try {
-      const items = preview.hasSections
+      let items = preview.hasSections
         ? [
             ...preview.delivery.toAdd.map(i => ({ ...i, importType: 'delivery' })),
             ...preview.service.toAdd.map(i => ({ ...i, importType: 'service' })),
           ]
         : preview.toAdd.map(i => ({ ...i, importType: type }));
+
+      // Confirm delivery resets before importing
+      const deliveryResets = items.filter(i => i.isDeliveryReset);
+      if (deliveryResets.length > 0) {
+        const vinListHtml = deliveryResets
+          .map(i => {
+            const times = i.repeatCount + 1;
+            return `<code>${i.vin}</code> (ya entregado ${times} ${times === 1 ? 'vez' : 'veces'})`;
+          })
+          .join('<br>');
+
+        const confirmed = await new Promise((resolve) => {
+          if (window.UIkit?.modal?.confirm) {
+            window.UIkit.modal.confirm(
+              `Los siguientes VINs de Delivery ya están registrados y serán reseteados a <b>No Registrado</b>:<br><br>${vinListHtml}<br><br>¿Confirmar?`
+            ).then(() => resolve(true)).catch(() => resolve(false));
+          } else {
+            resolve(window.confirm(
+              `Los siguientes VINs de Delivery ya están registrados y serán reseteados a No Registrado:\n${deliveryResets.map(i => `- ${i.vin}`).join('\n')}\n\n¿Confirmar?`
+            ));
+          }
+        });
+
+        if (!confirmed) {
+          items = items.filter(i => !i.isDeliveryReset);
+          if (items.length === 0) {
+            showNotification('⚠️ Importación cancelada', 'warning');
+            setIsImporting(false);
+            return;
+          }
+        }
+      }
 
       for (const item of items) {
         try {
@@ -322,7 +356,11 @@ const VinImport = memo(({ onImportCompleted }) => {
             <div key={idx} className="import-item">
               <span className="import-item-vin">{item.vin || item.processed}</span>
               <span className="import-item-line">#{item.line}</span>
-              {item.isRepeated && (
+              {item.isDeliveryReset ? (
+                <span className="import-item-badge reset">
+                  📦 Resetear delivery{item.repeatCount > 0 ? ` (ya entregado ${item.repeatCount + 1} veces)` : ''}
+                </span>
+              ) : item.isRepeated && (
                 <span className="import-item-badge repeated">🔄 Repetido (x{item.repeatCount + 1})</span>
               )}
               {item.isNew && (
